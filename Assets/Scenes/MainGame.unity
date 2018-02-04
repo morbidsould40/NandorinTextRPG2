@@ -189,6 +189,7 @@ GameObject:
   - component: {fileID: 460242826}
   - component: {fileID: 460242825}
   - component: {fileID: 460242824}
+  - component: {fileID: 460242829}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -220,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3568a2b1bcc5bb249b7284fb4deea022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nounsInRoom: []
+  examinableDescription: 
 --- !u!114 &460242825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,10 +274,26 @@ MonoBehaviour:
   inputActions:
   - {fileID: 11400000, guid: 9ef51dd24de9bb34cbfd5618f33d645b, type: 2}
   - {fileID: 11400000, guid: f25785ed1e734594aad2647797e2fb20, type: 2}
+  - {fileID: 11400000, guid: f4735dca7cd5db54c8b4e4cc306e409a, type: 2}
   roomNavigation: {fileID: 0}
   interactiveDescriptionsInRoom: []
+  examinableDescriptionsInRoom: []
   interactableItems: {fileID: 0}
   examinableItems: {fileID: 0}
+  lookableDirections: {fileID: 0}
+--- !u!114 &460242829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 460242822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ebd678dd36ed4d4e94d02ab2fa7cf6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lookRoom: {fileID: 0}
+  lookDescription: 
 --- !u!1 &516940752
 GameObject:
   m_ObjectHideFlags: 0

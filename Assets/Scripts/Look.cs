@@ -1,16 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Look : MonoBehaviour {
+[CreateAssetMenu(menuName = "TextRPG/InputActions/Look")]
+public class Look : InputAction {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public override void RespondToInput(GameController controller, string[] seperatedInputWords)
+    {
+        var wordLength = seperatedInputWords.Length;        
+        if (wordLength > 1)
+        {
+            controller.lookableDirections.LookKeyword(seperatedInputWords[1]);
+        }
+        else
+        {
+            controller.DisplayRoomText();
+        }        
+    }
 }

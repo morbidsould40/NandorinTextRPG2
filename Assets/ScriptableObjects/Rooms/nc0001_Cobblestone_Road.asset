@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470a378794f049440b35387ca57c2e41, type: 3}
   m_Name: nc0001_Cobblestone_Road
   m_EditorClassIdentifier: 
-  desctiption: The roads of Nandorin are upkept and busy day and night with people
-    bustling about their business.
+  description: Nandorin's cobblestone roads are well kept and always bustling with
+    city folk going about their daily business.
   roomName: Cobblestone Road
   roomCode: nc0001
   exits:
@@ -21,3 +21,4 @@ MonoBehaviour:
       square.
     valueRoom: {fileID: 11400000, guid: 68fdfaaa89275544ea557b5de92d46e1, type: 2}
   interactableObjectsInRoom: []
+  examinableObjectsInRoom: []

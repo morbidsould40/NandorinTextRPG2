@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     [HideInInspector] public List<string> examinableDescriptionsInRoom = new List<string>();
     [HideInInspector] public InteractableItems interactableItems;
     [HideInInspector] public ExamaniableItems examinableItems;
+    [HideInInspector] public LookableDirections lookableDirections;
 
     List<string> actionLog = new List<string>();
 
@@ -21,6 +22,7 @@ public class GameController : MonoBehaviour
         interactableItems = GetComponent<InteractableItems>();
         roomNavigation = GetComponent<RoomNavigation>();
         examinableItems = GetComponent<ExamaniableItems>();
+        lookableDirections = GetComponent<LookableDirections>();
     }
 
     void Start()
