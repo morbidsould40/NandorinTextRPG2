@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470a378794f049440b35387ca57c2e41, type: 3}
+  m_Name: nc0000_Nexus
+  m_EditorClassIdentifier: 
+  description: You are standing in the town square of Nandorin. Towering in front
+    of you is a large blue crystal knows as the <color=#00ff00ff>Nexus</color>. Once
+    a powerful teleportation device between world and dimensions, it has lied dormenr
+    for over 200 years.
+  roomName: The Nexus
+  roomCode: nc0000
+  exits:
+  - keyString: north
+    exitDescription: To the north you see the market district.
+    valueRoom: {fileID: 11400000, guid: 7cccaab0f3836354791ac855370213e7, type: 2}
+  interactableObjectsInRoom: []
+  examinableObjectsInRoom:
+  - {fileID: 11400000, guid: 91793ad615f038f439ce1ba7e674975a, type: 2}
