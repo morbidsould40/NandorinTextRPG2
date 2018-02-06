@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public Text displayText;
-    public Character character;
+    public Player player;
     public InputAction[] inputActions;
 
     [HideInInspector] public RoomNavigation roomNavigation;

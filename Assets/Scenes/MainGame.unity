@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayText: {fileID: 1639612365}
-  character: {fileID: 1698652932}
+  player: {fileID: 1698652932}
   inputActions:
   - {fileID: 11400000, guid: 9ef51dd24de9bb34cbfd5618f33d645b, type: 2}
   - {fileID: 11400000, guid: f25785ed1e734594aad2647797e2fb20, type: 2}
@@ -1092,6 +1092,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8a0a237bf8a9843b241c991c22a4e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentRoom: {fileID: 0}
+  controller: {fileID: 0}
+  playerName: 
+  playerRace: 
+  playerClass: 
+  playerCurrentRoom: 
+  playerLevel: 0
+  playerStrength: 0
+  playerAgility: 0
+  playerIntellect: 0
+  playerEndurance: 0
+  playerVitality: 0
+  playerCharm: 0
+  playerCurrentHealth: 0
+  playerMaxHealth: 0
+  playerCurrentMana: 0
+  playerMaxMana: 0
+  playerGold: 0
 --- !u!1 &1775527317
 GameObject:
   m_ObjectHideFlags: 0
