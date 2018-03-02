@@ -12,9 +12,6 @@ public class BaseWarlordClass : BaseCharacter {
         SecondMainStat = SecondaryStatBonuses.Endurance;
         LeastStat = LeastStatBonuses.Magic;
 
-        Strength = 7;
-        Agility = 5;
-        Endurance = 6;
-        Magic = 4;
+        CalculateStats();
     }
 }

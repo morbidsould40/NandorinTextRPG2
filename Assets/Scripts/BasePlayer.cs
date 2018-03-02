@@ -1,4 +1,4 @@
-﻿public class BasePlayer {
+﻿public class BasePlayer{
 
     private BaseCharacter playerClass;
     private string playerName;
@@ -8,7 +8,7 @@
     private int magic;
     private int maxHealth;
     private int maxMagica;
-    private int level;
+    private int playerLevel;
     private int currentExp;
     private int requiredExp;
     private int currentGold;
@@ -61,10 +61,10 @@
         set { maxMagica = value; }
     }
 
-    public int Level
+    public int PlayerLevel
     {
-        get { return level; }
-        set { level = value; }
+        get { return playerLevel; }
+        set { playerLevel = value; }
     }
 
     public int CurrentExp
@@ -84,5 +84,4 @@
         get { return currentGold; }
         set { currentGold = value; }
     }
-
 }

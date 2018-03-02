@@ -8,13 +8,10 @@ public class BasePriestClass : BaseCharacter {
     {
         CharacterClassName = "Priest";
         CharacterClassDescription = "The priest is the healer and buffer, casting spells to boost their abilities.";
-        MainStat = MainStatBonuses.Endurance;
-        SecondMainStat = SecondaryStatBonuses.Magic;
+        MainStat = MainStatBonuses.Magic;
+        SecondMainStat = SecondaryStatBonuses.Endurance;
         LeastStat = LeastStatBonuses.Agility;
 
-        Strength = 5;
-        Agility = 6;
-        Endurance = 4;
-        Magic = 7;
+        CalculateStats();
     }
 }

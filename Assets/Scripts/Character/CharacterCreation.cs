@@ -2,24 +2,57 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CharacterCreation : MonoBehaviour {
 
     public Dropdown dropdown;
     public Text classDescriptions;
+    public InputField playerNameInput;
+    public Player player;
 
     private BaseCharacter baseCharacter;
     private BasePlayer newPlayer;
-    private string playerName;
-    
+        
     private void Start()
     {
-        //dropdown = GetComponent<Dropdown>();
         newPlayer = new BasePlayer();
         PopulateClassesList();
         newPlayer.PlayerClass = new BaseBlackGuardClass();
         classDescriptions.text = newPlayer.PlayerClass.CharacterClassDescription +
             CalculateStats(BaseCharacter.BaseClasses.Blackguard.ToString());
+    }
+
+    public void OnClick_StartGame()
+    {
+        newPlayer.PlayerName = playerNameInput.text;
+        newPlayer.PlayerLevel = 1;
+        newPlayer.Strength = newPlayer.PlayerClass.Strength;
+        newPlayer.Agility = newPlayer.PlayerClass.Agility;
+        newPlayer.Endurance = newPlayer.PlayerClass.Endurance;
+        newPlayer.Magic = newPlayer.PlayerClass.Magic;
+        newPlayer.CurrentGold = 20;
+        newPlayer.MaxHealth = ((newPlayer.PlayerClass.Endurance * 3) + (newPlayer.PlayerLevel * 2)) * 2;
+        newPlayer.MaxMagica = ((newPlayer.PlayerClass.Magic * 3) + (newPlayer.PlayerLevel * 3) * 2);
+        newPlayer.CurrentExp = 1;
+        StorePlayerInfo();
+        SceneManager.LoadScene(1); 
+    }
+
+    private void StorePlayerInfo()
+    {
+        player.PlayerName = newPlayer.PlayerName;
+        player.PlayerLevel = newPlayer.PlayerLevel;
+        player.PlayerStrength = newPlayer.Strength;
+        player.PlayerAgility = newPlayer.Agility;
+        player.PlayerEndurance = newPlayer.Endurance;
+        player.PlayerMagic = newPlayer.Magic;
+        player.PlayerGold = newPlayer.CurrentGold;
+        player.PlayerMaxHealth = newPlayer.MaxHealth;
+        player.PlayerCurrentHealth = newPlayer.MaxHealth;
+        player.PlayerMaxMagicka = newPlayer.MaxMagica;
+        player.PlayerCurrentMagicka = newPlayer.MaxMagica;
+        player.PlayerCurrentExperience = newPlayer.CurrentExp;
     }
 
     public void Dropdown_IndexChanged(int index)
@@ -55,7 +88,6 @@ public class CharacterCreation : MonoBehaviour {
     {
         if (className == BaseCharacter.BaseClasses.Blackguard.ToString())
         {
-
             return "\n\n Strength: " + newPlayer.PlayerClass.Strength +
                 "\n Agility: " + newPlayer.PlayerClass.Agility +
                 "\n Endurance: " + newPlayer.PlayerClass.Endurance +

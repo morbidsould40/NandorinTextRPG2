@@ -18,14 +18,13 @@ public class Player : MonoBehaviour {
     [SerializeField] int playerLevel;
     [SerializeField] int playerStrength;
     [SerializeField] int playerAgility;
-    [SerializeField] int playerIntellect;
     [SerializeField] int playerEndurance;
-    [SerializeField] int playerVitality;
-    [SerializeField] int playerCharm;
+    [SerializeField] int playerMagic;
     [SerializeField] float playerCurrentHealth;
     [SerializeField] float playerMaxHealth;
-    [SerializeField] float playerCurrentMana;
-    [SerializeField] float playerMaxMana;
+    [SerializeField] float playerCurrentMagicka;
+    [SerializeField] float playerMaxMagicka;
+    [SerializeField] float playerCurrentExperience;
     [SerializeField] float playerGold;
 
     public enum Races
@@ -74,28 +73,16 @@ public class Player : MonoBehaviour {
         set { playerAgility = value; }
     }
 
-    public int PlayerIntellect
-    {
-        get { return playerIntellect; }
-        set { playerIntellect = value; }
-    }
-
     public int PlayerEndurance
     {
         get { return playerEndurance; }
         set { playerEndurance = value; }
     }
 
-    public int PlayerVitality
+    public int PlayerMagic
     {
-        get { return playerVitality; }
-        set { playerVitality = value; }
-    }
-
-    public int PlayerCharm
-    {
-        get { return playerCharm; }
-        set { playerCharm = value; }
+        get { return playerMagic; }
+        set { playerMagic = value; }
     }
 
     public float PlayerCurrentHealth
@@ -110,16 +97,22 @@ public class Player : MonoBehaviour {
         set { playerMaxHealth = value; }
     }
 
-    public float PlayerCurrentMana
+    public float PlayerCurrentMagicka
     {
-        get { return playerCurrentMana; }
-        set { playerCurrentMana = value; }
+        get { return playerCurrentMagicka; }
+        set { playerCurrentMagicka = value; }
     }
 
-    public float PlayerMaxMana
+    public float PlayerMaxMagicka
     {
-        get { return playerMaxMana; }
-        set { playerMaxMana = value; }
+        get { return playerMaxMagicka; }
+        set { playerMaxMagicka = value; }
+    }
+
+    public float PlayerCurrentExperience
+    {
+        get { return playerCurrentExperience; }
+        set { playerCurrentExperience = value; }
     }
 
     public float PlayerGold
@@ -140,7 +133,7 @@ public class Player : MonoBehaviour {
     }
 
     void Start () {
-		
+        DontDestroyOnLoad(this);        
 	}
 	
 	void Update () {

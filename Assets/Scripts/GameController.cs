@@ -5,8 +5,10 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public Text displayText;
+    public Text playerName;
     public Player player;
     public InputAction[] inputActions;
+
 
     [HideInInspector] public RoomNavigation roomNavigation;
     [HideInInspector] public List<string> interactiveDescriptionsInRoom = new List<string>();
@@ -18,7 +20,7 @@ public class GameController : MonoBehaviour
     List<string> actionLog = new List<string>();
 
     void Awake()
-    {
+    { 
         interactableItems = GetComponent<InteractableItems>();
         roomNavigation = GetComponent<RoomNavigation>();
         examinableItems = GetComponent<ExamaniableItems>();
@@ -29,6 +31,7 @@ public class GameController : MonoBehaviour
     {
         DisplayRoomText();
         DisplayLoggedText();
+        playerName.text = player.PlayerName;
     }
 
     public void DisplayLoggedText()
