@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 [CreateAssetMenu(menuName = "TextRPG/InputActions/Go")]
 public class Go : InputAction
 {

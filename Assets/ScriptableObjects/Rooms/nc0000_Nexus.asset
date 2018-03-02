@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: You are standing in the town square of Nandorin. Towering in front
     of you is a large blue crystal knows as the <color=#00ff00ff>Nexus</color>. Once
-    a powerful teleportation device between world and dimensions, it has lied dormenr
+    a powerful teleportation device between world and dimensions, it has lied dorment
     for over 200 years.
   roomName: The Nexus
   roomCode: nc0000
