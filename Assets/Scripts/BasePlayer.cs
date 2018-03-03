@@ -7,7 +7,7 @@
     private int endurance;
     private int magic;
     private int maxHealth;
-    private int maxMagica;
+    private int maxMana;
     private int playerLevel;
     private int currentExp;
     private int requiredExp;
@@ -55,10 +55,10 @@
         set { maxHealth = value; }
     }
 
-    public int MaxMagica
+    public int MaxMana
     {
-        get { return maxMagica; }
-        set { maxMagica = value; }
+        get { return maxMana; }
+        set { maxMana = value; }
     }
 
     public int PlayerLevel
