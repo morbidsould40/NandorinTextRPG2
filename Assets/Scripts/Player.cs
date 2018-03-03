@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-    public Room currentRoom;
-    public GameController controller;
-
     public Dictionary<string, string> inventory = new Dictionary<string, string>();
     public Dictionary<string, string> keyRing = new Dictionary<string, string>();
     public Dictionary<string, string> potions = new Dictionary<string, string>();
@@ -26,16 +23,6 @@ public class Player : MonoBehaviour {
     [SerializeField] float playerMaxMagicka;
     [SerializeField] float playerCurrentExperience;
     [SerializeField] float playerGold;
-
-    public enum Races
-    {
-        Dweller, Fallen, Human, KelDral, Touched, Steamforged
-    }
-
-    public enum Classes
-    {
-        Blackguard, Bowman, Priest, Thaumaturge, Warden, Warlord
-    }
 
     public string PlayerName
     {
@@ -129,7 +116,7 @@ public class Player : MonoBehaviour {
 
     void Awake()
     {
-        controller = GetComponent<GameController>();
+
     }
 
     void Start () {

@@ -10,6 +10,7 @@ public class BaseThaumaturgeClass : BaseCharacter {
         CharacterClassDescription = "A master of the arcane arts, the Thaumaturge is unmatched in their magical abilities.";
         MainStat = MainStatBonuses.Magic;
         SecondMainStat = SecondaryStatBonuses.Agility;
+        BaseStat = BaseStatBonuses.Endurance;
         LeastStat = LeastStatBonuses.Strength;
 
         CalculateStats();

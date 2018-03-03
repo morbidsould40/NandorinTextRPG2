@@ -53,6 +53,7 @@ public class CharacterCreation : MonoBehaviour {
         player.PlayerMaxMagicka = newPlayer.MaxMagica;
         player.PlayerCurrentMagicka = newPlayer.MaxMagica;
         player.PlayerCurrentExperience = newPlayer.CurrentExp;
+        player.PlayerClass = newPlayer.PlayerClass.CharacterClassName;
     }
 
     public void Dropdown_IndexChanged(int index)
@@ -65,8 +66,8 @@ public class CharacterCreation : MonoBehaviour {
                 newPlayer.PlayerClass = new BaseBlackGuardClass();
                 classDescriptions.text = newPlayer.PlayerClass.CharacterClassDescription + CalculateStats(className.ToString());
                     break;
-            case BaseCharacter.BaseClasses.Priest:
-                newPlayer.PlayerClass = new BasePriestClass();
+            case BaseCharacter.BaseClasses.Cleric:
+                newPlayer.PlayerClass = new BaseClericClass();
                 classDescriptions.text = newPlayer.PlayerClass.CharacterClassDescription + CalculateStats(className.ToString()); 
                 break;
             case BaseCharacter.BaseClasses.Thaumaturge:
@@ -93,7 +94,7 @@ public class CharacterCreation : MonoBehaviour {
                 "\n Endurance: " + newPlayer.PlayerClass.Endurance +
                 "\n Magic: " + newPlayer.PlayerClass.Magic;
         }
-        else if (className == BaseCharacter.BaseClasses.Priest.ToString())
+        else if (className == BaseCharacter.BaseClasses.Cleric.ToString())
         {
             return "\n\n Strength: " + newPlayer.PlayerClass.Strength +
                 "\n Agility: " + newPlayer.PlayerClass.Agility +

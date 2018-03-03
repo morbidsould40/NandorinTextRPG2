@@ -5,11 +5,12 @@ public class RoomNavigation : MonoBehaviour
 {
 
     public Room currentRoom;
-
+    public Player player;
     [HideInInspector] public Dictionary<string, Room> exitDictionary = new Dictionary<string, Room>();
     [HideInInspector] public Dictionary<string, string> examineDictionary = new Dictionary<string, string>();
-    GameController controller;
 
+    private GameController controller;
+    
     void Awake()
     {
         controller = GetComponent<GameController>();
@@ -40,6 +41,7 @@ public class RoomNavigation : MonoBehaviour
             currentRoom = exitDictionary[directionNoun];
             controller.LogStringWithReturn("You head to the " + directionNoun);
             controller.DisplayRoomText();
+            player.PlayerCurrentRoom = currentRoom.roomCode;
         }
         else
         {

@@ -10,6 +10,7 @@ public class BaseWarlordClass : BaseCharacter {
         CharacterClassDescription = "The warlord is the master of all things martial. His pure strength will challenge any foe.";
         MainStat = MainStatBonuses.Strength;
         SecondMainStat = SecondaryStatBonuses.Endurance;
+        BaseStat = BaseStatBonuses.Agility;
         LeastStat = LeastStatBonuses.Magic;
 
         CalculateStats();

@@ -15,7 +15,7 @@
 
     public enum BaseClasses
     {
-        Blackguard, Priest, Thaumaturge, Warlord
+        Blackguard, Cleric, Thaumaturge, Warlord
     }
 
     public enum MainStatBonuses
