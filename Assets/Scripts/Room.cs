@@ -11,4 +11,5 @@ public class Room : ScriptableObject
     public Exit[] exits;
     public InteractableObject[] interactableObjectsInRoom;
     public ExaminableObject[] examinableObjectsInRoom;
+    public Monsters[] monstersInRoom;
 }

@@ -913,6 +913,7 @@ MonoBehaviour:
   classDescriptions: {fileID: 1509084197}
   playerNameInput: {fileID: 1673203177}
   player: {fileID: 114705964056311450, guid: 4e370961a2661d245920b2c72eb9c8e2, type: 2}
+  startingRoom: {fileID: 11400000, guid: 68fdfaaa89275544ea557b5de92d46e1, type: 2}
 --- !u!4 &747234470
 Transform:
   m_ObjectHideFlags: 0

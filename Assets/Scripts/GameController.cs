@@ -4,8 +4,7 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public Text displayText;
-    public Text playerName;
+    public Text displayText;    
     public Player player;
     public InputAction[] inputActions;
 
@@ -17,9 +16,9 @@ public class GameController : MonoBehaviour
     [HideInInspector] public ExamaniableItems examinableItems;
     [HideInInspector] public LookableDirections lookableDirections;
 
-    List<string> actionLog = new List<string>();
+    private List<string> actionLog = new List<string>();
 
-    void Awake()
+    private void Awake()
     { 
         interactableItems = GetComponent<InteractableItems>();
         roomNavigation = GetComponent<RoomNavigation>();
@@ -27,11 +26,10 @@ public class GameController : MonoBehaviour
         lookableDirections = GetComponent<LookableDirections>();
     }
 
-    void Start()
+    private void Start()
     {
         DisplayRoomText();
         DisplayLoggedText();
-        playerName.text = player.PlayerName;
     }
 
     public void DisplayLoggedText()
@@ -50,14 +48,14 @@ public class GameController : MonoBehaviour
         LogStringWithReturn(combinedText);
     }
 
-    void UnpackRoom()
+    private void UnpackRoom()
     {
         roomNavigation.UnpackExitsInRoom();
         roomNavigation.UnpackExaminablesInRoom();
         PrepareObjectsToTakeOrExamine(roomNavigation.currentRoom);        
     }
 
-    void PrepareObjectsToTakeOrExamine(Room currentRoom)
+    private void PrepareObjectsToTakeOrExamine(Room currentRoom)
     {
         for (int i = 0; i < currentRoom.interactableObjectsInRoom.Length; i++)
         {
@@ -69,7 +67,7 @@ public class GameController : MonoBehaviour
         }
     }   
 
-    void ClearCollectionsForNewRoom()
+    private void ClearCollectionsForNewRoom()
     {
         interactiveDescriptionsInRoom.Clear();
         roomNavigation.ClearExaminables();

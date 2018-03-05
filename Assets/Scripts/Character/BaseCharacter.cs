@@ -2,8 +2,6 @@
 
     private string characterClassName;
     private string characterClassDescription;
-
-    //Stats
     private int strength = 5;
     private int agility = 5;    
     private int endurance = 5;

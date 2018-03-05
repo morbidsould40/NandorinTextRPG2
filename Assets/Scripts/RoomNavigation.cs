@@ -11,9 +11,14 @@ public class RoomNavigation : MonoBehaviour
 
     private GameController controller;
     
-    void Awake()
+    private void Awake()
     {
         controller = GetComponent<GameController>();
+    }
+
+    private void Start()
+    {
+        currentRoom = player.CurrentRoom;
     }
 
     public void UnpackExitsInRoom()
@@ -41,6 +46,7 @@ public class RoomNavigation : MonoBehaviour
             currentRoom = exitDictionary[directionNoun];
             controller.LogStringWithReturn("You head to the " + directionNoun);
             controller.DisplayRoomText();
+            player.CurrentRoom = currentRoom;
             player.PlayerCurrentRoom = currentRoom.roomCode;
         }
         else

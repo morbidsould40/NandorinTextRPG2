@@ -10,6 +10,7 @@ public class CharacterCreation : MonoBehaviour {
     public Text classDescriptions;
     public InputField playerNameInput;
     public Player player;
+    public Room startingRoom;
 
     private BaseCharacter baseCharacter;
     private BasePlayer newPlayer;
@@ -54,6 +55,7 @@ public class CharacterCreation : MonoBehaviour {
         player.PlayerCurrentMana = newPlayer.MaxMana;
         player.PlayerCurrentExperience = newPlayer.CurrentExp;
         player.PlayerClass = newPlayer.PlayerClass.CharacterClassName;
+        player.CurrentRoom = startingRoom;
     }
 
     public void Dropdown_IndexChanged(int index)

@@ -6,7 +6,7 @@ public class Player : MonoBehaviour {
 
     public Dictionary<string, string> inventory = new Dictionary<string, string>();
     public Dictionary<string, string> keyRing = new Dictionary<string, string>();
-    public Dictionary<string, string> potions = new Dictionary<string, string>();
+    public Dictionary<string, string> potions = new Dictionary<string, string>();    
 
     [SerializeField] string playerName;
     [SerializeField] string playerRace;
@@ -23,6 +23,9 @@ public class Player : MonoBehaviour {
     [SerializeField] float playerMaxMana;
     [SerializeField] float playerCurrentExperience;
     [SerializeField] float playerGold;
+    [SerializeField] Room currentRoom;
+
+    private RoomNavigation roomnav;
 
     public string PlayerName
     {
@@ -114,16 +117,22 @@ public class Player : MonoBehaviour {
         set { playerCurrentRoom = value; }
     }
 
+    public Room CurrentRoom
+    {
+        get { return currentRoom; }
+        set { currentRoom = value; }
+    }
+
     void Awake()
     {
 
     }
 
-    void Start () {
+    private void Start () {
         DontDestroyOnLoad(this);        
 	}
 	
-	void Update () {
+	private void Update () {
 		
 	}
 }
