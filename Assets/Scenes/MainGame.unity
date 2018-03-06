@@ -881,12 +881,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9ef51dd24de9bb34cbfd5618f33d645b, type: 2}
   - {fileID: 11400000, guid: f25785ed1e734594aad2647797e2fb20, type: 2}
   - {fileID: 11400000, guid: f4735dca7cd5db54c8b4e4cc306e409a, type: 2}
+  playerManagement: {fileID: 709624913}
   roomNavigation: {fileID: 0}
   interactiveDescriptionsInRoom: []
   examinableDescriptionsInRoom: []
   interactableItems: {fileID: 0}
   examinableItems: {fileID: 0}
   lookableDirections: {fileID: 0}
+  mobsInTheRoom: []
 --- !u!4 &709624916
 Transform:
   m_ObjectHideFlags: 0

@@ -5,11 +5,15 @@ public class Monsters : ScriptableObject
 {
 
     public string monsterName;
+    public string monsterKeyword;
+    public string monsterID;
     [TextArea]
     public string monsterDescription;
     public string monsterType;
     public float spawnChance;
     public float goldDropChance;
+    public int goldDroppedMin;
+    public int goldDroppedMax;
     public float itemDropChance;
     public Items[] itemsDropped;
     public float monsterCurrentHealth;
@@ -19,4 +23,5 @@ public class Monsters : ScriptableObject
     public float monsterAttack;
     public float monsterDefense;
     public MonsterAttacks[] monsterAttacks;
+    
 }

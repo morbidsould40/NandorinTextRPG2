@@ -7,15 +7,24 @@ public class TextInput : MonoBehaviour
 
     public InputField inputField;
 
-    GameController controller;
+    private GameController controller;
 
-    void Awake()
+    private void Awake()
     {
         controller = GetComponent<GameController>();
-        inputField.onEndEdit.AddListener(AcceptStringInput);
+        //inputField.onEndEdit.AddListener(AcceptStringInput);
     }
 
-    void AcceptStringInput(string userInput)
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            AcceptStringInput(inputField.text);
+        }
+    }
+
+    private void AcceptStringInput(string userInput)
     {
         userInput = userInput.ToLower();
         controller.LogStringWithReturn(userInput);
@@ -34,7 +43,7 @@ public class TextInput : MonoBehaviour
         InputComplete();
     }
 
-    void InputComplete()
+    private void InputComplete()
     {
         controller.DisplayLoggedText();
         inputField.ActivateInputField();

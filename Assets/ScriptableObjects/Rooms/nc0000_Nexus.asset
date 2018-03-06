@@ -24,3 +24,9 @@ MonoBehaviour:
   interactableObjectsInRoom: []
   examinableObjectsInRoom:
   - {fileID: 11400000, guid: 91793ad615f038f439ce1ba7e674975a, type: 2}
+  canMobsSpawnHere: 1
+  mobsThatCanSpawnHere:
+  - {fileID: 11400000, guid: 1f137c4e78243974a92f42a97d439a61, type: 2}
+  - {fileID: 11400000, guid: 6135a5bff8034264dbcc1a7e1bcdf023, type: 2}
+  mobsInRoom: []
+  mobsAlreadySpawned: 1

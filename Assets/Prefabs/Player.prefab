@@ -65,5 +65,5 @@ MonoBehaviour:
   playerCurrentMana: 18
   playerMaxMana: 18
   playerCurrentExperience: 1
-  playerGold: 20
+  playerGold: 1
   currentRoom: {fileID: 11400000, guid: 68fdfaaa89275544ea557b5de92d46e1, type: 2}

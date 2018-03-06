@@ -21,8 +21,8 @@ public class Player : MonoBehaviour {
     [SerializeField] float playerMaxHealth;
     [SerializeField] float playerCurrentMana;
     [SerializeField] float playerMaxMana;
-    [SerializeField] float playerCurrentExperience;
-    [SerializeField] float playerGold;
+    [SerializeField] int playerCurrentExperience;
+    [SerializeField] int playerGold;
     [SerializeField] Room currentRoom;
 
     private RoomNavigation roomnav;
@@ -99,13 +99,13 @@ public class Player : MonoBehaviour {
         set { playerMaxMana = value; }
     }
 
-    public float PlayerCurrentExperience
+    public int PlayerCurrentExperience
     {
         get { return playerCurrentExperience; }
         set { playerCurrentExperience = value; }
     }
 
-    public float PlayerGold
+    public int PlayerGold
     {
         get { return playerGold; }
         set { playerGold = value; }
