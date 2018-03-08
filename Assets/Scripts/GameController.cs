@@ -38,25 +38,33 @@ public class GameController : MonoBehaviour
         DisplayLoggedText();
     }
 
+    // keeps track of what has been displayed and creates the scroll of all text in the main display
     public void DisplayLoggedText()
     {
         string logAsText = string.Join("\n", actionLog.ToArray());
         displayText.text = logAsText;        
     }
 
+    // displays all the room info in the main display
     public void DisplayRoomText()
-    {        
+    {
+        // color#ffff00ff is yellow. color#c0c0c0ff is gray
         ClearCollectionsForNewRoom();
-        UnpackRoom();        
-        string joinedInteractionDescriptions = string.Join("\n", interactiveDescriptionsInRoom.ToArray());        
+        UnpackRoom();
+        string joinedInteractionDescriptions = string.Join("\n", interactiveDescriptionsInRoom.ToArray());
         string combinedText = "<color=#ffff00ff>" + roomNavigation.currentRoom.roomName + "</color> \n" +
-            roomNavigation.currentRoom.description + "\n" + "<color=#c0c0c0ff>" + joinedInteractionDescriptions + "</color>";       
+            roomNavigation.currentRoom.description + "\n" + "<color=#c0c0c0ff>" + joinedInteractionDescriptions + "</color>";
         LogStringWithReturn(combinedText);
+        CheckRoomForMobs();
+    }
 
+    private void CheckRoomForMobs()
+    {
         if (roomNav.mobsSpawnedInRoom.Count > 0)
         {
+            // using System.Linq to do a keyvaluepair lookup
             var lookup = roomNav.mobsSpawnedInRoom.ToLookup(kvp => kvp.Key, kvp => kvp.Value);
-            //string[] monsters;
+
             foreach (Monsters x in lookup[roomNav.currentRoom.roomCode])
             {
                 mobsInTheRoom.Add(x.monsterName);
