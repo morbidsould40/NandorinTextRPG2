@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,6 +36,12 @@ public class GameController : MonoBehaviour
     {
         DisplayRoomText();
         DisplayLoggedText();
+
+        Room[] rooms = Resources.LoadAll<Room>("ScriptableObjects/Rooms");
+        foreach (Room room in rooms)
+        {
+            room.mobsAlreadySpawned = false;
+        }
     }
 
     public void DisplayLoggedText()
