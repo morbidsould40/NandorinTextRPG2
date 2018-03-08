@@ -9,16 +9,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 470a378794f049440b35387ca57c2e41, type: 3}
-  m_Name: nc0001_Cobblestone_Road
+  m_Name: nc0036_Hilltop_Temple
   m_EditorClassIdentifier: 
-  description: Nandorin's cobblestone roads are well kept and always bustling with
-    city folk going about their daily business.
-  roomName: Cobblestone Road
-  roomCode: nc0001
+  description: <desc here>
+  roomName: Hilltop Temple
+  roomCode: nc0036
   exits:
-  - keyString: south
-    exitDescription: To the south you see the Nexus crystal looming over the town
-      square.
-    valueRoom: {fileID: 11400000, guid: 68fdfaaa89275544ea557b5de92d46e1, type: 2}
+  - keyString: west
+    exitDescription: East Templar Street is down the hill to the west.
+    valueRoom: {fileID: 11400000, guid: e980973c53deffc4a849ca3cba6bec31, type: 2}
   interactableObjectsInRoom: []
   examinableObjectsInRoom: []
+  canMobsSpawnHere: 0
+  mobsThatCanSpawnHere: []
+  mobsInRoom: []
+  mobsAlreadySpawned: 0

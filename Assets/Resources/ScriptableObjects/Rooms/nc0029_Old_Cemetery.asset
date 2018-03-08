@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470a378794f049440b35387ca57c2e41, type: 3}
+  m_Name: nc0029_Old_Cemetery
+  m_EditorClassIdentifier: 
+  description: <desc here>
+  roomName: Old Cemetery
+  roomCode: nc0029
+  exits:
+  - keyString: south
+    exitDescription: You see East Temple Road to the south.
+    valueRoom: {fileID: 11400000, guid: e980973c53deffc4a849ca3cba6bec31, type: 2}
+  interactableObjectsInRoom: []
+  examinableObjectsInRoom: []
+  canMobsSpawnHere: 1
+  mobsThatCanSpawnHere:
+  - {fileID: 11400000, guid: 6135a5bff8034264dbcc1a7e1bcdf023, type: 2}
+  - {fileID: 11400000, guid: 7499da668bf1207469033295533e7763, type: 2}
+  - {fileID: 11400000, guid: e6d545074732d2146be83ce511264f3c, type: 2}
+  mobsInRoom: []
+  mobsAlreadySpawned: 0

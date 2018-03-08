@@ -21,12 +21,13 @@ MonoBehaviour:
   - keyString: north
     exitDescription: To the north you see the market district.
     valueRoom: {fileID: 11400000, guid: 7cccaab0f3836354791ac855370213e7, type: 2}
+  - keyString: east
+    exitDescription: To the east you see East Templar Road.
+    valueRoom: {fileID: 11400000, guid: f92da97179a337147adaec7d435eb2f1, type: 2}
   interactableObjectsInRoom: []
   examinableObjectsInRoom:
   - {fileID: 11400000, guid: 91793ad615f038f439ce1ba7e674975a, type: 2}
-  canMobsSpawnHere: 1
-  mobsThatCanSpawnHere:
-  - {fileID: 11400000, guid: 1f137c4e78243974a92f42a97d439a61, type: 2}
-  - {fileID: 11400000, guid: 6135a5bff8034264dbcc1a7e1bcdf023, type: 2}
+  canMobsSpawnHere: 0
+  mobsThatCanSpawnHere: []
   mobsInRoom: []
-  mobsAlreadySpawned: 1
+  mobsAlreadySpawned: 0

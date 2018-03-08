@@ -21,7 +21,13 @@ public class RoomNavigation : MonoBehaviour
 
     private void Start()
     {
-        currentRoom = player.CurrentRoom;       
+        currentRoom = player.CurrentRoom;
+
+        Room[] rooms = Resources.LoadAll<Room>("ScriptableObjects/Rooms");
+        foreach (Room room in rooms)
+        {
+            room.mobsAlreadySpawned = false;
+        }
     }
 
     public void UnpackExitsInRoom()
