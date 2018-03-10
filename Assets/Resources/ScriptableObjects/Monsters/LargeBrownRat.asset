@@ -15,7 +15,7 @@ MonoBehaviour:
   monsterKeyword: rat
   monsterID: rat4911
   monsterDescription: A large brown rat
-  monsterType: 
+  monsterType: beast
   spawnChance: 30
   goldDropChance: 75
   goldDroppedMin: 0

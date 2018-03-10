@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public Player player;
     public InputAction[] inputActions;
     public PlayerManagement playerManagement;
+    public List<KeyValuePair<string, Monsters>> mobsSpawnedInRoom = new List<KeyValuePair<string, Monsters>>();
 
     [HideInInspector] public RoomNavigation roomNavigation;
     [HideInInspector] public List<string> interactiveDescriptionsInRoom = new List<string>();
@@ -34,8 +35,48 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        SpawnAllMobs();
         DisplayRoomText();
         DisplayLoggedText();
+    }
+
+    private void SpawnAllMobs()
+    {
+        // TODO: Implement mobs spawn percentages
+        
+        Room[] rooms = Resources.LoadAll<Room>("ScriptableObjects/Rooms");
+        foreach (Room room in rooms)
+        {
+            // Resets all rooms that can spawn mobs to be able to spawn them again on player entering
+            room.mobsAlreadySpawned = false;
+            if (room.canMobsSpawnHere)
+            {
+                // starts player in the same room they logged off
+                var numberToSpawn = Random.Range(0, 4);
+                if (!room.mobsAlreadySpawned)
+                {
+                    Debug.Log("Number of mobs to spawn in " + room.roomCode + ": " + numberToSpawn);
+                    // find the number of different mobs the room can potentially spawn
+                    var numMobs = 0;
+                    foreach (var mobs in room.mobsThatCanSpawnHere)
+                    {
+                        numMobs++;
+                    }
+                    // spawn x mobs randomly from the list of mobs that can spawn in the room
+                    for (int i = 0; i < numberToSpawn; i++)
+                    {
+                        var index = Random.Range(0, numMobs);
+                        mobsSpawnedInRoom.Add(new KeyValuePair<string, Monsters>(room.roomCode, room.mobsThatCanSpawnHere[index]));
+                        Debug.Log("Room: " + room.roomCode + " is spawning a " + room.mobsThatCanSpawnHere[index]);
+                    }
+                    // check to make sure mobs spawned, and if they did, set it so no more spawn until these are dead
+                    if (numberToSpawn != 0)
+                    {
+                        room.mobsAlreadySpawned = true;
+                    }
+                }
+            }
+        }
     }
 
     // keeps track of what has been displayed and creates the scroll of all text in the main display
@@ -60,10 +101,10 @@ public class GameController : MonoBehaviour
 
     private void CheckRoomForMobs()
     {
-        if (roomNav.mobsSpawnedInRoom.Count > 0)
+        if (mobsSpawnedInRoom.Count > 0)
         {
             // using System.Linq to do a keyvaluepair lookup
-            var lookup = roomNav.mobsSpawnedInRoom.ToLookup(kvp => kvp.Key, kvp => kvp.Value);
+            var lookup = mobsSpawnedInRoom.ToLookup(kvp => kvp.Key, kvp => kvp.Value);
 
             foreach (Monsters x in lookup[roomNav.currentRoom.roomCode])
             {

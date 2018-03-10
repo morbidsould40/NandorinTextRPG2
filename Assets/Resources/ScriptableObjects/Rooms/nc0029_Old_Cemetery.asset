@@ -26,4 +26,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7499da668bf1207469033295533e7763, type: 2}
   - {fileID: 11400000, guid: e6d545074732d2146be83ce511264f3c, type: 2}
   mobsInRoom: []
-  mobsAlreadySpawned: 0
+  mobsAlreadySpawned: 1

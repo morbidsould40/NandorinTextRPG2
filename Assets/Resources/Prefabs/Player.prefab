@@ -54,7 +54,7 @@ MonoBehaviour:
   playerName: Morbidsoul
   playerRace: 
   playerClass: Blackguard
-  playerCurrentRoom: nc0000
+  playerCurrentRoom: nc0035
   playerLevel: 1
   playerStrength: 6
   playerAgility: 7
@@ -66,4 +66,4 @@ MonoBehaviour:
   playerMaxMana: 18
   playerCurrentExperience: 1
   playerGold: 1
-  currentRoom: {fileID: 11400000, guid: 68fdfaaa89275544ea557b5de92d46e1, type: 2}
+  currentRoom: {fileID: 11400000, guid: 0f8d8c8c5baa1c04c936af7a4dad5031, type: 2}
