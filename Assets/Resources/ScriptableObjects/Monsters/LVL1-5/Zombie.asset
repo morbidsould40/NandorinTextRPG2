@@ -9,14 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 066ed596ffeda274d901278fb58e9571, type: 3}
-  m_Name: Ghoul
+  m_Name: Zombie
   m_EditorClassIdentifier: 
-  monsterName: <b>Ghoul</b>
-  monsterKeyword: ghoul
+  monsterName: <b>Zombie</b>
+  monsterKeyword: zombie
   monsterID: 
   monsterDescription: 
   monsterType: undead
-  spawnChance: 0
+  spawnChance: 100
   goldDropChance: 0
   goldDroppedMin: 0
   goldDroppedMax: 0

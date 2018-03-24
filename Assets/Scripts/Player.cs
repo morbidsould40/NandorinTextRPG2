@@ -17,6 +17,8 @@ public class Player : MonoBehaviour {
     [SerializeField] int playerAgility;
     [SerializeField] int playerEndurance;
     [SerializeField] int playerMagic;
+    [SerializeField] float playerAttack;
+    [SerializeField] float playerDefense;
     [SerializeField] float playerCurrentHealth;
     [SerializeField] float playerMaxHealth;
     [SerializeField] float playerCurrentMana;
@@ -73,6 +75,18 @@ public class Player : MonoBehaviour {
     {
         get { return playerMagic; }
         set { playerMagic = value; }
+    }
+
+    public float PlayerAttack
+    {
+        get { return playerAttack; }
+        set { playerAttack = value; }
+    }
+
+    public float PlayerDefense
+    {
+        get { return playerDefense; }
+        set { playerDefense = value; }
     }
 
     public float PlayerCurrentHealth

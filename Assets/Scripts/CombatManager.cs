@@ -6,7 +6,7 @@ public class CombatManager : MonoBehaviour {
 
     public Player player;
     public GameController controller;
-
+    public float critDamageMultiplier = 1.5f;
 
     public enum CombatState
     {
@@ -44,24 +44,53 @@ public class CombatManager : MonoBehaviour {
         return null;
     }
 
-    private void PlayerAttack()
+    // Attack formula for both players and monsters is atk / (atk + def) where both atk's are attackers attack and def is defenders defense
+    // This should scale pretty decent and will almost never result in a 100% chance to hit
+
+    private void PlayerAttack(string mobAttacked)
     {
         combatState = CombatState.PlayersTurn;
+        var toHit = player.PlayerAttack / (player.PlayerAttack + GetMonsterPlayerAttacked(mobAttacked).monsterDefense);
+        // random roll to see if hit is made
+        var rollToHit = Random.Range(1, 100);
+        if(rollToHit < toHit)
+        {
+            // hit successful
+            bool playerCrit = CalculatePlayerCrit();
+            float totalDamageDone = CalculatePlayerDamage(playerCrit);
+        }
+        else
+        {
+            // missed
+        }
     }
 
-    private void CalculatePlayerDamage()
+    private float CalculatePlayerDamage(bool playerCrit)
     {
-
+        if (playerCrit)
+        {
+            // Calculate damage and multiply it by critDamageModifier
+            var damageDealt = 1 * critDamageMultiplier; // TODO set up damage formula
+            return damageDealt;
+        }
+        else
+        {
+            // Calculate Damage normally
+            var damageDealt = 1; // TODO set up damage formula
+            return damageDealt;
+        }
     }
 
-    private void CalculatePlayerCrit()
+    private bool CalculatePlayerCrit()
     {
-
+        // TODO set up crit formula        
+        return false;
     }
 
     private void MonstersAttack()
     {
         combatState = CombatState.MonstersTurn;
+        
     }
 
     private void CalculateMonstersDamage()
