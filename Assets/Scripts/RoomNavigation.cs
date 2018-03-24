@@ -46,15 +46,6 @@ public class RoomNavigation : MonoBehaviour
         }
     }
 
-    // TODO Need to set spawn % values for each mob that can spawn in a room (ex. more skeletons than ghouls should spawn in cemetery)
-    public void UnpackMobsInRoom()
-    {
-        if (currentRoom.mobsInRoom.Length == 0 && currentRoom.mobsAlreadySpawned == false && currentRoom.canMobsSpawnHere == true)
-        {
-            // Spawn between 0-3 mobs in the room when a player enters it
-        }   
-    }
-
     public void AttemptToChangeRooms(string directionNoun)
     {
         // if there is an exit in the direction the player typed

@@ -13,7 +13,7 @@ public class Room : ScriptableObject
     public ExaminableObject[] examinableObjectsInRoom;
     public bool canMobsSpawnHere;
     public Monsters[] mobsThatCanSpawnHere;
-    public Monsters[] mobsInRoom;
     public bool mobsAlreadySpawned;
-    
+    public float minRespawnTimer;
+    public float maxRespawnTimer;    
 }

@@ -23,7 +23,6 @@ public class PlayerManagement : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-
         playerName.text = player.PlayerName;
         playerClass.text = player.PlayerClass;        
     }

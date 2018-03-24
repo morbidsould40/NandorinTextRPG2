@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour
     [HideInInspector] public InteractableItems interactableItems;
     [HideInInspector] public ExamaniableItems examinableItems;
     [HideInInspector] public LookableDirections lookableDirections;
-    [HideInInspector] public List<string> mobsInTheRoom = new List<string>();
+    [HideInInspector] public List<Monsters> mobsInTheRoom = new List<Monsters>();
 
     private List<string> actionLog = new List<string>();
     private RoomNavigation roomNav;
@@ -65,9 +65,17 @@ public class GameController : MonoBehaviour
                     // spawn x mobs randomly from the list of mobs that can spawn in the room
                     for (int i = 0; i < numberToSpawn; i++)
                     {
-                        var index = Random.Range(0, numMobs);
-                        mobsSpawnedInRoom.Add(new KeyValuePair<string, Monsters>(room.roomCode, room.mobsThatCanSpawnHere[index]));
-                        Debug.Log("Room: " + room.roomCode + " is spawning a " + room.mobsThatCanSpawnHere[index]);
+                        for (int x = 0; i < numMobs; x++)
+                        {
+                            var mob = room.mobsThatCanSpawnHere[x];
+                            float roll = Random.Range(0, 100);
+                            if (roll <= mob.spawnChance)
+                            {
+                                mobsSpawnedInRoom.Add(new KeyValuePair<string, Monsters>(room.roomCode, room.mobsThatCanSpawnHere[x]));
+                                Debug.Log("Room: " + room.roomCode + " is spawning a " + room.mobsThatCanSpawnHere[x]);
+                                break;
+                            }
+                        }
                     }
                     // check to make sure mobs spawned, and if they did, set it so no more spawn until these are dead
                     if (numberToSpawn != 0)
@@ -108,11 +116,16 @@ public class GameController : MonoBehaviour
 
             foreach (Monsters x in lookup[roomNav.currentRoom.roomCode])
             {
-                mobsInTheRoom.Add(x.monsterName);
+                mobsInTheRoom.Add(x);
             }
             if (mobsInTheRoom.Count > 0)
             {
-                string mobsInRoom = string.Join(", and a ", mobsInTheRoom.ToArray());
+                List<string> mobNames = new List<string>();
+                for (int i = 0; i < mobsInTheRoom.Count; i++)
+                {
+                    mobNames.Add(mobsInTheRoom[i].monsterKeyword);
+                }
+                string mobsInRoom = string.Join(", and a ", mobNames.ToArray());
                 string monsterText = "<color=#ff0000ff> You see a " + mobsInRoom + " in the room.</color>";
                 LogStringWithReturn(monsterText);
             }
@@ -123,21 +136,7 @@ public class GameController : MonoBehaviour
     {
         roomNavigation.UnpackExitsInRoom();
         roomNavigation.UnpackExaminablesInRoom();
-        roomNavigation.UnpackMobsInRoom();
-        //PrepareObjectsToTakeOrExamine(roomNavigation.currentRoom);        
     }
-
-    //private void PrepareObjectsToTakeOrExamine(Room currentRoom)
-    //{
-    //    for (int i = 0; i < currentRoom.interactableObjectsInRoom.Length; i++)
-    //    {
-    //        string descriptionNotInInventory = interactableItems.GetObjectsInRoom(currentRoom, i);
-    //        if (descriptionNotInInventory != null)
-    //        {
-    //            interactiveDescriptionsInRoom.Add(descriptionNotInInventory);
-    //        }
-    //    }
-    //}   
 
     private void ClearCollectionsForNewRoom()
     {
