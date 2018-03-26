@@ -6,10 +6,9 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public Text displayText;    
+    public Text displayText;
     public Player player;
     public InputAction[] inputActions;
-    public PlayerManagement playerManagement;
     public List<KeyValuePair<string, Monsters>> mobsSpawnedInRoom = new List<KeyValuePair<string, Monsters>>();
 
     [HideInInspector] public RoomNavigation roomNavigation;
@@ -18,10 +17,13 @@ public class GameController : MonoBehaviour
     [HideInInspector] public InteractableItems interactableItems;
     [HideInInspector] public ExamaniableItems examinableItems;
     [HideInInspector] public LookableDirections lookableDirections;
+    [HideInInspector] public AttackableMobs attackableMobs;
+    [HideInInspector] public CombatManager combatManager;
     [HideInInspector] public List<Monsters> mobsInTheRoom = new List<Monsters>();
 
     private List<string> actionLog = new List<string>();
-    private RoomNavigation roomNav;
+    private RoomNavigation roomNav;    
+    private PlayerManagement playerManagement;
 
     private void Awake()
     { 
@@ -31,6 +33,7 @@ public class GameController : MonoBehaviour
         lookableDirections = GetComponent<LookableDirections>();
         playerManagement = GetComponent<PlayerManagement>();
         roomNav = GetComponent<RoomNavigation>();
+        combatManager = GetComponent<CombatManager>();
     }
 
     private void Start()
@@ -41,9 +44,7 @@ public class GameController : MonoBehaviour
     }
 
     private void SpawnAllMobs()
-    {
-        // TODO: Implement mobs spawn percentages
-        
+    {        
         Room[] rooms = Resources.LoadAll<Room>("ScriptableObjects/Rooms");
         foreach (Room room in rooms)
         {

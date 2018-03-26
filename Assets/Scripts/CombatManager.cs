@@ -28,7 +28,25 @@ public class CombatManager : MonoBehaviour {
         IsPlayerDead();
     }
 
-    private Monsters GetMonsterPlayerAttacked(string mobAttacked)
+    // Combat State Machine    
+    public void StartCombat(string mobToAttack)
+    {
+        switch (combatState)
+        {
+            case CombatState.OutOfCombat:
+                break;
+            case CombatState.PlayersTurn:
+                break;
+            case CombatState.MonstersTurn:
+                break;
+            case CombatState.PlayerDead:
+                break;
+            default:
+                break;
+        }
+    }
+
+    public Monsters GetMonsterPlayerAttacked(string mobAttacked)
     {
         for (int i = 0; i < controller.mobsInTheRoom.Count; i++)
         {
@@ -47,7 +65,7 @@ public class CombatManager : MonoBehaviour {
     // Attack formula for both players and monsters is atk / (atk + def) where both atk's are attackers attack and def is defenders defense
     // This should scale pretty decent and will almost never result in a 100% chance to hit
 
-    private void PlayerAttack(string mobAttacked)
+    public void PlayerAttack(string mobAttacked)
     {
         combatState = CombatState.PlayersTurn;
         var toHit = player.PlayerAttack / (player.PlayerAttack + GetMonsterPlayerAttacked(mobAttacked).monsterDefense);
@@ -62,10 +80,11 @@ public class CombatManager : MonoBehaviour {
         else
         {
             // missed
+
         }
     }
 
-    private float CalculatePlayerDamage(bool playerCrit)
+    public float CalculatePlayerDamage(bool playerCrit)
     {
         if (playerCrit)
         {
@@ -81,34 +100,34 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
-    private bool CalculatePlayerCrit()
+    public bool CalculatePlayerCrit()
     {
         // TODO set up crit formula        
         return false;
     }
 
-    private void MonstersAttack()
+    public void MonstersAttack()
     {
         combatState = CombatState.MonstersTurn;
         
     }
 
-    private void CalculateMonstersDamage()
+    public void CalculateMonstersDamage()
     {
 
     }
 
-    private void CalculateMonstersCrit()
+    public void CalculateMonstersCrit()
     {
 
     }
 
-    private void GetLootDrops()
+    public void GetLootDrops()
     {
 
     }
 
-    private bool IsPlayerDead()
+    public bool IsPlayerDead()
     {
         if (player.PlayerCurrentHealth <= 0)
         {
