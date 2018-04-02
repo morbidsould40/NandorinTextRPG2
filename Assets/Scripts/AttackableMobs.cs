@@ -15,6 +15,8 @@ public class AttackableMobs : MonoBehaviour {
 
     public void ExamineKeyword(string keywordNoun)
     {
-        combatManager.StartCombat(keywordNoun);
+        Debug.Log("Attempting to attack a " + keywordNoun);
+        combatManager.combatState = CombatManager.CombatState.StartCombat;
+        combatManager.CombatStateMachine(keywordNoun);
     }
 }

@@ -22,8 +22,9 @@ MonoBehaviour:
   examinableObjectsInRoom: []
   canMobsSpawnHere: 1
   mobsThatCanSpawnHere:
-  - {fileID: 11400000, guid: 6135a5bff8034264dbcc1a7e1bcdf023, type: 2}
   - {fileID: 11400000, guid: 7499da668bf1207469033295533e7763, type: 2}
+  - {fileID: 11400000, guid: 6135a5bff8034264dbcc1a7e1bcdf023, type: 2}
   - {fileID: 11400000, guid: e6d545074732d2146be83ce511264f3c, type: 2}
-  mobsInRoom: []
   mobsAlreadySpawned: 1
+  minRespawnTimer: 0
+  maxRespawnTimer: 0

@@ -56,10 +56,12 @@ MonoBehaviour:
   playerClass: Blackguard
   playerCurrentRoom: nc0035
   playerLevel: 1
-  playerStrength: 6
-  playerAgility: 7
+  playerStrength: 10
+  playerAgility: 15
   playerEndurance: 5
-  playerMagic: 4
+  playerMagic: 5
+  playerAttack: 0
+  playerDefense: 0
   playerCurrentHealth: 34
   playerMaxHealth: 34
   playerCurrentMana: 18

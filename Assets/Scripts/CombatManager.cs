@@ -7,13 +7,14 @@ public class CombatManager : MonoBehaviour {
     public Player player;
     public GameController controller;
     public float critDamageMultiplier = 1.5f;
+    public bool playerInCombat = false;
 
     public enum CombatState
     {
-        OutOfCombat, PlayersTurn, MonstersTurn, PlayerDead
+        StartCombat, PlayersTurn, MonstersTurn, PlayerDead, EndCombat, OutOfCombat
     }
 
-    CombatState combatState = CombatState.OutOfCombat;
+    public CombatState combatState = CombatState.OutOfCombat;
 
     // Use this for initialization
     void Start ()
@@ -29,17 +30,28 @@ public class CombatManager : MonoBehaviour {
     }
 
     // Combat State Machine    
-    public void StartCombat(string mobToAttack)
+    public void CombatStateMachine(string mobToAttack)
     {
         switch (combatState)
         {
-            case CombatState.OutOfCombat:
+            case CombatState.StartCombat:
+                // turn off auto heal
+                Debug.Log(combatState);                
+                playerInCombat = true;
+                combatState = CombatState.PlayersTurn;
+                CombatStateMachine(mobToAttack);
                 break;
             case CombatState.PlayersTurn:
+                Debug.Log(combatState);
+                PlayerAttack(mobToAttack);
                 break;
             case CombatState.MonstersTurn:
                 break;
             case CombatState.PlayerDead:
+                break;
+            case CombatState.EndCombat:
+                break;
+            case CombatState.OutOfCombat:
                 break;
             default:
                 break;
@@ -48,11 +60,13 @@ public class CombatManager : MonoBehaviour {
 
     public Monsters GetMonsterPlayerAttacked(string mobAttacked)
     {
+#pragma warning disable CS0162 // Unreachable code detected
         for (int i = 0; i < controller.mobsInTheRoom.Count; i++)
+#pragma warning restore CS0162 // Unreachable code detected
         {
             if (mobAttacked == controller.mobsInTheRoom[i].monsterKeyword)
             {
-                return controller.mobsInTheRoom[i];
+                return controller.mobsInTheRoom[i];                
             }
             else
             {
@@ -67,43 +81,62 @@ public class CombatManager : MonoBehaviour {
 
     public void PlayerAttack(string mobAttacked)
     {
-        combatState = CombatState.PlayersTurn;
+        combatState = CombatState.PlayersTurn;        
         var toHit = player.PlayerAttack / (player.PlayerAttack + GetMonsterPlayerAttacked(mobAttacked).monsterDefense);
+        Debug.Log("percentage to hit: " + toHit);
         // random roll to see if hit is made
-        var rollToHit = Random.Range(1, 100);
+        var rollToHit = Random.Range(0, 100);
+        Debug.Log("Random roll: " + rollToHit);
         if(rollToHit < toHit)
         {
             // hit successful
             bool playerCrit = CalculatePlayerCrit();
             float totalDamageDone = CalculatePlayerDamage(playerCrit);
+            Debug.Log("Total damage dealt: " + totalDamageDone);
         }
         else
         {
             // missed
+            Debug.Log("missed");
 
         }
     }
 
     public float CalculatePlayerDamage(bool playerCrit)
     {
+        var playerDamageBonus = ((player.PlayerStrength / 5) * player.PlayerLevel);
+        var weaponDamage = 0;
         if (playerCrit)
         {
             // Calculate damage and multiply it by critDamageModifier
-            var damageDealt = 1 * critDamageMultiplier; // TODO set up damage formula
+            var damageDealt = ((weaponDamage + playerDamageBonus) * critDamageMultiplier); // TODO set up damage formula            
             return damageDealt;
         }
         else
         {
             // Calculate Damage normally
-            var damageDealt = 1; // TODO set up damage formula
+            var damageDealt = weaponDamage + playerDamageBonus; // TODO set up damage formula            
             return damageDealt;
         }
     }
 
     public bool CalculatePlayerCrit()
     {
-        // TODO set up crit formula        
-        return false;
+        // ((agility / 25) * currentLevel)
+        var playerCritChance = ((player.PlayerAgility / 10) * player.PlayerLevel);
+        Debug.Log("Crit Chane: " + playerCritChance);
+        var critRoll = Random.Range(1, 100);
+        Debug.Log("Random crit roll: " + critRoll);
+        if (critRoll <= playerCritChance)
+        {
+            Debug.Log("crit: true");
+            return true;
+        }
+        else
+        {
+            Debug.Log("crit: false");
+            return false;
+        }
     }
 
     public void MonstersAttack()

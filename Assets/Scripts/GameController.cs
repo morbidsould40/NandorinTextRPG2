@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
     [HideInInspector] public ExamaniableItems examinableItems;
     [HideInInspector] public LookableDirections lookableDirections;
     [HideInInspector] public AttackableMobs attackableMobs;
+    [HideInInspector] public Inventory inventory;
     [HideInInspector] public CombatManager combatManager;
     [HideInInspector] public List<Monsters> mobsInTheRoom = new List<Monsters>();
 
@@ -34,6 +35,8 @@ public class GameController : MonoBehaviour
         playerManagement = GetComponent<PlayerManagement>();
         roomNav = GetComponent<RoomNavigation>();
         combatManager = GetComponent<CombatManager>();
+        attackableMobs = GetComponent<AttackableMobs>();
+        inventory = GetComponent<Inventory>();
     }
 
     private void Start()
@@ -124,7 +127,7 @@ public class GameController : MonoBehaviour
                 List<string> mobNames = new List<string>();
                 for (int i = 0; i < mobsInTheRoom.Count; i++)
                 {
-                    mobNames.Add(mobsInTheRoom[i].monsterKeyword);
+                    mobNames.Add(mobsInTheRoom[i].monsterName);
                 }
                 string mobsInRoom = string.Join(", and a ", mobNames.ToArray());
                 string monsterText = "<color=#ff0000ff> You see a " + mobsInRoom + " in the room.</color>";

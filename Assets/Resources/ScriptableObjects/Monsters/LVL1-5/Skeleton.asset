@@ -26,6 +26,6 @@ MonoBehaviour:
   monsterMaxHealth: 0
   monsterCurrentMana: 0
   monsterMaxMana: 0
-  monsterAttack: 0
-  monsterDefense: 0
+  monsterAttack: 0.5
+  monsterDefense: 0.25
   monsterAttacks: []
