@@ -1,7 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-[CreateAssetMenu(menuName = "TextRPG/Items")]
-public class Items : ScriptableObject {
+public class Items : MonoBehaviour {
 
-    public string itemName;
+	// Use this for initialization
+	void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
 }

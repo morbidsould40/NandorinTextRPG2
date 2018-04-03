@@ -7,6 +7,10 @@ public class Inventory : MonoBehaviour {
     GameController controller;
     CombatManager combatManager;
     Player player;
+
+    // need a couple lists/dictionaries to handle weapons/armor/general items.
+    // Can you initialize a dictionary with a set of keys with blank values (empty equipment slots)
+    public Dictionary<string, Items> inventory = new Dictionary<string, Items>();
     
 	void Awake () {
         controller = GetComponent<GameController>();
@@ -24,9 +28,18 @@ public class Inventory : MonoBehaviour {
         {
             Debug.Log("unequip");
         }
-        if (keywordVerb == "inv" || keywordVerb == "inventory")
+        
+        if (keywordVerb == "buy")
         {
-            Debug.Log("inventory");
+            Debug.Log("buy");
+        }
+        if (keywordVerb == "sell")
+        {
+            Debug.Log("sell");
+        }
+        if (keywordVerb == "drop")
+        {
+            Debug.LogError("THIS WILL DESTROY THE ITEM");
         }
     }
 }

@@ -886,6 +886,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f4735dca7cd5db54c8b4e4cc306e409a, type: 2}
   - {fileID: 11400000, guid: cf1b0ab89e553ab48abf784b34a0f359, type: 2}
   - {fileID: 11400000, guid: b899e00457bcd63478f63e59a61c6752, type: 2}
+  - {fileID: 11400000, guid: 7d98e888316e89e43b2417e6044cfdc1, type: 2}
+  - {fileID: 11400000, guid: 30a9a6ac7c66c0544ae10a213d34dd0b, type: 2}
+  - {fileID: 11400000, guid: cd203c0779972c840a9a0a9dcecad2a9, type: 2}
+  - {fileID: 11400000, guid: 4d1913dee918fff4194dd88c4fb9f46e, type: 2}
+  - {fileID: 11400000, guid: a393dc29ca8017b44a614ec291dccb87, type: 2}
+  - {fileID: 11400000, guid: 036401bdbd1683a408cc0c5bae996b32, type: 2}
   roomNavigation: {fileID: 0}
   interactiveDescriptionsInRoom: []
   examinableDescriptionsInRoom: []
