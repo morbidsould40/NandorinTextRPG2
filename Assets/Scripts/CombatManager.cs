@@ -60,17 +60,12 @@ public class CombatManager : MonoBehaviour {
 
     public Monsters GetMonsterPlayerAttacked(string mobAttacked)
     {
-#pragma warning disable CS0162 // Unreachable code detected
+
         for (int i = 0; i < controller.mobsInTheRoom.Count; i++)
-#pragma warning restore CS0162 // Unreachable code detected
         {
             if (mobAttacked == controller.mobsInTheRoom[i].monsterKeyword)
             {
                 return controller.mobsInTheRoom[i];                
-            }
-            else
-            {
-                return null;
             }
         }
         return null;

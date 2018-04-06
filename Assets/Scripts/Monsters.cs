@@ -15,7 +15,8 @@ public class Monsters : ScriptableObject
     public int goldDroppedMin;
     public int goldDroppedMax;
     public float itemDropChance;
-    public Items[] itemsDropped;
+    public Weapons[] weaponsDropped;
+    public Armor[] armorDropped;
     public float monsterCurrentHealth;
     public float monsterMaxHealth;
     public float monsterCurrentMana;

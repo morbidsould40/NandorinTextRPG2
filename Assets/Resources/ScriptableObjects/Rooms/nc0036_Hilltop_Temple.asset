@@ -22,5 +22,10 @@ MonoBehaviour:
   examinableObjectsInRoom: []
   canMobsSpawnHere: 0
   mobsThatCanSpawnHere: []
-  mobsInRoom: []
   mobsAlreadySpawned: 0
+  minRespawnTimer: 0
+  maxRespawnTimer: 0
+  isShop: 0
+  shopWeapons: []
+  shopArmor: []
+  isDark: 0

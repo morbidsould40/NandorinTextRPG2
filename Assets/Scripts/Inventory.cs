@@ -10,7 +10,8 @@ public class Inventory : MonoBehaviour {
 
     // need a couple lists/dictionaries to handle weapons/armor/general items.
     // Can you initialize a dictionary with a set of keys with blank values (empty equipment slots)
-    public Dictionary<string, Items> inventory = new Dictionary<string, Items>();
+    public Dictionary<int, string> inventory = new Dictionary<int, string>();
+    public Dictionary<string, string> equippedItems = new Dictionary<string, string>();
     
 	void Awake () {
         controller = GetComponent<GameController>();
