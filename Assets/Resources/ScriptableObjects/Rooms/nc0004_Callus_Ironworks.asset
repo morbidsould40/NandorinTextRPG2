@@ -9,20 +9,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 470a378794f049440b35387ca57c2e41, type: 3}
-  m_Name: nc0001_N_Cobblestone_Road
+  m_Name: nc0004_Callus_Ironworks
   m_EditorClassIdentifier: 
-  description: Nandorin's cobblestone roads are well kept and always bustling with
-    city folk going about their daily business.
-  roomName: North Cobblestone Road
-  roomCode: nc0001
+  description: Weapon Shop <enter desc here>
+  roomName: Callus Ironworks
+  roomCode: nc0004
   exits:
-  - keyString: north
-    exitDescription: Cobblestone Road continues to the north.
+  - keyString: east
+    exitDescription: To the east you see North Cobblestone Road
     valueRoom: {fileID: 11400000, guid: 4e16dfcc889a3294dae876147a66bac9, type: 2}
-  - keyString: south
-    exitDescription: To the south you see the Nexus crystal looming over the town
-      square.
-    valueRoom: {fileID: 11400000, guid: 68fdfaaa89275544ea557b5de92d46e1, type: 2}
   interactableObjectsInRoom: []
   examinableObjectsInRoom: []
   canMobsSpawnHere: 0
@@ -30,7 +25,8 @@ MonoBehaviour:
   mobsAlreadySpawned: 0
   minRespawnTimer: 0
   maxRespawnTimer: 0
-  isShop: 0
-  shopWeapons: []
+  isShop: 1
+  shopWeapons:
+  - {fileID: 11400000, guid: 4724282b684f9d4409d7a13f9065e5c5, type: 2}
   shopArmor: []
   isDark: 0
