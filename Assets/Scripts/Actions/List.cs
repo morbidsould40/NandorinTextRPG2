@@ -26,10 +26,12 @@ public class List : InputAction
                     storeInventory.Add(shopArmor[i].armorName, shopArmor[i].armorCost);
                 }
             }
-            controller.LogStringWithReturn("For Sale\n_______________________________________________");
+            controller.LogStringWithReturn("For Sale (BUY items by their number)\n_______________________________________________");
+            var itemNumber = 1;
             foreach (var item in storeInventory)
             {
-                controller.LogStringWithReturn(item.Key + ": " + item.Value + " gold pieces");
+                controller.LogStringWithoutReturn(itemNumber + ": " + item.Key + " - " + item.Value + " gold");
+                itemNumber++;
             }
             controller.DisplayLoggedText();
             storeInventory.Clear();

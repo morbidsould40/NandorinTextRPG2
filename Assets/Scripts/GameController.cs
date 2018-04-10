@@ -155,4 +155,9 @@ public class GameController : MonoBehaviour
     {
         actionLog.Add(stringToAdd + "\n");
     }
+
+    public void LogStringWithoutReturn(string stringToAdd)
+    {
+        actionLog.Add(stringToAdd);
+    }
 }

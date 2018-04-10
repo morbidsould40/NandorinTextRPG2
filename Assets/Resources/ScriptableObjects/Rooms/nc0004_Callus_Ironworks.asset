@@ -28,5 +28,6 @@ MonoBehaviour:
   isShop: 1
   shopWeapons:
   - {fileID: 11400000, guid: 4724282b684f9d4409d7a13f9065e5c5, type: 2}
-  shopArmor: []
+  shopArmor:
+  - {fileID: 11400000, guid: c58b7819fed2c73499edec08a099e558, type: 2}
   isDark: 0

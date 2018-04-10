@@ -19,7 +19,7 @@ public class Inventory : MonoBehaviour {
         player = FindObjectOfType<Player>();
 	}
 
-    public void ExamineKeyword(string keywordVerb, string keywordNoun)
+    public void ExamineKeyword(string keywordVerb, params string[] keywordNoun)
     {
         if (keywordVerb == "equip")
         {
@@ -28,11 +28,40 @@ public class Inventory : MonoBehaviour {
         if (keywordVerb == "unequip")
         {
             Debug.Log("unequip");
-        }
-        
+        }        
         if (keywordVerb == "buy")
         {
-            Debug.Log("buy");
+            string result = "";
+            for (int i = 0; i < keywordNoun.Length; i++)
+            {
+                if (i > 0)
+                {
+                    result += " ";
+                }
+                result += keywordNoun[i];
+            }
+
+            if (result.Length > 0)
+            {
+                int i = result.IndexOf(" ") + 1;
+                string str = result.Substring(i);
+                result = str;
+            }
+
+            foreach (var item in controller.roomNavigation.currentRoom.shopWeapons)
+            {
+                if (result == item.weaponName.ToLower())
+                {
+                    Debug.Log("Buying " + result);
+                }
+            }
+            foreach (var item in controller.roomNavigation.currentRoom.shopArmor)
+            {
+                if (result == item.armorName.ToLower())
+                {
+                    Debug.Log("Buying " + result);
+                }
+            }
         }
         if (keywordVerb == "sell")
         {
