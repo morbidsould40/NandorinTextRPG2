@@ -24,12 +24,17 @@ public class Inv : InputAction
 
         if (inv.inventory.Count <= 0)
         {            
-            controller.LogStringWithReturn("Your inventory is currently empty. \nYou have " + player.PlayerGold + " gold " + goldTense + ".");
+            controller.LogStringWithReturn("Your inventory is currently empty. \n" + player.PlayerGold + " gold " + goldTense + ".");
             controller.DisplayLoggedText();
         }
         else
         {
-            controller.LogStringWithReturn("<Display items here>. \nYou have " + player.PlayerGold + " gold " + goldTense + ".");
+            controller.LogStringWithReturn("Inventory\n_______________________________________________");
+            foreach (var item in inv.inventory)
+            {
+                controller.LogStringWithoutReturn(item.Value);
+            }            
+            controller.LogStringWithoutReturn(player.PlayerGold + " gold " + goldTense + ".");
             controller.DisplayLoggedText();
         }
     }

@@ -11,6 +11,7 @@ public class Armor : ScriptableObject {
     public string armorDesc;
     public Sprite armorIcon;
     public int armorCost;
+    public float armorWeight;
     public float armorDefense;
 
     public enum ArmorType

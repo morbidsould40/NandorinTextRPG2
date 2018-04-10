@@ -11,6 +11,7 @@ public class Weapons : ScriptableObject {
     public string weaponDesc;
     public Sprite weaponIcon;
     public int weaponCost;
+    public float weaponWeight;
     public float weaponMinDamage;
     public float weaponMaxDamage;
     public float weaponAttack;
