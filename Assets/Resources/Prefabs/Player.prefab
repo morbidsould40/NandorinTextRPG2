@@ -51,21 +51,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8a0a237bf8a9843b241c991c22a4e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: Morbidsoul
+  playerName: Test Player
   playerRace: 
-  playerClass: Blackguard
-  playerCurrentRoom: nc0035
+  playerClass: Cleric
+  playerCurrentRoom: nc0004
   playerLevel: 1
-  playerStrength: 10
-  playerAgility: 15
-  playerEndurance: 5
-  playerMagic: 5
+  playerStrength: 5
+  playerAgility: 4
+  playerEndurance: 7
+  playerMagic: 6
   playerAttack: 0
   playerDefense: 0
-  playerCurrentHealth: 34
-  playerMaxHealth: 34
-  playerCurrentMana: 18
-  playerMaxMana: 18
+  playerCurrentHealth: 46
+  playerMaxHealth: 46
+  playerCurrentMana: 24
+  playerMaxMana: 24
+  playerCurrentStamina: 22
+  playerMaxStamina: 22
   playerCurrentExperience: 1
-  playerGold: 1
-  currentRoom: {fileID: 11400000, guid: 0f8d8c8c5baa1c04c936af7a4dad5031, type: 2}
+  playerGold: 20
+  currentRoom: {fileID: 11400000, guid: 68fdfaaa89275544ea557b5de92d46e1, type: 2}

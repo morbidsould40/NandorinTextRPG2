@@ -8,6 +8,7 @@
     private int magic;
     private int maxHealth;
     private int maxMana;
+    private int maxStamina;
     private int playerLevel;
     private int currentExp;
     private int requiredExp;
@@ -59,6 +60,12 @@
     {
         get { return maxMana; }
         set { maxMana = value; }
+    }
+
+    public int MaxStamina
+    {
+        get { return maxStamina; }
+        set { maxStamina = value; }
     }
 
     public int PlayerLevel

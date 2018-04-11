@@ -35,6 +35,8 @@ public class CharacterCreation : MonoBehaviour {
         newPlayer.CurrentGold = 20;
         newPlayer.MaxHealth = ((newPlayer.PlayerClass.Endurance * 3) + (newPlayer.PlayerLevel * 2)) * 2;
         newPlayer.MaxMana = ((newPlayer.PlayerClass.Magic * 3) + (newPlayer.PlayerLevel * 3) * 2);
+        newPlayer.MaxStamina = ((player.PlayerEndurance * 4) + (player.PlayerLevel * 2));
+        
         newPlayer.CurrentExp = 1;
         StorePlayerInfo();
         SceneManager.LoadScene(1); 
@@ -53,6 +55,8 @@ public class CharacterCreation : MonoBehaviour {
         player.PlayerCurrentHealth = newPlayer.MaxHealth;
         player.PlayerMaxMana = newPlayer.MaxMana;
         player.PlayerCurrentMana = newPlayer.MaxMana;
+        player.PlayerMaxStamina = newPlayer.MaxStamina;
+        player.PlayerCurrentStamina = newPlayer.MaxStamina;
         player.PlayerCurrentExperience = newPlayer.CurrentExp;
         player.PlayerClass = newPlayer.PlayerClass.CharacterClassName;
         player.CurrentRoom = startingRoom;
