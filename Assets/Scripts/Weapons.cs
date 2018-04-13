@@ -27,14 +27,5 @@ public class Weapons : Items {
     }
     public DamageType damageType;
 
-    public enum Rarity
-    {
-        Common, Uncommon, Rare, Epic, Relic, Artifact
-    }
-    public Rarity rarity;
-
-    public bool isUnique = false;
-    public bool isDroppable = true;
-
     public GearBonuses[] gearBonuses;
 }

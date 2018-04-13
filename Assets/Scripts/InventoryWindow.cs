@@ -24,11 +24,12 @@ public class InventoryWindow : MonoBehaviour {
     {
         controller = FindObjectOfType<GameController>();
         CreateInventorySlotsInWindow();
+        AddItemsFromInventory();
     }
 
     private void Update()
     {
-        AddItemsFromInventory();
+        
     }
 
     private void CreateInventorySlotsInWindow()
@@ -66,8 +67,16 @@ public class InventoryWindow : MonoBehaviour {
             if (inventorySlots[i].name == "Empty")
             {
                 inventorySlots[i].name = i.ToString();
+                inventorySlots[i].transform.GetChild(0).gameObject.SetActive(true);
+                inventorySlots[i].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = ReturnItemIcon(playerInventory[i]);
             }
         }
     }
 
+    private Sprite ReturnItemIcon(Items item)
+    {
+        Sprite icon = new Sprite();
+        icon = item.itemIcon;
+        return icon;
+    }
 }
