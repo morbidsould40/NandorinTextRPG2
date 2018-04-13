@@ -3,15 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "TextRPG/Items/Weapons")]
-public class Weapons : ScriptableObject {
+public class Weapons : Items {
 
-    public string weaponName;
-    public string weaponID;
-    [TextArea]
-    public string weaponDesc;
-    public Sprite weaponIcon;
-    public int weaponCost;
-    public float weaponWeight;
     public float weaponMinDamage;
     public float weaponMaxDamage;
     public float weaponAttack;

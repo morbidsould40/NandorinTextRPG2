@@ -17,7 +17,6 @@ public class Room : ScriptableObject
     public float minRespawnTimer;
     public float maxRespawnTimer;
     public bool isShop;
-    public Weapons[] shopWeapons;
-    public Armor[] shopArmor;
+    public Items[] shopItems;
     public bool isDark; // players will need a lightsource to move through these sections
 }

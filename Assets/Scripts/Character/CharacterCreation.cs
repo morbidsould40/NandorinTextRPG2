@@ -60,6 +60,8 @@ public class CharacterCreation : MonoBehaviour {
         player.PlayerCurrentExperience = newPlayer.CurrentExp;
         player.PlayerClass = newPlayer.PlayerClass.CharacterClassName;
         player.CurrentRoom = startingRoom;
+        player.PlayerAttack = (player.PlayerAgility / 20f) * player.PlayerLevel;
+        player.PlayerDefense = ((player.PlayerStrength / 10f) * (player.PlayerLevel / 2f));
     }
 
     public void Dropdown_IndexChanged(int index)

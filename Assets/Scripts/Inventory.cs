@@ -6,10 +6,11 @@ public class Inventory : MonoBehaviour {
     GameController controller;
     CombatManager combatManager;
     Player player;
+    InventoryWindow inventoryWindow;
 
     // need a couple lists/dictionaries to handle weapons/armor/general items.
     // Can you initialize a dictionary with a set of keys with blank values (empty equipment slots)
-    public Dictionary<int, string> inventory = new Dictionary<int, string>();
+    public List<Items> inventory = new List<Items>();
     public Dictionary<string, string> equippedItems = new Dictionary<string, string>();
 
     public enum Encumberance
@@ -23,6 +24,7 @@ public class Inventory : MonoBehaviour {
         controller = GetComponent<GameController>();
         combatManager = GetComponent<CombatManager>();
         player = FindObjectOfType<Player>();
+        inventoryWindow = FindObjectOfType<InventoryWindow>();
 	}
 
     private void Update()
@@ -41,13 +43,16 @@ public class Inventory : MonoBehaviour {
         {
             Debug.Log("equip");
         }
+
         if (keywordVerb == "unequip")
         {
             Debug.Log("unequip");
-        }        
+        }  
+        
         if (keywordVerb == "buy")
         {
             string result = "";
+
             for (int i = 0; i < keywordNoun.Length; i++)
             {
                 if (i > 0)
@@ -64,33 +69,29 @@ public class Inventory : MonoBehaviour {
                 result = str;
             }
             var currentInventoryCount = inventory.Count;
-            foreach (var item in controller.roomNavigation.currentRoom.shopWeapons)
+
+            foreach (var item in controller.roomNavigation.currentRoom.shopItems)
             {
-                if (result == item.weaponName.ToLower())
+                if (result == item.itemName.ToLower())
                 {
-                    inventory.Add(inventory.Count, item.weaponName);
+                    inventory.Add(item);
                     Debug.Log("Buying " + result);
-                    controller.LogStringWithReturn("You have bought a " + item.weaponName + " for " + item.weaponCost + " gold.");
+                    controller.LogStringWithReturn("You have bought a " + item.itemName + " for " + item.itemCost + " gold.");
+                    inventoryWindow.AddItemsFromInventory();
                 }
             }
-            foreach (var item in controller.roomNavigation.currentRoom.shopArmor)
-            {
-                if (result == item.armorName.ToLower())
-                {
-                    inventory.Add(inventory.Count, item.armorName);
-                    Debug.Log("Buying " + result);
-                    controller.LogStringWithReturn("You have bought a " + item.armorName + " for " + item.armorCost + " gold.");
-                }
-            }
+
             if (currentInventoryCount == inventory.Count)
             {
                 controller.LogStringWithReturn("There is no " + result + " to buy here. Type list to see what is available.");
             }
         }
+
         if (keywordVerb == "sell")
         {
             Debug.Log("sell");
         }
+
         if (keywordVerb == "drop")
         {
             Debug.LogError("THIS WILL DESTROY THE ITEM");

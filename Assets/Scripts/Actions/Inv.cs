@@ -32,7 +32,7 @@ public class Inv : InputAction
             controller.LogStringWithReturn("Inventory\n_______________________________________________");
             foreach (var item in inv.inventory)
             {
-                controller.LogStringWithoutReturn(item.Value);
+                controller.LogStringWithoutReturn(item.itemName);
             }            
             controller.LogStringWithoutReturn(player.PlayerGold + " gold " + goldTense + ".");
             controller.DisplayLoggedText();

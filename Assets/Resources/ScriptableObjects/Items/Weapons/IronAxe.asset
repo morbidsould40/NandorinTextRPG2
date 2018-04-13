@@ -11,13 +11,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a095e02e80a047b478f8ac7998efb31d, type: 3}
   m_Name: IronAxe
   m_EditorClassIdentifier: 
-  weaponName: Iron Axe
-  weaponID: iron_axe
-  weaponDesc: <enter desc here>
-  weaponIcon: {fileID: 21300000, guid: e31e8d69349991d4eb816f8450d450c9, type: 3}
-  weaponCost: 5
+  itemName: Iron Axe
+  itemID: 
+  itemDesc: <enter desc here>
+  itemIcon: {fileID: 21300000, guid: e31e8d69349991d4eb816f8450d450c9, type: 3}
+  itemCost: 5
+  itemWeight: 1
   weaponMinDamage: 1
-  weaponMaxDamage: 3
+  weaponMaxDamage: 4
   weaponAttack: 2
   weaponType: 0
   weaponHandType: 0

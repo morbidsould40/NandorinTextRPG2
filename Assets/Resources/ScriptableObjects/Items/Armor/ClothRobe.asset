@@ -11,21 +11,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4164bf088d2f01942b26e8ecca3f18b6, type: 3}
   m_Name: ClothRobe
   m_EditorClassIdentifier: 
-  armorName: Cloth Robe
-  armorID: cloth_robe
-  armorDesc: <Enter desc here>
-  armorIcon: {fileID: 21300000, guid: 20361b72fa11c944aad7b90e03c19acd, type: 3}
-  armorCost: 2
+  itemName: Cloth Robe
+  itemID: 
+  itemDesc: <enter desc here>
+  itemIcon: {fileID: 21300000, guid: 20361b72fa11c944aad7b90e03c19acd, type: 3}
+  itemCost: 2
+  itemWeight: 0.2
   armorDefense: 0.5
   armorType: 0
   armorSlot: 4
   rarity: 0
   isUnique: 0
   isDroppable: 1
-  gearBonuses:
-  - buffName: Mana Buff
-    statBonus: 7
-    statAdjustment: 10
-  - buffName: Magic Buff
-    statBonus: 3
-    statAdjustment: 1
+  gearBonuses: []

@@ -158,8 +158,6 @@ public class Player : MonoBehaviour {
 
     private void Start () {
         DontDestroyOnLoad(this);
-        playerAttack = (playerAgility / 20f) * playerLevel;
-        playerDefense = ((playerStrength / 10f) * (playerLevel / 2f));
     }
 	
 	private void Update () {

@@ -9,32 +9,26 @@ public class List : InputAction
     {
         if (controller.roomNavigation.currentRoom.isShop)
         {
-            Dictionary<string, int> storeInventory = new Dictionary<string, int>();
-            var shopWeapons = controller.roomNavigation.currentRoom.shopWeapons;
-            var shopArmor = controller.roomNavigation.currentRoom.shopArmor;
-            if (shopWeapons.Length > 0)
+            List<Items> currentShopItems = new List<Items>();
+            var shopItems = controller.roomNavigation.currentRoom.shopItems;
+
+            if (shopItems.Length > 0)
             {
-                for (int i = 0; i < shopWeapons.Length; i++)
+                for (int i = 0; i < shopItems.Length; i++)
                 {
-                    storeInventory.Add(shopWeapons[i].weaponName, shopWeapons[i].weaponCost);
+                    currentShopItems.Add(shopItems[i]);
                 }
             }
-            if (shopArmor.Length > 0)
-            {
-                for (int i = 0; i < shopArmor.Length; i++)
-                {
-                    storeInventory.Add(shopArmor[i].armorName, shopArmor[i].armorCost);
-                }
-            }
+
             controller.LogStringWithReturn("For Sale\n_______________________________________________");
             var itemNumber = 1;
-            foreach (var item in storeInventory)
+            foreach (var item in currentShopItems)
             {
-                controller.LogStringWithoutReturn(itemNumber + ": " + item.Key + " - " + item.Value + " gold");
+                controller.LogStringWithoutReturn(item.itemName+ " - " + item.itemCost + " gold");
                 itemNumber++;
             }
             controller.DisplayLoggedText();
-            storeInventory.Clear();
+            currentShopItems.Clear();
         }
         else
         {

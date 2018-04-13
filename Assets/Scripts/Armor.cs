@@ -3,15 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "TextRPG/Items/Armor")]
-public class Armor : ScriptableObject {
+public class Armor : Items {
 
-    public string armorName;
-    public string armorID;
-    [TextArea]
-    public string armorDesc;
-    public Sprite armorIcon;
-    public int armorCost;
-    public float armorWeight;
     public float armorDefense;
 
     public enum ArmorType
