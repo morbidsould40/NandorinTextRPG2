@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class Items : ScriptableObject {
 
     public string itemName;
@@ -17,6 +19,8 @@ public class Items : ScriptableObject {
         Common, Uncommon, Rare, Epic, Relic, Artifact
     }
     public Rarity rarity;
+
+    public EquipmentType equipmentType;
 
     public bool isUnique = false;
     public bool isDroppable = true;

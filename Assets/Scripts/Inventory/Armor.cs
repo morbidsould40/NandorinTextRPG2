@@ -13,11 +13,5 @@ public class Armor : Items {
     }
     public ArmorType armorType;
 
-    public enum ArmorSlot
-    {
-        Head, Shoulders, Arms, Hands, Chest, Waist, Legs, Feet, Neck, Finger, Ear
-    }
-    public ArmorSlot armorSlot;
-
     public GearBonuses[] gearBonuses;
 }

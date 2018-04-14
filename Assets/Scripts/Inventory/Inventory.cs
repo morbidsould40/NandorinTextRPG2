@@ -6,7 +6,6 @@ public class Inventory : MonoBehaviour {
     GameController controller;
     CombatManager combatManager;
     Player player;
-    InventoryWindow inventoryWindow;
 
     // need a couple lists/dictionaries to handle weapons/armor/general items.
     // Can you initialize a dictionary with a set of keys with blank values (empty equipment slots)
@@ -24,7 +23,6 @@ public class Inventory : MonoBehaviour {
         controller = GetComponent<GameController>();
         combatManager = GetComponent<CombatManager>();
         player = FindObjectOfType<Player>();
-        inventoryWindow = FindObjectOfType<InventoryWindow>();
 	}
 
     private void Update()
@@ -77,7 +75,6 @@ public class Inventory : MonoBehaviour {
                     inventory.Add(item);
                     Debug.Log("Buying " + result);
                     controller.LogStringWithReturn("You have bought a " + item.itemName + " for " + item.itemCost + " gold.");
-                    inventoryWindow.AddItemsFromInventory();
                 }
             }
 
