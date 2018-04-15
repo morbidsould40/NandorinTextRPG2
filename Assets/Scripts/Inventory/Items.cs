@@ -20,8 +20,6 @@ public class Items : ScriptableObject {
     }
     public Rarity rarity;
 
-    public EquipmentType equipmentType;
-
     public bool isUnique = false;
     public bool isDroppable = true;
     public bool isConsumable = false;

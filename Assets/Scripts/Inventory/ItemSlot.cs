@@ -3,11 +3,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 
-public enum EquipmentType
-{
-    Head, Shoulders, Arms, Hands, Chest, Waist, Legs, Feet, Neck, Finger1, Finger2, Ear1, Ear2, Weapon1, Weapon2
-}
-
 public class ItemSlot : MonoBehaviour, IPointerClickHandler {
 
     [SerializeField] Image image;

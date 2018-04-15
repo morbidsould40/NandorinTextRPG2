@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EquipmentPanel : MonoBehaviour {
@@ -8,13 +6,13 @@ public class EquipmentPanel : MonoBehaviour {
     [SerializeField] Transform equipmentSlotsParent;
     [SerializeField] EquipmentSlot[] equipmentSlots;
 
-    public event Action<Items> OnItemRightClickEvent;
+    public event Action<Items> OnItemRightClickedEvent;
 
-    private void Awake()
+    private void Start()
     {
         for (int i = 0; i < equipmentSlots.Length; i++)
         {
-            equipmentSlots[i].OnRightClickEvent += OnItemRightClickEvent;
+            equipmentSlots[i].OnRightClickEvent += OnItemRightClickedEvent;
         }
     }
 
@@ -23,13 +21,13 @@ public class EquipmentPanel : MonoBehaviour {
         equipmentSlots = equipmentSlotsParent.GetComponentsInChildren<EquipmentSlot>();
     }
 
-    public bool AddItem(Items item, out Items previousItem)
+    public bool AddItem(EquippableItems item, out EquippableItems previousItem)
     {
         for (int i = 0; i < equipmentSlots.Length; i++)
         {
             if (equipmentSlots[i].equipmentType == item.equipmentType)
             {
-                previousItem = equipmentSlots[i].Item;
+                previousItem = (EquippableItems)equipmentSlots[i].Item;
                 equipmentSlots[i].Item = item;
                 return true;
             }            
@@ -38,7 +36,7 @@ public class EquipmentPanel : MonoBehaviour {
         return false;
     }
 
-    public bool RemoveItem(Items item)
+    public bool RemoveItem(EquippableItems item)
     {
         for (int i = 0; i < equipmentSlots.Length; i++)
         {

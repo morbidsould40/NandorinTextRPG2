@@ -9,19 +9,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4164bf088d2f01942b26e8ecca3f18b6, type: 3}
-  m_Name: ClothRobe
+  m_Name: IronCurass
   m_EditorClassIdentifier: 
-  itemName: Cloth Robe
+  itemName: Iron Curass
   itemID: 
   itemDesc: <enter desc here>
   itemIcon: {fileID: 21300000, guid: 20361b72fa11c944aad7b90e03c19acd, type: 3}
-  itemCost: 2
-  itemWeight: 0.2
+  itemCost: 10
+  itemWeight: 5
   rarity: 0
-  equipmentType: 4
   isUnique: 0
   isDroppable: 1
   isConsumable: 0
-  armorDefense: 0.5
-  armorType: 0
-  gearBonuses: []
+  strengthBonus: 0
+  agilityBonus: 0
+  enduranceBonus: 0
+  magicBonus: 0
+  attackBonus: 0
+  defenseBonus: 0
+  healthBonus: 0
+  manaBonus: 0
+  minDamageBonus: 0
+  maxDamageBonus: 0
+  critChanceBonus: 0
+  multiAttackChanceBonus: 0
+  equipmentType: 4
+  armorDefense: 3
+  armorType: 1

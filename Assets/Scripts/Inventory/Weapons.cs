@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "TextRPG/Items/Weapons")]
-public class Weapons : Items {
+public class Weapons : EquippableItems {
 
     public float weaponMinDamage;
     public float weaponMaxDamage;
@@ -26,6 +26,4 @@ public class Weapons : Items {
         Blunt, Slashing, Piercing, Magic
     }
     public DamageType damageType;
-
-    public GearBonuses[] gearBonuses;
 }

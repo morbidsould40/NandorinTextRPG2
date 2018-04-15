@@ -7,25 +7,36 @@ public class InventoryManager : MonoBehaviour {
 
     private void Awake()
     {
-        inventory.OnItemRightClickEvent += Equip;
-        equipmentPanel.OnItemRightClickEvent += UnequipFromEquipPanel;
+        inventory.OnItemRightClickedEvent += EquipFromInventory;
+        equipmentPanel.OnItemRightClickedEvent += UnequipFromEquipPanel;
+    }
+
+    private void EquipFromInventory(Items item)
+    {
+        if (item is EquippableItems)
+        {
+            Equip((EquippableItems)item);
+        }
     }
 
     private void UnequipFromEquipPanel(Items item)
     {
-        Unequip(item);
+        if (item is EquippableItems)
+        {
+            Unequip((EquippableItems)item);
+        }
     }
 
-    public void Equip(Items item)
+    public void Equip(EquippableItems item)
     {
         if (inventory.RemoveItem(item))
         {
-            Items previousItems;
-            if (equipmentPanel.AddItem(item, out previousItems))
+            EquippableItems previousItem;
+            if (equipmentPanel.AddItem(item, out previousItem))
             {
-                if (previousItems != null)
+                if (previousItem != null)
                 {
-                    inventory.AddItem(previousItems);
+                    inventory.AddItem(previousItem);
                 }
             }
             else
@@ -35,7 +46,7 @@ public class InventoryManager : MonoBehaviour {
         }
     }
 
-    public void Unequip(Items item)
+    public void Unequip(EquippableItems item)
     {
         if (!inventory.IsFull() && equipmentPanel.RemoveItem(item))
         {

@@ -4,8 +4,6 @@ using UnityEngine;
 public class Inventory : MonoBehaviour {
 
     GameController controller;
-    CombatManager combatManager;
-    Player player;
 
     // need a couple lists/dictionaries to handle weapons/armor/general items.
     // Can you initialize a dictionary with a set of keys with blank values (empty equipment slots)
@@ -21,8 +19,6 @@ public class Inventory : MonoBehaviour {
     
 	void Awake () {
         controller = GetComponent<GameController>();
-        combatManager = GetComponent<CombatManager>();
-        player = FindObjectOfType<Player>();
 	}
 
     private void Update()

@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4732969031375682}
   - component: {fileID: 114705964056311450}
+  - component: {fileID: 114751543283567550}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -71,3 +72,16 @@ MonoBehaviour:
   playerCurrentExperience: 1
   playerGold: 20
   currentRoom: {fileID: 11400000, guid: f218062f20d8ce3418523beddb3cfd6e, type: 2}
+--- !u!114 &114751543283567550
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1368591502875560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f6b4201dd28dc44858133476b3fe30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 0}
+  equipmentPanel: {fileID: 0}

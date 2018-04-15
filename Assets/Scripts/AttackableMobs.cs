@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class AttackableMobs : MonoBehaviour {
 
-    GameController controller;
     CombatManager combatManager;
 
     void Awake ()
     {
-        controller = GetComponent<GameController>();
         combatManager = GetComponent<CombatManager>();
 	}
 

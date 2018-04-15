@@ -9,13 +9,13 @@ public class InventoryWindow : MonoBehaviour {
     [SerializeField] Transform itemsParent;
     [SerializeField] ItemSlot[] itemSlots;
 
-    public event Action<Items> OnItemRightClickEvent;
+    public event Action<Items> OnItemRightClickedEvent;
 
-    private void Awake()
+    private void Start()
     {
         for (int i = 0; i < itemSlots.Length; i++)
         {
-            itemSlots[i].OnRightClickEvent += OnItemRightClickEvent;
+            itemSlots[i].OnRightClickEvent += OnItemRightClickedEvent;
         }
     }
 
@@ -49,12 +49,11 @@ public class InventoryWindow : MonoBehaviour {
         {
             return false;
         }
-        else
-        {
-            items.Add(item);
-            RefreshUI();
-            return true;
-        }
+       
+        items.Add(item);
+        RefreshUI();
+        return true;
+       
     }
 
     public bool RemoveItem(Items item)
@@ -63,11 +62,8 @@ public class InventoryWindow : MonoBehaviour {
         {
             RefreshUI();
             return true;
-        }
-        else
-        {
-            return false;
-        }
+        }        
+        return false;
     }
 
     public bool IsFull()

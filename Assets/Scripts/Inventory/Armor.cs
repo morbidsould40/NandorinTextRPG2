@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "TextRPG/Items/Armor")]
-public class Armor : Items {
+public class Armor : EquippableItems {
 
     public float armorDefense;
 
@@ -12,6 +12,4 @@ public class Armor : Items {
         Light, Heavy
     }
     public ArmorType armorType;
-
-    public GearBonuses[] gearBonuses;
 }

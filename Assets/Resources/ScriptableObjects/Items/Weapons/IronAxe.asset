@@ -18,14 +18,25 @@ MonoBehaviour:
   itemCost: 5
   itemWeight: 1
   rarity: 0
-  equipmentType: 13
   isUnique: 0
   isDroppable: 1
   isConsumable: 0
+  strengthBonus: 0
+  agilityBonus: 0
+  enduranceBonus: 0
+  magicBonus: 0
+  attackBonus: 0
+  defenseBonus: 0
+  healthBonus: 0
+  manaBonus: 0
+  minDamageBonus: 0
+  maxDamageBonus: 0
+  critChanceBonus: 0
+  multiAttackChanceBonus: 0
+  equipmentType: 13
   weaponMinDamage: 1
   weaponMaxDamage: 4
-  weaponAttack: 2
+  weaponAttack: 5
   weaponType: 0
   weaponHandType: 0
   damageType: 1
-  gearBonuses: []

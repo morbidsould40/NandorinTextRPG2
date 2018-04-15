@@ -24,7 +24,6 @@ public class GameController : MonoBehaviour
 
     private List<string> actionLog = new List<string>();
     private RoomNavigation roomNav;    
-    private PlayerManagement playerManagement;
 
     private void Awake()
     { 
@@ -32,7 +31,6 @@ public class GameController : MonoBehaviour
         roomNavigation = GetComponent<RoomNavigation>();
         examinableItems = GetComponent<ExamaniableItems>();
         lookableDirections = GetComponent<LookableDirections>();
-        playerManagement = GetComponent<PlayerManagement>();
         roomNav = GetComponent<RoomNavigation>();
         combatManager = GetComponent<CombatManager>();
         attackableMobs = GetComponent<AttackableMobs>();
