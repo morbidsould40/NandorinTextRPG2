@@ -37,7 +37,7 @@ public class InventoryManager : MonoBehaviour {
                 if (previousItem != null)
                 {
                     inventory.AddItem(previousItem);
-                }
+                }                
             }
             else
             {

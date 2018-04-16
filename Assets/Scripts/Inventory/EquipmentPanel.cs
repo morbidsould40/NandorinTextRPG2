@@ -40,7 +40,7 @@ public class EquipmentPanel : MonoBehaviour {
     {
         for (int i = 0; i < equipmentSlots.Length; i++)
         {
-            if (equipmentSlots[i].Item = item)
+            if (equipmentSlots[i].Item == item)
             {
                 equipmentSlots[i].Item = null;
                 return true;
