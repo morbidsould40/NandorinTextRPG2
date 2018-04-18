@@ -5,6 +5,6 @@ public class Unequip : InputAction
 {
     public override void RespondToInput(GameController controller, string[] seperatedInputWords)
     {
-        controller.inventory.ExamineKeyword("unequip", seperatedInputWords[1]);
+        controller.inventory.ExamineKeyword("unequip", seperatedInputWords);
     }
 }

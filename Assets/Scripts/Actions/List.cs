@@ -18,17 +18,22 @@ public class List : InputAction
                 {
                     currentShopItems.Add(shopItems[i]);
                 }
-            }
 
-            controller.LogStringWithReturn("For Sale\n_______________________________________________");
-            var itemNumber = 1;
-            foreach (var item in currentShopItems)
-            {
-                controller.LogStringWithoutReturn(item.itemName+ " - " + item.itemCost + " gold");
-                itemNumber++;
+                controller.LogStringWithReturn("For Sale\n_______________________________________________");
+                var itemNumber = 1;
+                foreach (var item in currentShopItems)
+                {
+                    controller.LogStringWithoutReturn(item.itemName + " - " + item.itemCost + " gold");
+                    itemNumber++;
+                }
+                controller.DisplayLoggedText();
+                currentShopItems.Clear();
             }
-            controller.DisplayLoggedText();
-            currentShopItems.Clear();
+            else
+            {
+                controller.LogStringWithReturn("There are no items in this shop for sale.");
+                controller.DisplayLoggedText();
+            }
         }
         else
         {

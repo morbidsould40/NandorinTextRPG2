@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryWindow : MonoBehaviour {
+public class InventoryWindow : MonoBehaviour
+{
 
     [SerializeField] List<Items> items;
     [SerializeField] Transform itemsParent;
@@ -50,11 +51,11 @@ public class InventoryWindow : MonoBehaviour {
         {
             return false;
         }
-       
+
         items.Add(item);
         RefreshUI();
         return true;
-       
+
     }
 
     public bool RemoveItem(Items item)
@@ -63,7 +64,7 @@ public class InventoryWindow : MonoBehaviour {
         {
             RefreshUI();
             return true;
-        }        
+        }
         return false;
     }
 

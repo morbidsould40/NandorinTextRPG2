@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EquipmentPanel : MonoBehaviour {
 
@@ -7,6 +8,8 @@ public class EquipmentPanel : MonoBehaviour {
     [SerializeField] EquipmentSlot[] equipmentSlots;
 
     public event Action<Items> OnItemRightClickedEvent;
+
+    private Text[] equippableSlotLabel;
 
     private void Start()
     {
@@ -19,6 +22,7 @@ public class EquipmentPanel : MonoBehaviour {
     private void OnValidate()
     {
         equipmentSlots = equipmentSlotsParent.GetComponentsInChildren<EquipmentSlot>();
+        equippableSlotLabel = equipmentSlotsParent.GetComponentsInChildren<Text>();
     }
 
     public bool AddItem(EquippableItems item, out EquippableItems previousItem)
@@ -29,6 +33,7 @@ public class EquipmentPanel : MonoBehaviour {
             {
                 previousItem = (EquippableItems)equipmentSlots[i].Item;
                 equipmentSlots[i].Item = item;
+                equippableSlotLabel[i].enabled = false;
                 return true;
             }            
         }
@@ -43,6 +48,7 @@ public class EquipmentPanel : MonoBehaviour {
             if (equipmentSlots[i].Item == item)
             {
                 equipmentSlots[i].Item = null;
+                equippableSlotLabel[i].enabled = true;
                 return true;
             }
         }

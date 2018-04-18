@@ -27,6 +27,6 @@ MonoBehaviour:
   maxRespawnTimer: 0
   isShop: 1
   shopItems:
-  - {fileID: 11400000, guid: 282c434d649db0049b526279354aeb96, type: 2}
-  - {fileID: 11400000, guid: 46c4b7d0ed445aa40b43c9dcedadcfad, type: 2}
+  - {fileID: 11400000, guid: 8d341463f7f3db34a92d20a7a1be38fa, type: 2}
+  - {fileID: 11400000, guid: bec48e93c921f524fa03bedd3dc1713d, type: 2}
   isDark: 0

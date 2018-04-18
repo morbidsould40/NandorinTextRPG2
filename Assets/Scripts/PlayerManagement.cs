@@ -23,12 +23,7 @@ public class PlayerManagement : MonoBehaviour {
     public Text playerLevel;
     public Text playerExp;
     public Text playerGold;
-    public Text playerStrength;
-    public Text playerAgility;
-    public Text playerEndurance;
-    public Text playerMagic;
-    public Text playerAttack;
-    public Text playerDefense;
+
 
     // Use this for initialization
     void Start ()
@@ -38,12 +33,6 @@ public class PlayerManagement : MonoBehaviour {
         playerLevel.text = player.PlayerLevel.ToString();
         playerExp.text = player.PlayerCurrentExperience.ToString();
         playerGold.text = player.PlayerGold.ToString();
-        playerStrength.text = player.PlayerStrength.ToString();
-        playerAgility.text = player.PlayerAgility.ToString();
-        playerEndurance.text = player.PlayerEndurance.ToString();
-        playerMagic.text = player.PlayerMagic.ToString();
-        playerAttack.text = player.PlayerAttack.ToString();
-        playerDefense.text = player.PlayerDefense.ToString();
     }
 	
 	// Update is called once per frame

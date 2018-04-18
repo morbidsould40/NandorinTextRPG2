@@ -5,6 +5,6 @@ public class Equip : InputAction
 {
     public override void RespondToInput(GameController controller, string[] seperatedInputWords)
     {
-        controller.inventory.ExamineKeyword("equip", seperatedInputWords[1]);
+        controller.inventory.ExamineKeyword("equip", seperatedInputWords);
     }
 }

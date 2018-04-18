@@ -8,7 +8,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c55553d89c6c9a478065ac2d500c5f5, type: 3}
-  m_Name: Drop
+  m_Script: {fileID: 11500000, guid: fdb1ffb9307c55342b50f6f816b78a81, type: 3}
+  m_Name: Destroy
   m_EditorClassIdentifier: 
-  keyWord: drop
+  keyWord: destroy
