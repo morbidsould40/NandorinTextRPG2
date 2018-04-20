@@ -77,6 +77,7 @@ namespace RPG.CharacterStats
 
             for (int i = statModifiers.Count - 1; i >= 0; i--)
             {
+                //Console.Write(statModifiers[i].Source);
                 if (statModifiers[i].Source == source)
                 {
                     isDirty = true;

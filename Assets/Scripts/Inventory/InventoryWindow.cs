@@ -14,11 +14,13 @@ public class InventoryWindow : MonoBehaviour
 
     private void Start()
     {
-        RefreshUI();
+        
         for (int i = 0; i < itemSlots.Length; i++)
         {
             itemSlots[i].OnRightClickEvent += OnItemRightClickedEvent;
         }
+
+        RefreshUI();
     }
 
     private void OnValidate()
