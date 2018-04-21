@@ -22,6 +22,8 @@ public class TextInput : MonoBehaviour
         {
             AcceptStringInput(inputField.text);
         }
+
+        inputField.ActivateInputField();
     }
 
     private void AcceptStringInput(string userInput)

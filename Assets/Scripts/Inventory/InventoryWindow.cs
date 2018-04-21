@@ -6,15 +6,18 @@ using UnityEngine;
 public class InventoryWindow : MonoBehaviour
 {
 
-    [SerializeField] List<Items> items;
+    public List<Items> items;
     [SerializeField] Transform itemsParent;
     [SerializeField] ItemSlot[] itemSlots;
+
+    Inventory inventory;
 
     public event Action<Items> OnItemRightClickedEvent;
 
     private void Start()
     {
-        
+        inventory = FindObjectOfType<Inventory>();
+
         for (int i = 0; i < itemSlots.Length; i++)
         {
             itemSlots[i].OnRightClickEvent += OnItemRightClickedEvent;
@@ -64,7 +67,7 @@ public class InventoryWindow : MonoBehaviour
     {
         if (items.Remove(item))
         {
-            RefreshUI();
+            RefreshUI();            
             return true;
         }
         return false;

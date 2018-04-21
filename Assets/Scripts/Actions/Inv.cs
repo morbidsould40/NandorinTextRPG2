@@ -3,14 +3,14 @@
 [CreateAssetMenu(menuName = "TextRPG/InputActions/Inv")]
 public class Inv : InputAction
 {
-    Inventory inv;
+    InventoryWindow inv;
     Player player;
     string goldTense;
 
 
     public override void RespondToInput(GameController controller, string[] seperatedInputWords)
     {
-        inv = FindObjectOfType<Inventory>();
+        inv = FindObjectOfType<InventoryWindow>();
         player = FindObjectOfType<Player>();
 
         if (player.PlayerGold == 1)
@@ -22,7 +22,7 @@ public class Inv : InputAction
             goldTense = "coins";
         }
 
-        if (inv.inventory.Count <= 0)
+        if (inv.items.Count <= 0)
         {            
             controller.LogStringWithReturn("Your inventory is currently empty. \n" + player.PlayerGold + " gold " + goldTense + ".");
             controller.DisplayLoggedText();
@@ -30,7 +30,7 @@ public class Inv : InputAction
         else
         {
             controller.LogStringWithReturn("Inventory\n_______________________________________________");
-            foreach (var item in inv.inventory)
+            foreach (var item in inv.items)
             {
                 controller.LogStringWithoutReturn(item.itemName);
             }            

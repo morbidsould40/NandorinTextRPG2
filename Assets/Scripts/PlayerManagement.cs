@@ -51,15 +51,30 @@ public class PlayerManagement : MonoBehaviour {
         staminaBar.UpdateBar(currentStamina, maxStamina);
     }
 
+    public bool CheckIfPlayerHasEnoughGold(int value)
+    {
+        if (player.PlayerGold >= value)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public void UpdatePlayerGold(int value)
     {
         if (player.PlayerGold >= 0)
         {
             player.PlayerGold += value;
+            playerGold.text = player.PlayerGold.ToString();
+
         }
         else
         {
             player.PlayerGold = 0;
+            playerGold.text = player.PlayerGold.ToString();
         }
     }
 

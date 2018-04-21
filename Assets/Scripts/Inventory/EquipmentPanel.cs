@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class EquipmentPanel : MonoBehaviour {
 
-    [SerializeField] Transform equipmentSlotsParent;
-    [SerializeField] EquipmentSlot[] equipmentSlots;
+    public Transform equipmentSlotsParent;
+    public EquipmentSlot[] equipmentSlots;
 
     public event Action<Items> OnItemRightClickedEvent;
 

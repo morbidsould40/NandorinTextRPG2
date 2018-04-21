@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4732969031375682}
   - component: {fileID: 114705964056311450}
-  - component: {fileID: 114751543283567550}
+  - component: {fileID: 114229353738712332}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -41,6 +41,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114229353738712332
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1368591502875560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65abccde6330e2e4aace119947f1be51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Strength:
+    BaseValue: 0
+  Agility:
+    BaseValue: 0
+  Endurance:
+    BaseValue: 0
+  Magic:
+    BaseValue: 0
+  Attack:
+    BaseValue: 0
+  Defense:
+    BaseValue: 0
+  inventory: {fileID: 0}
+  equipmentPanel: {fileID: 0}
+  statPanel: {fileID: 0}
 --- !u!114 &114705964056311450
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70,18 +96,5 @@ MonoBehaviour:
   playerCurrentStamina: 22
   playerMaxStamina: 22
   playerCurrentExperience: 1
-  playerGold: 20
+  playerGold: 100000
   currentRoom: {fileID: 11400000, guid: f218062f20d8ce3418523beddb3cfd6e, type: 2}
---- !u!114 &114751543283567550
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1368591502875560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71f6b4201dd28dc44858133476b3fe30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventory: {fileID: 0}
-  equipmentPanel: {fileID: 0}

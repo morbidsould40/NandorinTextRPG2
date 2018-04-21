@@ -6,13 +6,12 @@ public class Inventory : MonoBehaviour {
 
     GameController controller;
     InventoryWindow invWindow;
-    EquipmentPanel equipmentPanel;
+    public EquipmentPanel equipmentPanel;
     Character invManager;
+    PlayerManagement playerManagement;
+    public EquipmentSlot[] equipmentSlot;
     public DropItemConfirmation dropItemConfirmation;
     public Button yesButton;
-    
-    public List<Items> inventory = new List<Items>();
-    public Dictionary<string, string> equippedItems = new Dictionary<string, string>();
 
     public enum Encumberance
     {
@@ -20,12 +19,14 @@ public class Inventory : MonoBehaviour {
     }
 
     public Encumberance encumberance = Encumberance.None;
-    
-	void Awake () {
+
+    void Awake () {
         controller = GetComponent<GameController>();
         invWindow = FindObjectOfType<InventoryWindow>();
         equipmentPanel = FindObjectOfType<EquipmentPanel>();
         invManager = FindObjectOfType<Character>();
+        playerManagement = FindObjectOfType<PlayerManagement>();
+        equipmentSlot = equipmentPanel.equipmentSlotsParent.GetComponentsInChildren<EquipmentSlot>();
 	}
 
     private void Update()
@@ -38,17 +39,36 @@ public class Inventory : MonoBehaviour {
 
     }
 
-    public void ExamineKeyword(string keywordVerb, params string[] keywordNoun)
+    public void ExamineKeyword(string keywordVerb, string[] keywordNoun)
     {
+        if (keywordVerb == "unequip")
+        {
+            string result = GetItemKeyword(keywordNoun);
+            Debug.Log("unequiping: " + result);            
+
+            for (int i = 0; i < equipmentSlot.Length; i++)
+            {
+                var item = equipmentSlot[i].Item;
+                Debug.Log(item);
+                if (item != null)
+                {
+                    if (result == item.itemName.ToLower())
+                    {
+                        invManager.UnequipFromEquipPanel(item);
+                    }
+                }
+            }
+        }
+
         if (keywordVerb == "equip")
         {
             string result = GetItemKeyword(keywordNoun);
-            Debug.Log(result);
-            var currentInventoryCount = inventory.Count;
+            Debug.Log("equipping: " + result);
+            var currentInventoryCount = invWindow.items.Count;
 
             for (int i = 0; i < currentInventoryCount; i++)
             {
-                var item = inventory[i];
+                var item = invWindow.items[i];
 
                 if (result == item.itemName.ToLower())
                 {
@@ -57,42 +77,32 @@ public class Inventory : MonoBehaviour {
             }
         }
 
-        if (keywordVerb == "unequip")
-        {
-            string result = GetItemKeyword(keywordNoun);
-            Debug.Log(result);
-            var currentInventoryCount = inventory.Count;
-
-            for (int i = 0; i < currentInventoryCount; i++)
-            {
-                var item = inventory[i];
-
-                if (result == item.itemName.ToLower())
-                {
-                    invManager.UnequipFromEquipPanel(item);
-                }
-            }
-        }  
-        
         if (keywordVerb == "buy")
         {
             string result = GetItemKeyword(keywordNoun);
-            var currentInventoryCount = inventory.Count;
+            var currentInventoryCount = invWindow.items.Count;
 
             foreach (var item in controller.roomNavigation.currentRoom.shopItems)
             {
                 if (result == item.itemName.ToLower())
-                {
-                    // TODO check if player has enough gold
-                    inventory.Add(item);
-                    Debug.Log("Buying " + result);
-                    controller.LogStringWithReturn("You have bought a " + item.itemName + " for " + item.itemCost + " gold.");
-                    invWindow.AddItem(item);
-                    // TODO subtract player gold for item
+                {                    
+                    // make sure player has enough gold to buy item requested
+                    if (playerManagement.CheckIfPlayerHasEnoughGold(item.itemCost))
+                    {
+                        Debug.Log("Buying " + result);
+                        controller.LogStringWithReturn("You have bought a " + item.itemName + " for " + item.itemCost + " gold.");
+                        invWindow.AddItem(item);
+                        // subtract gold from players total
+                        playerManagement.UpdatePlayerGold(-item.itemCost);
+                    }
+                    else
+                    {
+                        controller.LogStringWithReturn("You do not have enough gold to buy " + item.itemName + ".");
+                    }                   
                 }
             }
 
-            if (currentInventoryCount == inventory.Count)
+            if (currentInventoryCount == invWindow.items.Count)
             {
                 controller.LogStringWithReturn("There is no " + result + " to buy here. Type list to see what is available.");
             }
@@ -102,19 +112,20 @@ public class Inventory : MonoBehaviour {
         {
             string result = GetItemKeyword(keywordNoun);
             Debug.Log(result);
-            var currentInventoryCount = inventory.Count;
+            var currentInventoryCount = invWindow.items.Count; ;
 
             for (int i = 0; i < currentInventoryCount; i++)
             {
-                var item = inventory[i];
-                
+                var item = invWindow.items[i];
+
                 if (result == item.itemName.ToLower())
                 {
-                    inventory.Remove(item);
                     Debug.Log("Selling " + result);
                     controller.LogStringWithoutReturn("You have sold " + item.itemName + " for " + (item.itemCost / 2) + " gold.");
                     invWindow.RemoveItem(item);
-                    // TODO add gold to player's total
+                    // add gold to players total
+                    playerManagement.UpdatePlayerGold(item.itemCost / 2);
+                    break;
                 }
             }
         }
@@ -123,19 +134,19 @@ public class Inventory : MonoBehaviour {
         {
             string result = GetItemKeyword(keywordNoun);
             Debug.Log(result);
-            var currentInventoryCount = inventory.Count;
+            var currentInventoryCount = invWindow.items.Count;
 
             for (int i = 0; i < currentInventoryCount; i++)
             {
-                var item = inventory[i];
+                var item = invWindow.items[i];
 
                 if (result == item.itemName.ToLower())
                 {
                     // TODO Implement item deletion confirmation box
                     //dropItemConfirmation.gameObject.SetActive(true);
                     controller.LogStringWithoutReturn("You destroyed " + item.itemName + ".");
-                    inventory.Remove(item);
                     invWindow.RemoveItem(item);
+                    break;
                 }
                 else
                 {
