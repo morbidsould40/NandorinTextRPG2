@@ -29,4 +29,6 @@ MonoBehaviour:
   shopItems:
   - {fileID: 11400000, guid: 8d341463f7f3db34a92d20a7a1be38fa, type: 2}
   - {fileID: 11400000, guid: bec48e93c921f524fa03bedd3dc1713d, type: 2}
+  - {fileID: 11400000, guid: 674bc47168985bb4f8bc47262af8e1d4, type: 2}
+  - {fileID: 11400000, guid: fdc058d42f4163a46abedb5836cbfddd, type: 2}
   isDark: 0

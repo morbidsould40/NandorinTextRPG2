@@ -26,7 +26,13 @@ MonoBehaviour:
   enduranceBonus: 0
   magicBonus: 0
   attackBonus: 0
-  defenseBonus: 0
+  defenseBonus: 3
+  strengthPercentBonus: 0
+  agilityPercentBonus: 0
+  endurancePercentBonus: 0
+  magicPercentBonus: 0
+  attackPercentBonus: 0
+  defensePercentBonus: 0
   healthBonus: 0
   manaBonus: 0
   minDamageBonus: 0

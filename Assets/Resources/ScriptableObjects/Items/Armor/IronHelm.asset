@@ -8,15 +8,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a095e02e80a047b478f8ac7998efb31d, type: 3}
-  m_Name: IronAxe
+  m_Script: {fileID: 11500000, guid: 4164bf088d2f01942b26e8ecca3f18b6, type: 3}
+  m_Name: IronHelm
   m_EditorClassIdentifier: 
-  itemName: Iron Axe
+  itemName: Iron Helm
   itemID: 
-  itemDesc: <enter desc here>
-  itemIcon: {fileID: 21300000, guid: e31e8d69349991d4eb816f8450d450c9, type: 3}
-  itemCost: 5
-  itemWeight: 1
+  itemDesc: 
+  itemIcon: {fileID: 21300000, guid: 3614a5a091f2295438ca3a3d2883768f, type: 3}
+  itemCost: 3
+  itemWeight: 0
   rarity: 0
   isUnique: 0
   isDroppable: 1
@@ -25,8 +25,8 @@ MonoBehaviour:
   agilityBonus: 0
   enduranceBonus: 0
   magicBonus: 0
-  attackBonus: 5
-  defenseBonus: 0
+  attackBonus: 0
+  defenseBonus: 2
   strengthPercentBonus: 0
   agilityPercentBonus: 0
   endurancePercentBonus: 0
@@ -39,10 +39,6 @@ MonoBehaviour:
   maxDamageBonus: 0
   critChanceBonus: 0
   multiAttackChanceBonus: 0
-  equipmentType: 13
-  weaponMinDamage: 1
-  weaponMaxDamage: 4
-  weaponAttack: 5
-  weaponType: 0
-  weaponHandType: 0
-  damageType: 1
+  equipmentType: 0
+  armorDefense: 0
+  armorType: 1

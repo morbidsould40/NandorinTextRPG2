@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using RPG.CharacterStats;
 
 public class Character : MonoBehaviour {
@@ -29,9 +30,9 @@ public class Character : MonoBehaviour {
         Strength.BaseValue = player.PlayerStrength;
         Agility.BaseValue = player.PlayerAgility;
         Endurance.BaseValue = player.PlayerEndurance;
-        Magic.BaseValue = player.PlayerMagic;
-        Attack.BaseValue = player.PlayerAttack;
-        Defense.BaseValue = player.PlayerDefense;
+        Magic.BaseValue = player.PlayerMagic;        
+        Attack.BaseValue = CalculateAttack();
+        Defense.BaseValue = CalculateDefense();
 
         statPanel.SetStats(Strength, Agility, Endurance, Magic, Attack, Defense);
         statPanel.UpdateStatValues();
@@ -64,9 +65,14 @@ public class Character : MonoBehaviour {
                 {
                     inventory.AddItem(previousItem);
                     previousItem.Unequip(this);
+
+                    Attack.BaseValue = CalculateAttack();
+                    Defense.BaseValue = CalculateDefense();
                     statPanel.UpdateStatValues();
                 }
                 item.Equip(this);
+                Attack.BaseValue = CalculateAttack();
+                Defense.BaseValue = CalculateDefense();
                 statPanel.UpdateStatValues();
             }
             else
@@ -81,9 +87,25 @@ public class Character : MonoBehaviour {
         if (!inventory.IsFull() && equipmentPanel.RemoveItem(item))
         {
             item.Unequip(this);
+            Attack.BaseValue = CalculateAttack();
+            Defense.BaseValue = CalculateDefense();
             statPanel.UpdateStatValues();
             inventory.AddItem(item);
         }
+    }
+
+    private float CalculateAttack()
+    {
+        float totalAttack = Attack.Value;
+        totalAttack = Agility.Value / 2; 
+        return (float)Math.Round(totalAttack, 2);
+    }
+
+    private float CalculateDefense()
+    {
+        float totalDefense = Defense.Value;
+        totalDefense = Strength.Value / 5;
+        return (float)Math.Round(totalDefense, 2);
     }
 
 }

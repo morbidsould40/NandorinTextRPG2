@@ -9,12 +9,12 @@ public enum EquipmentType
 public class EquippableItems : Items {
 
     [Header("Main Stat Bonus")]
-    public int strengthBonus;
-    public int agilityBonus;
-    public int enduranceBonus;
-    public int magicBonus;
-    public int attackBonus;
-    public int defenseBonus;
+    public float strengthBonus;
+    public float agilityBonus;
+    public float enduranceBonus;
+    public float magicBonus;
+    public float attackBonus;
+    public float defenseBonus;
     [Space]
     public float strengthPercentBonus;
     public float agilityPercentBonus;
@@ -24,12 +24,12 @@ public class EquippableItems : Items {
     public float defensePercentBonus;
     [Space]
     [Header("Other Bonuses")]    
-    public int healthBonus;
-    public int manaBonus;
-    public int minDamageBonus;
-    public int maxDamageBonus;
-    public int critChanceBonus;
-    public int multiAttackChanceBonus;
+    public float healthBonus;
+    public float manaBonus;
+    public float minDamageBonus;
+    public float maxDamageBonus;
+    public float critChanceBonus;
+    public float multiAttackChanceBonus;
     [Space]
     public EquipmentType equipmentType;
     

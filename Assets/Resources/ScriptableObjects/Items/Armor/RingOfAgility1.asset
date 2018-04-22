@@ -8,24 +8,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a095e02e80a047b478f8ac7998efb31d, type: 3}
-  m_Name: IronAxe
+  m_Script: {fileID: 11500000, guid: 4164bf088d2f01942b26e8ecca3f18b6, type: 3}
+  m_Name: RingOfAgility1
   m_EditorClassIdentifier: 
-  itemName: Iron Axe
+  itemName: Ring of Minor Agility
   itemID: 
-  itemDesc: <enter desc here>
-  itemIcon: {fileID: 21300000, guid: e31e8d69349991d4eb816f8450d450c9, type: 3}
-  itemCost: 5
-  itemWeight: 1
-  rarity: 0
+  itemDesc: 
+  itemIcon: {fileID: 21300000, guid: 2cc0993d36bd9774c92f4feb67a24f43, type: 3}
+  itemCost: 10
+  itemWeight: 0
+  rarity: 1
   isUnique: 0
   isDroppable: 1
   isConsumable: 0
   strengthBonus: 0
-  agilityBonus: 0
+  agilityBonus: 2
   enduranceBonus: 0
   magicBonus: 0
-  attackBonus: 5
+  attackBonus: 0
   defenseBonus: 0
   strengthPercentBonus: 0
   agilityPercentBonus: 0
@@ -39,10 +39,6 @@ MonoBehaviour:
   maxDamageBonus: 0
   critChanceBonus: 0
   multiAttackChanceBonus: 0
-  equipmentType: 13
-  weaponMinDamage: 1
-  weaponMaxDamage: 4
-  weaponAttack: 5
-  weaponType: 0
-  weaponHandType: 0
-  damageType: 1
+  equipmentType: 9
+  armorDefense: 0
+  armorType: 0
