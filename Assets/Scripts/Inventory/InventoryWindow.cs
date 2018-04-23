@@ -23,15 +23,17 @@ public class InventoryWindow : MonoBehaviour
             itemSlots[i].OnRightClickEvent += OnItemRightClickedEvent;
         }
 
+        if (itemsParent != null)
+        {
+            itemSlots = itemsParent.GetComponentsInChildren<ItemSlot>();
+        }
+
         RefreshUI();
     }
 
     private void OnValidate()
     {
-        if (itemsParent != null)
-        {
-            itemSlots = itemsParent.GetComponentsInChildren<ItemSlot>();
-        }
+        
 
         RefreshUI();
     }

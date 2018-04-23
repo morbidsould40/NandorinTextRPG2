@@ -17,12 +17,14 @@ public class EquipmentPanel : MonoBehaviour {
         {
             equipmentSlots[i].OnRightClickEvent += OnItemRightClickedEvent;
         }
+
+        equipmentSlots = equipmentSlotsParent.GetComponentsInChildren<EquipmentSlot>();
+        equippableSlotLabel = equipmentSlotsParent.GetComponentsInChildren<Text>();
     }
 
     private void OnValidate()
     {
-        equipmentSlots = equipmentSlotsParent.GetComponentsInChildren<EquipmentSlot>();
-        equippableSlotLabel = equipmentSlotsParent.GetComponentsInChildren<Text>();
+        
     }
 
     public bool AddItem(EquippableItems item, out EquippableItems previousItem)
