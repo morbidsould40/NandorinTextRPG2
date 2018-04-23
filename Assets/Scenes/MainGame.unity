@@ -5069,12 +5069,12 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
+    width: 1920
+    height: 1080
+  near clip plane: 0.01
   far clip plane: 1000
-  field of view: 60
-  orthographic: 1
+  field of view: 177.9
+  orthographic: 0
   orthographic size: 551.30817
   m_Depth: -1
   m_CullingMask:

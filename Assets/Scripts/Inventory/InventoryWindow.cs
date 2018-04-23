@@ -10,13 +10,11 @@ public class InventoryWindow : MonoBehaviour
     [SerializeField] Transform itemsParent;
     [SerializeField] ItemSlot[] itemSlots;
 
-    Inventory inventory;
 
     public event Action<Items> OnItemRightClickedEvent;
 
     private void Start()
     {
-        inventory = FindObjectOfType<Inventory>();
 
         for (int i = 0; i < itemSlots.Length; i++)
         {
@@ -33,8 +31,6 @@ public class InventoryWindow : MonoBehaviour
 
     private void OnValidate()
     {
-        
-
         RefreshUI();
     }
 

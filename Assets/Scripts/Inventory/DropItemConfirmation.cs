@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class DropItemConfirmation : MonoBehaviour {
 
-    InventoryWindow inventoryWindow;
-    GameController controller;
-    Inventory inventory;
-
     private void Start()
     {
-        inventoryWindow = FindObjectOfType<InventoryWindow>();
-        controller = FindObjectOfType<GameController>();
-        inventory = FindObjectOfType<Inventory>();
+        
     }
 
     public bool YesButtonClicked()

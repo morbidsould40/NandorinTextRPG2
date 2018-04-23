@@ -63,7 +63,7 @@ public class CombatManager : MonoBehaviour {
 
         for (int i = 0; i < controller.mobsInTheRoom.Count; i++)
         {
-            if (mobAttacked == controller.mobsInTheRoom[i].monsterKeyword)
+            if (mobAttacked == controller.mobsInTheRoom[i].monsterName.ToLower())
             {
                 return controller.mobsInTheRoom[i];                
             }
@@ -71,8 +71,10 @@ public class CombatManager : MonoBehaviour {
         return null;
     }
 
+    ////////
     // Attack formula for both players and monsters is atk / (atk + def) where both atk's are attackers attack and def is defenders defense
     // This should scale pretty decent and will almost never result in a 100% chance to hit
+    ///////
 
     public void PlayerAttack(string mobAttacked)
     {

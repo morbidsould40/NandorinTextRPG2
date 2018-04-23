@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 066ed596ffeda274d901278fb58e9571, type: 3}
   m_Name: LargeBrownRat
   m_EditorClassIdentifier: 
-  monsterName: Large Brown <b>Rat</b>
+  monsterName: Large Brown Rat
   monsterKeyword: rat
   monsterID: rat4911
   monsterDescription: A large brown rat
@@ -21,11 +21,12 @@ MonoBehaviour:
   goldDroppedMin: 0
   goldDroppedMax: 2
   itemDropChance: 2
-  itemsDropped: []
+  weaponsDropped: []
+  armorDropped: []
   monsterCurrentHealth: 6
   monsterMaxHealth: 6
   monsterCurrentMana: 0
   monsterMaxMana: 0
-  monsterAttack: 0
-  monsterDefense: 0
+  monsterAttack: 3
+  monsterDefense: 1
   monsterAttacks: []

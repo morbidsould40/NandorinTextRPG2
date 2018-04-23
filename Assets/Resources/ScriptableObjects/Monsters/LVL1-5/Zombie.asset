@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 066ed596ffeda274d901278fb58e9571, type: 3}
   m_Name: Zombie
   m_EditorClassIdentifier: 
-  monsterName: <b>Zombie</b>
+  monsterName: Zombie
   monsterKeyword: zombie
   monsterID: 
   monsterDescription: 
@@ -21,11 +21,12 @@ MonoBehaviour:
   goldDroppedMin: 0
   goldDroppedMax: 0
   itemDropChance: 0
-  itemsDropped: []
+  weaponsDropped: []
+  armorDropped: []
   monsterCurrentHealth: 0
   monsterMaxHealth: 0
   monsterCurrentMana: 0
   monsterMaxMana: 0
-  monsterAttack: 0.5
-  monsterDefense: 0.25
+  monsterAttack: 5
+  monsterDefense: 4
   monsterAttacks: []
