@@ -5,50 +5,72 @@ using UnityEngine.UI;
 
 public class PlayerManagement : MonoBehaviour {
 
-    public float currentHealth;
-    public float maxHealth;
-    public float currentMana;
-    public float maxMana;
-    public float currentStamina;
-    public float maxStamina;
     public SimpleHealthBar healthBar;
     public SimpleHealthBar manaBar;
     public SimpleHealthBar staminaBar;
     public Text healthDisplay;
     public Text manaDisplay;
-    public Text staminaDisplay;
-    public Player player;
+    public Text staminaDisplay;    
     public Text playerName;
     public Text playerClass;
     public Text playerLevel;
     public Text playerExp;
     public Text playerGold;
 
+    Player player;
+    Character character;
+    float currentHealth;
+    float maxHealth;
+    float currentMana;
+    float maxMana;
+    float currentStamina;
+    float maxStamina;
+
 
     // Use this for initialization
     void Start ()
     {
+        character = FindObjectOfType<Character>();
+        player = FindObjectOfType<Player>();
         playerName.text = player.PlayerName;
         playerClass.text = player.PlayerClass;
         playerLevel.text = player.PlayerLevel.ToString();
         playerExp.text = player.PlayerCurrentExperience.ToString();
         playerGold.text = player.PlayerGold.ToString();
+
+        
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
+        CalculateMaxHealth();
+        CalculateMaxMana();
+        CalculateMaxStamina();
         currentHealth = player.PlayerCurrentHealth;
-        maxHealth = player.PlayerMaxHealth;
         currentMana = player.PlayerCurrentMana;
-        maxMana = player.PlayerMaxMana;
         currentStamina = player.PlayerCurrentStamina;
-        maxStamina = player.PlayerMaxStamina;
         healthDisplay.text = currentHealth + "/" + maxHealth;
         manaDisplay.text = currentMana + "/" + maxMana;
         staminaDisplay.text = currentStamina + "/" + maxStamina;
         healthBar.UpdateBar(currentHealth, maxHealth);
         manaBar.UpdateBar(currentMana, maxMana);
         staminaBar.UpdateBar(currentStamina, maxStamina);
+    }
+
+    private void CalculateMaxStamina()
+    {
+        maxStamina = ((character.Endurance.Value * 4) + (player.PlayerLevel * 2));
+    }
+
+    private void CalculateMaxMana()
+    {
+        maxMana = ((character.Magic.Value * 3) + (player.PlayerLevel * 3) * 2);
+    }
+
+    private void CalculateMaxHealth()
+    {
+        maxHealth = ((character.Endurance.Value * 3) + (player.PlayerLevel * 2)) * 2;
     }
 
     public bool CheckIfPlayerHasEnoughGold(int value)

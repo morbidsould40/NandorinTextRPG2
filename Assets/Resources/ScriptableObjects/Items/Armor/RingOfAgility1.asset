@@ -23,7 +23,7 @@ MonoBehaviour:
   isConsumable: 0
   strengthBonus: 0
   agilityBonus: 2
-  enduranceBonus: 0
+  enduranceBonus: 10
   magicBonus: 0
   attackBonus: 0
   defenseBonus: 0

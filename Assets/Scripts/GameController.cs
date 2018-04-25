@@ -21,6 +21,9 @@ public class GameController : MonoBehaviour
     [HideInInspector] public CombatManager combatManager;
     [HideInInspector] public List<Monsters> mobsInTheRoom = new List<Monsters>();
 
+    // this will be used to determine if the player can leave a room or has to flee
+    [HideInInspector] public bool mustFleeToMove = false; 
+
     private List<string> actionLog = new List<string>();
     private RoomNavigation roomNav;    
 
@@ -129,6 +132,8 @@ public class GameController : MonoBehaviour
                 string mobsInRoom = string.Join(", and a ", mobNames.ToArray());
                 string monsterText = "<color=#ff0000ff> You see a " + mobsInRoom + " in the room.</color>";
                 LogStringWithReturn(monsterText);
+                LogStringWithReturn("It is your turn to attack!");
+                mustFleeToMove = true;
             }
         }
     }

@@ -12,11 +12,14 @@ public class RoomNavigation : MonoBehaviour
     [HideInInspector] public Dictionary<string, string> mobsDictionary = new Dictionary<string, string>();
        
 
-    private GameController controller;
+    GameController controller;
+    Character character;
+
     
     private void Awake()
     {
-        controller = GetComponent<GameController>();              
+        controller = GetComponent<GameController>();
+        character = FindObjectOfType<Character>();
     }
 
     private void Start()
@@ -51,16 +54,59 @@ public class RoomNavigation : MonoBehaviour
         // if there is an exit in the direction the player typed
         if (exitDictionary.ContainsKey(directionNoun))
         {
-            currentRoom = exitDictionary[directionNoun];
-            controller.LogStringWithReturn("You head to the " + directionNoun);
-            controller.DisplayRoomText();
-            player.CurrentRoom = currentRoom;
-            player.PlayerCurrentRoom = currentRoom.roomCode;
+            if (controller.mustFleeToMove)
+            {
+                if (AttemptToFleeRoom(directionNoun))
+                {
+                    ChangeRooms(directionNoun);
+                }
+                else
+                {
+                    // mobs attack first then player flees to choosen room
+                    ChangeRooms(directionNoun);
+                }
+            }
+            else
+            {
+                ChangeRooms(directionNoun);
+            }
         }
         else
         {
             controller.LogStringWithReturn("There is no exit to the " + directionNoun);
         }
+    }
+
+    private void ChangeRooms(string directionNoun)
+    {
+        currentRoom = exitDictionary[directionNoun];
+        controller.LogStringWithReturn("You head to the " + directionNoun);
+        controller.DisplayRoomText();
+        player.CurrentRoom = currentRoom;
+        player.PlayerCurrentRoom = currentRoom.roomCode;
+    }
+
+    private bool AttemptToFleeRoom(string directionNoun)
+    {
+        // Fleeing a room has a base 35% chance. Each point of Endurance increases the chance
+        // by .5% (Ex: a player with 20 Endurance has a 45% chance to flee a room with mobs.
+        // If a player fails their flee check, the mobs get a free attack before he moves to
+        // the next room.
+
+        controller.LogStringWithReturn("Attempting to flee  " + directionNoun);
+        var playerFleeChance = (character.Endurance.Value / 2) + 35;
+        var fleeRandomRoll = Random.Range(1, 100);
+        if (fleeRandomRoll <= playerFleeChance)
+        {
+            controller.LogStringWithReturn("You managed to flee from your enemies without harm.");
+            return true;
+        }
+        else
+        {
+            controller.LogStringWithReturn("You managed to flee, but not before your enemies attack!");
+            return false;
+        }
+
     }
 
     // clear all dictionaries to prepare for next room population

@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-    public Dictionary<string, string> inventory = new Dictionary<string, string>();
-    public Dictionary<string, string> keyRing = new Dictionary<string, string>();
-    public Dictionary<string, string> potions = new Dictionary<string, string>();    
-
     [SerializeField] string playerName;
     [SerializeField] string playerRace;
     [SerializeField] string playerClass;
