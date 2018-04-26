@@ -33,9 +33,9 @@ public class CharacterCreation : MonoBehaviour {
         newPlayer.Endurance = newPlayer.PlayerClass.Endurance;
         newPlayer.Magic = newPlayer.PlayerClass.Magic;
         newPlayer.CurrentGold = 20;
-        newPlayer.MaxHealth = 0; // ((newPlayer.PlayerClass.Endurance * 3) + (newPlayer.PlayerLevel * 2)) * 2;
-        newPlayer.MaxMana = 0; // ((newPlayer.PlayerClass.Magic * 3) + (newPlayer.PlayerLevel * 3) * 2);
-        newPlayer.MaxStamina = 0; // ((newPlayer.PlayerClass.Endurance * 4) + (newPlayer.PlayerLevel * 2));
+        newPlayer.MaxHealth = 0;
+        newPlayer.MaxMana = 0;
+        newPlayer.MaxStamina = 0; 
         
         newPlayer.CurrentExp = 1;
         StorePlayerInfo();
@@ -51,12 +51,6 @@ public class CharacterCreation : MonoBehaviour {
         player.PlayerEndurance = newPlayer.Endurance;
         player.PlayerMagic = newPlayer.Magic;
         player.PlayerGold = newPlayer.CurrentGold;
-        player.PlayerMaxHealth = newPlayer.MaxHealth;
-        player.PlayerCurrentHealth = newPlayer.MaxHealth;
-        player.PlayerMaxMana = newPlayer.MaxMana;
-        player.PlayerCurrentMana = newPlayer.MaxMana;
-        player.PlayerMaxStamina = newPlayer.MaxStamina;
-        player.PlayerCurrentStamina = newPlayer.MaxStamina;
         player.PlayerCurrentExperience = newPlayer.CurrentExp;
         player.PlayerClass = newPlayer.PlayerClass.CharacterClassName;
         player.CurrentRoom = startingRoom;

@@ -7,27 +7,22 @@ public class PlayerManagement : MonoBehaviour {
 
     public SimpleHealthBar healthBar;
     public SimpleHealthBar manaBar;
-    public SimpleHealthBar staminaBar;
-    public Text healthDisplay;
-    public Text manaDisplay;
-    public Text staminaDisplay;    
+    public SimpleHealthBar staminaBar;   
     public Text playerName;
     public Text playerClass;
     public Text playerLevel;
     public Text playerExp;
     public Text playerGold;
+    public float currentHealth;
+    public float currentMana;
+    public float currentStamina;
+    public float maxHealth;
+    public float maxMana;
+    public float maxStamina;
 
     Player player;
-    Character character;
-    float currentHealth;
-    float maxHealth;
-    float currentMana;
-    float maxMana;
-    float currentStamina;
-    float maxStamina;
+    Character character;    
 
-
-    // Use this for initialization
     void Start ()
     {
         character = FindObjectOfType<Character>();
@@ -37,11 +32,8 @@ public class PlayerManagement : MonoBehaviour {
         playerLevel.text = player.PlayerLevel.ToString();
         playerExp.text = player.PlayerCurrentExperience.ToString();
         playerGold.text = player.PlayerGold.ToString();
-
-        
     }
 	
-	// Update is called once per frame
 	void Update ()
     {
         CalculateMaxHealth();
@@ -50,25 +42,22 @@ public class PlayerManagement : MonoBehaviour {
         currentHealth = player.PlayerCurrentHealth;
         currentMana = player.PlayerCurrentMana;
         currentStamina = player.PlayerCurrentStamina;
-        healthDisplay.text = currentHealth + "/" + maxHealth;
-        manaDisplay.text = currentMana + "/" + maxMana;
-        staminaDisplay.text = currentStamina + "/" + maxStamina;
         healthBar.UpdateBar(currentHealth, maxHealth);
         manaBar.UpdateBar(currentMana, maxMana);
         staminaBar.UpdateBar(currentStamina, maxStamina);
     }
 
-    private void CalculateMaxStamina()
+    public void CalculateMaxStamina()
     {
         maxStamina = ((character.Endurance.Value * 4) + (player.PlayerLevel * 2));
     }
 
-    private void CalculateMaxMana()
+    public void CalculateMaxMana()
     {
         maxMana = ((character.Magic.Value * 3) + (player.PlayerLevel * 3) * 2);
     }
 
-    private void CalculateMaxHealth()
+    public void CalculateMaxHealth()
     {
         maxHealth = ((character.Endurance.Value * 3) + (player.PlayerLevel * 2)) * 2;
     }

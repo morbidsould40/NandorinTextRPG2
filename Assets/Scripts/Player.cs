@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
 
     [SerializeField] string playerName;
     [SerializeField] string playerRace;
@@ -147,16 +148,15 @@ public class Player : MonoBehaviour {
         set { currentRoom = value; }
     }
 
-    void Awake()
+    private void Start()
     {
-
-    }
-
-    private void Start () {
+        var manager = FindObjectOfType<PlayerManagement>();
         DontDestroyOnLoad(this);
+        manager.CalculateMaxHealth();
+        PlayerCurrentHealth = manager.maxHealth;
+        manager.CalculateMaxStamina();
+        PlayerCurrentStamina = manager.maxStamina;
+        manager.CalculateMaxMana();
+        PlayerCurrentMana = manager.maxMana;
     }
-	
-	private void Update () {
-		
-	}
 }

@@ -80,21 +80,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: Test Player
   playerRace: 
-  playerClass: Warlord
-  playerCurrentRoom: nc0004
+  playerClass: Cleric
+  playerCurrentRoom: nc0028
   playerLevel: 1
-  playerStrength: 7
-  playerAgility: 5
-  playerEndurance: 6
-  playerMagic: 4
-  playerAttack: 0
-  playerDefense: 0
-  playerCurrentHealth: 40
-  playerMaxHealth: 40
-  playerCurrentMana: 18
-  playerMaxMana: 18
-  playerCurrentStamina: 22
-  playerMaxStamina: 22
+  playerStrength: 5
+  playerAgility: 4
+  playerEndurance: 7
+  playerMagic: 6
+  playerAttack: 0.2
+  playerDefense: 0.25
+  playerCurrentHealth: 0
+  playerMaxHealth: 0
+  playerCurrentMana: 0
+  playerMaxMana: 0
+  playerCurrentStamina: 0
+  playerMaxStamina: 0
   playerCurrentExperience: 1
-  playerGold: 100000
-  currentRoom: {fileID: 11400000, guid: f218062f20d8ce3418523beddb3cfd6e, type: 2}
+  playerGold: 20
+  currentRoom: {fileID: 11400000, guid: 68fdfaaa89275544ea557b5de92d46e1, type: 2}

@@ -1175,7 +1175,6 @@ GameObject:
   - component: {fileID: 165924648}
   - component: {fileID: 165924650}
   - component: {fileID: 165924649}
-  - component: {fileID: 165924651}
   m_Layer: 5
   m_Name: PaperDollBox
   m_TagString: Untagged
@@ -1237,19 +1236,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 165924647}
---- !u!114 &165924651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 165924647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71f6b4201dd28dc44858133476b3fe30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventory: {fileID: 0}
-  equipmentPanel: {fileID: 857358782}
 --- !u!1 &170056705
 GameObject:
   m_ObjectHideFlags: 0
@@ -2171,7 +2157,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '*0/0'
+  m_Text: 100 / 100
 --- !u!222 &299517735
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2401,11 +2387,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11474322, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
       propertyPath: m_Color.r
-      value: 0.023072997
+      value: 0.30268762
       objectReference: {fileID: 0}
     - target: {fileID: 11474322, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
       propertyPath: m_Color.g
-      value: 0.6691177
+      value: 0.778
       objectReference: {fileID: 0}
     - target: {fileID: 11474322, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
       propertyPath: m_Color.b
@@ -2421,12 +2407,28 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11487436, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
       propertyPath: displayText
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11487436, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
       propertyPath: barText
       value: 
       objectReference: {fileID: 299517734}
+    - target: {fileID: 11487436, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
+      propertyPath: barColor.r
+      value: 0.30268762
+      objectReference: {fileID: 0}
+    - target: {fileID: 11487436, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
+      propertyPath: barColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11487436, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
+      propertyPath: barColor.g
+      value: 0.778
+      objectReference: {fileID: 0}
+    - target: {fileID: 197766, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
+      propertyPath: m_Name
+      value: StaminaFill
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
   m_IsPrefabParent: 0
@@ -3807,6 +3809,26 @@ Prefab:
     - target: {fileID: 22493990, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11487436, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
+      propertyPath: barColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11487436, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
+      propertyPath: barColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11487436, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
+      propertyPath: displayText
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11487436, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
+      propertyPath: barText
+      value: 
+      objectReference: {fileID: 1199966474}
+    - target: {fileID: 197766, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
+      propertyPath: m_Name
+      value: HealthFill
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
@@ -5259,19 +5281,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 514e492a7b130414c894388e16a1bdce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 0
-  currentMana: 0
-  maxMana: 0
-  currentStamina: 0
-  maxStamina: 0
   healthBar: {fileID: 341549398}
   manaBar: {fileID: 78133724}
   staminaBar: {fileID: 1493438818}
   healthDisplay: {fileID: 1199966474}
   manaDisplay: {fileID: 1781627091}
   staminaDisplay: {fileID: 299517734}
-  player: {fileID: 114705964056311450, guid: 4e370961a2661d245920b2c72eb9c8e2, type: 2}
   playerName: {fileID: 848667918}
   playerClass: {fileID: 1756421506}
   playerLevel: {fileID: 1001760130}
@@ -5324,6 +5339,7 @@ MonoBehaviour:
   inventory: {fileID: 0}
   combatManager: {fileID: 0}
   mobsInTheRoom: []
+  mustFleeToMove: 0
 --- !u!4 &709624916
 Transform:
   m_ObjectHideFlags: 0
@@ -6613,6 +6629,11 @@ Prefab:
       propertyPath: statPanel
       value: 
       objectReference: {fileID: 178613634}
+    - target: {fileID: 114705964056311450, guid: 4e370961a2661d245920b2c72eb9c8e2,
+        type: 2}
+      propertyPath: playerCurrentStamina
+      value: 26
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e370961a2661d245920b2c72eb9c8e2, type: 2}
   m_IsPrefabParent: 0
@@ -6701,7 +6722,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11474322, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
       propertyPath: m_Color.g
-      value: 0.5034485
+      value: 0.542
       objectReference: {fileID: 0}
     - target: {fileID: 11474322, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
       propertyPath: m_Color.b
@@ -6718,6 +6739,26 @@ Prefab:
     - target: {fileID: 11487436, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
       propertyPath: displayText
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11487436, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
+      propertyPath: barColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11487436, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
+      propertyPath: barColor.g
+      value: 0.542
+      objectReference: {fileID: 0}
+    - target: {fileID: 11487436, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
+      propertyPath: barColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11487436, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
+      propertyPath: barText
+      value: 
+      objectReference: {fileID: 1781627091}
+    - target: {fileID: 197766, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
+      propertyPath: m_Name
+      value: ManaFill
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 2}
@@ -8153,7 +8194,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '*0/0'
+  m_Text: 100 / 100
 --- !u!1 &1216749084
 GameObject:
   m_ObjectHideFlags: 0
@@ -10566,7 +10607,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '*0/0'
+  m_Text: 100 / 100
 --- !u!222 &1781627092
 CanvasRenderer:
   m_ObjectHideFlags: 0

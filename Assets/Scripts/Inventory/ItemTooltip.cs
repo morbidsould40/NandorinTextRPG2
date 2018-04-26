@@ -19,9 +19,9 @@ public class ItemTooltip : MonoBehaviour {
         if (rarity == Items.Rarity.Uncommon)
             ItemNameText.text = "<color=#00ff00ff>" + item.itemName + "</Color>";
         if (rarity == Items.Rarity.Rare)
-            ItemNameText.text = "<color=#0000ffff>" + item.itemName + "</Color>";
+            ItemNameText.text = "<color=#0088ffff>" + item.itemName + "</Color>";
         if (rarity == Items.Rarity.Epic)
-            ItemNameText.text = "<color=#ff00ffff>" + item.itemName + "</Color>";
+            ItemNameText.text = "<color=#ff00aaff>" + item.itemName + "</Color>";
         if (rarity == Items.Rarity.Relic)
             ItemNameText.text = "<color=#ff0000ff>" + item.itemName + "</Color>";
         if (rarity == Items.Rarity.Artifact)
