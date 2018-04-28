@@ -1,18 +1,17 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using RPG.CharacterStats;
 
 public class CombatManager : MonoBehaviour {
 
     public Player player;
     public GameController controller;
-    public float critDamageMultiplier = 1.5f;
+    [SerializeField] float critDamageMultiplier = 1.5f;
     public bool playerInCombat = false;
 
     Character character;
     EquipmentPanel equipmentPanel;
     EquipmentSlot[] equipmentSlots;
+    Weapons weaponUsed;
     int weaponDamage;
 
     public enum CombatState
@@ -22,7 +21,6 @@ public class CombatManager : MonoBehaviour {
 
     public CombatState combatState = CombatState.OutOfCombat;
 
-    // Use this for initialization
     void Start ()
     {
         player = FindObjectOfType<Player>();
@@ -33,7 +31,6 @@ public class CombatManager : MonoBehaviour {
 
     }
 	
-	// Update is called once per frame
 	void Update ()
     {
         IsPlayerDead();
@@ -68,6 +65,7 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
+    // checks to see what the player typed in to attack and grabs the first mob in the room that matches
     public Monsters GetMonsterPlayerAttacked(string mobAttacked)
     {
 
@@ -84,12 +82,16 @@ public class CombatManager : MonoBehaviour {
     ////////
     // Attack formula for both players and monsters is atk / (atk + def) where both atk's are attackers attack and def is defenders defense
     // This should scale pretty decent and will almost never result in a 100% chance to hit
+    //
+    // TODO: Add in if statement if attack was with a skill or magic based. All will need to be calculated differently
     ///////
 
     public void PlayerAttack(string mobAttacked)
     {
-        combatState = CombatState.PlayersTurn;        
-        var toHit = character.Attack.Value / (character.Attack.Value + GetMonsterPlayerAttacked(mobAttacked).monsterDefense);
+        combatState = CombatState.PlayersTurn;
+        Monsters mob = GetMonsterPlayerAttacked(mobAttacked);
+        weaponUsed = WeaponUsed();
+        var toHit = character.Attack.Value / (character.Attack.Value + mob.monsterDefense);
         Debug.Log("percentage to hit: " + toHit);
         // random roll to see if hit is made
         var rollToHit = Random.Range(0f, 1f);
@@ -99,6 +101,19 @@ public class CombatManager : MonoBehaviour {
             // hit successful
             bool playerCrit = CalculatePlayerCrit();
             float totalDamageDone = CalculatePlayerDamage(playerCrit);
+            if (WeaponUsed())
+            {
+
+                controller.LogStringWithoutReturn("You hit " + mobAttacked + " with your " + weaponUsed.itemName
+                    + " for " + totalDamageDone + " damage.");
+                DamageMob(mob, totalDamageDone);
+                CheckMobDamageStatus(mob);
+
+            }
+            else
+            {
+                controller.LogStringWithoutReturn("You punch " + mobAttacked + " for " + totalDamageDone + " damage.");
+            }
             Debug.Log("Total damage dealt: " + totalDamageDone);
         }
         else
@@ -107,6 +122,38 @@ public class CombatManager : MonoBehaviour {
             Debug.Log("missed");
 
         }
+    }
+
+    private void CheckMobDamageStatus(Monsters mob)
+    {
+        var mobCurrentHeath = mob.monsterCurrentHealth;
+        var mobMaxHealth = mob.monsterMaxHealth;
+
+        if (mobCurrentHeath < mobMaxHealth && mobCurrentHeath >= mobMaxHealth * .75f)
+        {
+            // mob is mildly wounded
+        }
+        else if (mobCurrentHeath < mobMaxHealth * .75f && mobCurrentHeath >= mobMaxHealth * .5f)
+        {
+            // mob is moderately wounded
+        }
+        else if (mobCurrentHeath < mobMaxHealth * .5f && mobCurrentHeath >= mobMaxHealth * .25f)
+        {
+            // mob is seriously wounded
+        }
+        else if (mobCurrentHeath < mobMaxHealth * .25f && mobCurrentHeath >= 1f)
+        {
+            // mob is severly wounded
+        }
+        else
+        {
+            // mob is dead
+        }
+    }
+
+    private void DamageMob(Monsters mobAttacked, float totalDamageDone)
+    {
+        
     }
 
     private Weapons WeaponUsed()
@@ -125,12 +172,13 @@ public class CombatManager : MonoBehaviour {
 
     public float CalculatePlayerDamage(bool playerCrit)
     {
+        // calculate player bonus damage ((str / 5) * level)
         float playerDamageBonus = ((player.PlayerStrength / 5) * player.PlayerLevel);
         Debug.Log("Player Damage Bonus: " + playerDamageBonus);
         
-        Weapons weaponUsed = WeaponUsed();
-        
+        weaponUsed = WeaponUsed();        
 
+        // Get the weapon the player is using to calculate weapon damage
         if (WeaponUsed())
         {
             Debug.Log(weaponUsed.itemName);
@@ -148,7 +196,8 @@ public class CombatManager : MonoBehaviour {
         if (playerCrit)
         {
             // Calculate damage and multiply it by critDamageModifier
-            var damageDealt = ((weaponDamage + playerDamageBonus) * critDamageMultiplier); // TODO set up damage formula            
+            var damageDealt = ((weaponDamage + playerDamageBonus) * critDamageMultiplier); // TODO set up damage formula
+            controller.LogStringWithoutReturn("CRITICAL STRIKE!");
             return damageDealt;
         }
         else
@@ -180,8 +229,7 @@ public class CombatManager : MonoBehaviour {
 
     public void MonstersAttack()
     {
-        combatState = CombatState.MonstersTurn;
-        
+        combatState = CombatState.MonstersTurn;        
     }
 
     public void CalculateMonstersDamage()
