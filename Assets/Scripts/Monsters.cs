@@ -3,7 +3,6 @@
 [CreateAssetMenu(menuName = "TextRPG/Monsters")]
 public class Monsters : ScriptableObject
 {
-
     public string monsterName;
     public string monsterKeyword;
     public string monsterID;
@@ -15,6 +14,7 @@ public class Monsters : ScriptableObject
     public int goldDroppedMin;
     public int goldDroppedMax;
     public float itemDropChance;
+    public int monsterExperience;
     public Weapons[] weaponsDropped;
     public Armor[] armorDropped;
     public float monsterCurrentHealth;
@@ -24,5 +24,5 @@ public class Monsters : ScriptableObject
     public float monsterAttack;
     public float monsterDefense;
     public MonsterAttacks[] monsterAttacks;
-    
+    public GameObject monsterPrefab;
 }

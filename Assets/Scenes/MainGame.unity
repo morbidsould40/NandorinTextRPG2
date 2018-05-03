@@ -5284,14 +5284,17 @@ MonoBehaviour:
   healthBar: {fileID: 341549398}
   manaBar: {fileID: 78133724}
   staminaBar: {fileID: 1493438818}
-  healthDisplay: {fileID: 1199966474}
-  manaDisplay: {fileID: 1781627091}
-  staminaDisplay: {fileID: 299517734}
   playerName: {fileID: 848667918}
   playerClass: {fileID: 1756421506}
   playerLevel: {fileID: 1001760130}
   playerExp: {fileID: 1987380029}
   playerGold: {fileID: 742465992}
+  currentHealth: 0
+  currentMana: 0
+  currentStamina: 0
+  maxHealth: 0
+  maxMana: 0
+  maxStamina: 0
 --- !u!114 &709624914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6629,11 +6632,6 @@ Prefab:
       propertyPath: statPanel
       value: 
       objectReference: {fileID: 178613634}
-    - target: {fileID: 114705964056311450, guid: 4e370961a2661d245920b2c72eb9c8e2,
-        type: 2}
-      propertyPath: playerCurrentStamina
-      value: 26
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e370961a2661d245920b2c72eb9c8e2, type: 2}
   m_IsPrefabParent: 0

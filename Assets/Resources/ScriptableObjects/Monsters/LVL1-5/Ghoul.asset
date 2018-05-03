@@ -21,10 +21,11 @@ MonoBehaviour:
   goldDroppedMin: 0
   goldDroppedMax: 0
   itemDropChance: 0
+  monsterExperience: 0
   weaponsDropped: []
   armorDropped: []
-  monsterCurrentHealth: 0
-  monsterMaxHealth: 0
+  monsterCurrentHealth: 25
+  monsterMaxHealth: 25
   monsterCurrentMana: 0
   monsterMaxMana: 0
   monsterAttack: 8

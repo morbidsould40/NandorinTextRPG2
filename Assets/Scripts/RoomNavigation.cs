@@ -10,11 +10,9 @@ public class RoomNavigation : MonoBehaviour
     [HideInInspector] public Dictionary<string, Room> exitDictionary = new Dictionary<string, Room>();
     [HideInInspector] public Dictionary<string, string> examineDictionary = new Dictionary<string, string>();
     [HideInInspector] public Dictionary<string, string> mobsDictionary = new Dictionary<string, string>();
-       
-
+    
     GameController controller;
     Character character;
-
     
     private void Awake()
     {
@@ -25,8 +23,8 @@ public class RoomNavigation : MonoBehaviour
     private void Start()
     {        
         currentRoom = player.CurrentRoom;
-    }    
-    
+    }
+
     public void UnpackExitsInRoom()
     {
         for (int i = 0; i < currentRoom.exits.Length; i++)
@@ -84,7 +82,7 @@ public class RoomNavigation : MonoBehaviour
         controller.DisplayRoomText();
         player.CurrentRoom = currentRoom;
         player.PlayerCurrentRoom = currentRoom.roomCode;
-    }
+    }   
 
     private bool AttemptToFleeRoom(string directionNoun)
     {

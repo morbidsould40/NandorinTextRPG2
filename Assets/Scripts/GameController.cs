@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public Player player;
     public InputAction[] inputActions;
     public List<KeyValuePair<string, Monsters>> mobsSpawnedInRoom = new List<KeyValuePair<string, Monsters>>();
+    public bool enemyPrefabsSpawned = false;
 
     [HideInInspector] public RoomNavigation roomNavigation;
     [HideInInspector] public List<string> interactiveDescriptionsInRoom = new List<string>();
@@ -22,10 +23,11 @@ public class GameController : MonoBehaviour
     [HideInInspector] public List<Monsters> mobsInTheRoom = new List<Monsters>();
 
     // this will be used to determine if the player can leave a room or has to flee
-    [HideInInspector] public bool mustFleeToMove = false; 
+    [HideInInspector] public bool mustFleeToMove = false;
 
     private List<string> actionLog = new List<string>();
-    private RoomNavigation roomNav;    
+    private RoomNavigation roomNav;
+    Monsters monsters;
 
     private void Awake()
     { 
@@ -109,6 +111,19 @@ public class GameController : MonoBehaviour
             roomNavigation.currentRoom.description + "\n" + "<color=#c0c0c0ff>" + joinedInteractionDescriptions + "</color>";
         LogStringWithReturn(combinedText);
         CheckRoomForMobs();
+        if (!enemyPrefabsSpawned)
+        {
+            SpawnEnemyPrefabs();
+        }
+    }
+
+    private void SpawnEnemyPrefabs()
+    {
+        foreach (var mob in mobsInTheRoom)
+        {
+            mob.monsterPrefab.name = mob.monsterName;
+            GameObject go = Instantiate(mob.monsterPrefab);
+        }
     }
 
     private void CheckRoomForMobs()
@@ -128,7 +143,7 @@ public class GameController : MonoBehaviour
                 for (int i = 0; i < mobsInTheRoom.Count; i++)
                 {
                     mobNames.Add(mobsInTheRoom[i].monsterName);
-                }
+                }                
                 string mobsInRoom = string.Join(", and a ", mobNames.ToArray());
                 string monsterText = "<color=#ff0000ff> You see a " + mobsInRoom + " in the room.</color>";
                 LogStringWithReturn(monsterText);

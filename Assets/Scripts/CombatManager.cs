@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CombatManager : MonoBehaviour {
 
@@ -12,6 +11,7 @@ public class CombatManager : MonoBehaviour {
     EquipmentPanel equipmentPanel;
     EquipmentSlot[] equipmentSlots;
     Weapons weaponUsed;
+    PlayerManagement playerManagement;
     int weaponDamage;
 
     public enum CombatState
@@ -28,6 +28,7 @@ public class CombatManager : MonoBehaviour {
         character = FindObjectOfType<Character>();
         equipmentPanel = FindObjectOfType<EquipmentPanel>();
         equipmentSlots = equipmentPanel.equipmentSlotsParent.GetComponentsInChildren<EquipmentSlot>();
+        playerManagement = FindObjectOfType<PlayerManagement>();
 
     }
 	
@@ -43,7 +44,7 @@ public class CombatManager : MonoBehaviour {
         {
             case CombatState.StartCombat:
                 // turn off auto heal
-                Debug.Log(combatState);                
+                Debug.Log(combatState);
                 playerInCombat = true;
                 combatState = CombatState.PlayersTurn;
                 CombatStateMachine(mobToAttack);
@@ -103,57 +104,91 @@ public class CombatManager : MonoBehaviour {
             float totalDamageDone = CalculatePlayerDamage(playerCrit);
             if (WeaponUsed())
             {
-
                 controller.LogStringWithoutReturn("You hit " + mobAttacked + " with your " + weaponUsed.itemName
                     + " for " + totalDamageDone + " damage.");
                 DamageMob(mob, totalDamageDone);
                 CheckMobDamageStatus(mob);
-
             }
             else
             {
                 controller.LogStringWithoutReturn("You punch " + mobAttacked + " for " + totalDamageDone + " damage.");
+                DamageMob(mob, totalDamageDone);
+                CheckMobDamageStatus(mob);
             }
+
             Debug.Log("Total damage dealt: " + totalDamageDone);
         }
         else
         {
             // missed
+            controller.LogStringWithoutReturn("You missed the " + mobAttacked + ".");
             Debug.Log("missed");
-
         }
     }
 
     private void CheckMobDamageStatus(Monsters mob)
     {
-        var mobCurrentHeath = mob.monsterCurrentHealth;
+        var mobCurrentHeath = mob.monsterCurrentHealth;        
         var mobMaxHealth = mob.monsterMaxHealth;
+        Debug.Log(mobMaxHealth);
+        Debug.Log(mobCurrentHeath);
 
         if (mobCurrentHeath < mobMaxHealth && mobCurrentHeath >= mobMaxHealth * .75f)
         {
-            // mob is mildly wounded
+            // mob is slightly wounded
+            controller.LogStringWithoutReturn(mob.monsterName + " is slightly wounded.");
         }
         else if (mobCurrentHeath < mobMaxHealth * .75f && mobCurrentHeath >= mobMaxHealth * .5f)
         {
             // mob is moderately wounded
+            controller.LogStringWithoutReturn(mob.monsterName + " is moderately wounded.");
         }
         else if (mobCurrentHeath < mobMaxHealth * .5f && mobCurrentHeath >= mobMaxHealth * .25f)
         {
             // mob is seriously wounded
+            controller.LogStringWithoutReturn(mob.monsterName + " is seriously wounded.");
         }
         else if (mobCurrentHeath < mobMaxHealth * .25f && mobCurrentHeath >= 1f)
         {
             // mob is severly wounded
+            controller.LogStringWithoutReturn(mob.monsterName + " is severly wounded.");
         }
         else
         {
             // mob is dead
+            controller.LogStringWithoutReturn(mob.monsterName + " has been killed.");
+
+            GetExperience(mob);
+            GetLootDrops(mob);
+            RemoveMobFromRoom(mob);
+            mob.monsterCurrentHealth = mob.monsterMaxHealth;
         }
+    }
+
+    private void RemoveMobFromRoom(Monsters mob)
+    {
+        for (int i = 0; i < controller.mobsInTheRoom.Count; i++)
+        {
+            if (mob == controller.mobsInTheRoom[i] && controller.mobsInTheRoom[i].monsterCurrentHealth <= 0)
+            {
+                controller.mobsInTheRoom.Remove(mob);
+                controller.mobsSpawnedInRoom.RemoveAt(i);
+                break;
+            }
+        }
+    }
+
+    private void GetExperience(Monsters mob)
+    {
+        playerManagement.UpdatePlayerExperience(mob.monsterExperience);
     }
 
     private void DamageMob(Monsters mobAttacked, float totalDamageDone)
     {
+
+        mobAttacked.monsterCurrentHealth -= totalDamageDone;
         
+        Debug.Log(mobAttacked.monsterCurrentHealth);
     }
 
     private Weapons WeaponUsed()
@@ -166,8 +201,7 @@ public class CombatManager : MonoBehaviour {
                 return weapon;
             }            
         }
-        return null;
-        
+        return null;        
     }
 
     public float CalculatePlayerDamage(bool playerCrit)
@@ -242,7 +276,7 @@ public class CombatManager : MonoBehaviour {
 
     }
 
-    public void GetLootDrops()
+    public void GetLootDrops(Monsters mob)
     {
 
     }
