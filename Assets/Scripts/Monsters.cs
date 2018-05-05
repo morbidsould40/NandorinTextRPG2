@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "TextRPG/Monsters")]
-public class Monsters : ScriptableObject
+public class Monsters : MonoBehaviour
 {
     public string monsterName;
     public string monsterKeyword;
@@ -24,5 +23,4 @@ public class Monsters : ScriptableObject
     public float monsterAttack;
     public float monsterDefense;
     public MonsterAttacks[] monsterAttacks;
-    public GameObject monsterPrefab;
 }

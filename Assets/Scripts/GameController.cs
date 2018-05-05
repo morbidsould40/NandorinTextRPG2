@@ -11,7 +11,6 @@ public class GameController : MonoBehaviour
     public List<KeyValuePair<string, Monsters>> mobsSpawnedInRoom = new List<KeyValuePair<string, Monsters>>();
     public bool enemyPrefabsSpawned = false;
 
-    [HideInInspector] public RoomNavigation roomNavigation;
     [HideInInspector] public List<string> interactiveDescriptionsInRoom = new List<string>();
     [HideInInspector] public List<string> examinableDescriptionsInRoom = new List<string>();
     [HideInInspector] public InteractableItems interactableItems;
@@ -21,18 +20,18 @@ public class GameController : MonoBehaviour
     [HideInInspector] public Inventory inventory;
     [HideInInspector] public CombatManager combatManager;
     [HideInInspector] public List<Monsters> mobsInTheRoom = new List<Monsters>();
+    [HideInInspector] public RoomNavigation roomNav;
 
     // this will be used to determine if the player can leave a room or has to flee
     [HideInInspector] public bool mustFleeToMove = false;
 
-    private List<string> actionLog = new List<string>();
-    private RoomNavigation roomNav;
+    List<string> actionLog = new List<string>();    
     Monsters monsters;
+    GameObject spawnedMob;
 
     private void Awake()
     { 
         interactableItems = GetComponent<InteractableItems>();
-        roomNavigation = GetComponent<RoomNavigation>();
         examinableItems = GetComponent<ExamaniableItems>();
         lookableDirections = GetComponent<LookableDirections>();
         roomNav = GetComponent<RoomNavigation>();
@@ -57,7 +56,6 @@ public class GameController : MonoBehaviour
             room.mobsAlreadySpawned = false;
             if (room.canMobsSpawnHere)
             {
-                // starts player in the same room they logged off
                 var numberToSpawn = Random.Range(0, 4);
                 if (!room.mobsAlreadySpawned)
                 {
@@ -71,14 +69,14 @@ public class GameController : MonoBehaviour
                     // spawn x mobs randomly from the list of mobs that can spawn in the room
                     for (int i = 0; i < numberToSpawn; i++)
                     {
-                        for (int x = 0; i < numMobs; x++)
+                        for (int x = 0; x < numMobs; x++)
                         {
                             var mob = room.mobsThatCanSpawnHere[x];
                             float roll = Random.Range(0, 100);
                             if (roll <= mob.spawnChance)
                             {
                                 mobsSpawnedInRoom.Add(new KeyValuePair<string, Monsters>(room.roomCode, room.mobsThatCanSpawnHere[x]));
-                                Debug.Log("Room: " + room.roomCode + " is spawning a " + room.mobsThatCanSpawnHere[x]);
+                                Debug.Log("Room: " + room.roomCode + " is spawning a " + room.mobsThatCanSpawnHere[x]);                                
                                 break;
                             }
                         }
@@ -107,24 +105,27 @@ public class GameController : MonoBehaviour
         ClearCollectionsForNewRoom();
         UnpackRoom();
         string joinedInteractionDescriptions = string.Join("\n", interactiveDescriptionsInRoom.ToArray());
-        string combinedText = "<color=#ffff00ff>" + roomNavigation.currentRoom.roomName + "</color> \n" +
-            roomNavigation.currentRoom.description + "\n" + "<color=#c0c0c0ff>" + joinedInteractionDescriptions + "</color>";
+        string combinedText = "<color=#ffff00ff>" + roomNav.currentRoom.roomName + "</color> \n" +
+            roomNav.currentRoom.description + "\n" + "<color=#c0c0c0ff>" + joinedInteractionDescriptions + "</color>";
         LogStringWithReturn(combinedText);
         CheckRoomForMobs();
         if (!enemyPrefabsSpawned)
         {
-            SpawnEnemyPrefabs();
+            SpawnMobPrefabs();
         }
     }
 
-    private void SpawnEnemyPrefabs()
+    private void SpawnMobPrefabs()
     {
-        foreach (var mob in mobsInTheRoom)
+        var lookup = mobsSpawnedInRoom.ToLookup(kvp => kvp.Key, kvp => kvp.Value);
+
+        foreach (Monsters mob in lookup[roomNav.currentRoom.roomCode])
         {
-            mob.monsterPrefab.name = mob.monsterName;
-            GameObject go = Instantiate(mob.monsterPrefab);
-        }
-    }
+            Monsters go = Instantiate(mob);
+            go.name = mob.monsterName;
+            mob.monsterID = mob.monsterName + Random.Range(1, 999999);
+            enemyPrefabsSpawned = true;
+        }    }
 
     private void CheckRoomForMobs()
     {
@@ -135,7 +136,7 @@ public class GameController : MonoBehaviour
 
             foreach (Monsters x in lookup[roomNav.currentRoom.roomCode])
             {
-                mobsInTheRoom.Add(x);
+                mobsInTheRoom.Add(x);                
             }
             if (mobsInTheRoom.Count > 0)
             {
@@ -155,17 +156,17 @@ public class GameController : MonoBehaviour
 
     private void UnpackRoom()
     {
-        roomNavigation.UnpackExitsInRoom();
-        roomNavigation.UnpackExaminablesInRoom();
+        roomNav.UnpackExitsInRoom();
+        roomNav.UnpackExaminablesInRoom();
     }
 
     private void ClearCollectionsForNewRoom()
     {
         interactiveDescriptionsInRoom.Clear();
         mobsInTheRoom.Clear();
-        roomNavigation.ClearExaminables();
-        roomNavigation.ClearExits();
-        roomNavigation.ClearMobs();
+        roomNav.ClearExaminables();
+        roomNav.ClearExits();
+        roomNav.ClearMobs();
     }
 
     public void LogStringWithReturn(string stringToAdd)

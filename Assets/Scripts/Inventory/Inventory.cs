@@ -82,7 +82,7 @@ public class Inventory : MonoBehaviour {
             string result = GetItemKeyword(keywordNoun);
             var currentInventoryCount = invWindow.items.Count;
 
-            foreach (var item in controller.roomNavigation.currentRoom.shopItems)
+            foreach (var item in controller.roomNav.currentRoom.shopItems)
             {
                 if (result == item.itemName.ToLower())
                 {                    

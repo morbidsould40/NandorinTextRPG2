@@ -5332,6 +5332,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4d1913dee918fff4194dd88c4fb9f46e, type: 2}
   - {fileID: 11400000, guid: 7641651b8b974e241ae4dda93d8baad9, type: 2}
   - {fileID: 11400000, guid: 036401bdbd1683a408cc0c5bae996b32, type: 2}
+  enemyPrefabsSpawned: 0
   roomNavigation: {fileID: 0}
   interactiveDescriptionsInRoom: []
   examinableDescriptionsInRoom: []

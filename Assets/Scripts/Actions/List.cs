@@ -7,10 +7,10 @@ public class List : InputAction
 
     public override void RespondToInput(GameController controller, string[] seperatedInputWords)
     {
-        if (controller.roomNavigation.currentRoom.isShop)
+        if (controller.roomNav.currentRoom.isShop)
         {
             List<Items> currentShopItems = new List<Items>();
-            var shopItems = controller.roomNavigation.currentRoom.shopItems;
+            var shopItems = controller.roomNav.currentRoom.shopItems;
 
             if (shopItems.Length > 0)
             {

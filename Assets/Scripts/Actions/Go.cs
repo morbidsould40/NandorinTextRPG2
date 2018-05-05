@@ -6,6 +6,6 @@ public class Go : InputAction
 
     public override void RespondToInput(GameController controller, string[] seperatedInputWords)
     {
-        controller.roomNavigation.AttemptToChangeRooms(seperatedInputWords[1]);
+        controller.roomNav.AttemptToChangeRooms(seperatedInputWords[1]);
     }
 }

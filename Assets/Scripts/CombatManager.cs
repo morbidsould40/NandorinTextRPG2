@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class CombatManager : MonoBehaviour {
 
@@ -12,6 +13,7 @@ public class CombatManager : MonoBehaviour {
     EquipmentSlot[] equipmentSlots;
     Weapons weaponUsed;
     PlayerManagement playerManagement;
+    RoomNavigation roomNav;
     int weaponDamage;
 
     public enum CombatState
@@ -29,7 +31,7 @@ public class CombatManager : MonoBehaviour {
         equipmentPanel = FindObjectOfType<EquipmentPanel>();
         equipmentSlots = equipmentPanel.equipmentSlotsParent.GetComponentsInChildren<EquipmentSlot>();
         playerManagement = FindObjectOfType<PlayerManagement>();
-
+        roomNav = GetComponent<RoomNavigation>();
     }
 	
 	void Update ()
@@ -69,14 +71,22 @@ public class CombatManager : MonoBehaviour {
     // checks to see what the player typed in to attack and grabs the first mob in the room that matches
     public Monsters GetMonsterPlayerAttacked(string mobAttacked)
     {
+        GameObject[] enemyMobObjects = GameObject.FindGameObjectsWithTag("Enemy");
 
-        for (int i = 0; i < controller.mobsInTheRoom.Count; i++)
+        // Debug.Log(enemyMobObjects.Length);
+
+        for (int i = 0; i < enemyMobObjects.Length; i++)
         {
-            if (mobAttacked == controller.mobsInTheRoom[i].monsterName.ToLower())
+            var enemyMob = enemyMobObjects[i].GetComponent<Monsters>();
+            // Debug.Log(enemyMob.monsterName);
+            if (enemyMob.monsterKeyword == mobAttacked)
             {
-                return controller.mobsInTheRoom[i];                
+                // Debug.Log(enemyMobObjects[i]);
+                return enemyMob;
+
             }
         }
+
         return null;
     }
 
@@ -97,11 +107,13 @@ public class CombatManager : MonoBehaviour {
         // random roll to see if hit is made
         var rollToHit = Random.Range(0f, 1f);
         Debug.Log("Random roll: " + rollToHit);
+
         if(rollToHit < toHit)
         {
             // hit successful
             bool playerCrit = CalculatePlayerCrit();
             float totalDamageDone = CalculatePlayerDamage(playerCrit);
+
             if (WeaponUsed())
             {
                 controller.LogStringWithoutReturn("You hit " + mobAttacked + " with your " + weaponUsed.itemName
@@ -116,13 +128,13 @@ public class CombatManager : MonoBehaviour {
                 CheckMobDamageStatus(mob);
             }
 
-            Debug.Log("Total damage dealt: " + totalDamageDone);
+            // Debug.Log("Total damage dealt: " + totalDamageDone);
         }
         else
         {
             // missed
             controller.LogStringWithoutReturn("You missed the " + mobAttacked + ".");
-            Debug.Log("missed");
+            // Debug.Log("missed");
         }
     }
 
@@ -130,8 +142,6 @@ public class CombatManager : MonoBehaviour {
     {
         var mobCurrentHeath = mob.monsterCurrentHealth;        
         var mobMaxHealth = mob.monsterMaxHealth;
-        Debug.Log(mobMaxHealth);
-        Debug.Log(mobCurrentHeath);
 
         if (mobCurrentHeath < mobMaxHealth && mobCurrentHeath >= mobMaxHealth * .75f)
         {
@@ -159,9 +169,8 @@ public class CombatManager : MonoBehaviour {
             controller.LogStringWithoutReturn(mob.monsterName + " has been killed.");
 
             GetExperience(mob);
-            GetLootDrops(mob);
+            GetLootDrops(mob);            
             RemoveMobFromRoom(mob);
-            mob.monsterCurrentHealth = mob.monsterMaxHealth;
         }
     }
 
@@ -169,10 +178,17 @@ public class CombatManager : MonoBehaviour {
     {
         for (int i = 0; i < controller.mobsInTheRoom.Count; i++)
         {
-            if (mob == controller.mobsInTheRoom[i] && controller.mobsInTheRoom[i].monsterCurrentHealth <= 0)
+            if (mob.monsterCurrentHealth <= 0)
             {
+                Debug.Log("attempting to remove dead " + mob + " from room " + roomNav.currentRoom.roomCode);
                 controller.mobsInTheRoom.Remove(mob);
-                controller.mobsSpawnedInRoom.RemoveAt(i);
+                controller.mobsSpawnedInRoom.Remove(new KeyValuePair<string, Monsters>(roomNav.currentRoom.roomCode, mob));
+                Destroy(mob.transform.gameObject);
+
+                if (controller.mobsInTheRoom.Count <= 0)
+                {
+                   roomNav.currentRoom.mobsAlreadySpawned = false;
+                }
                 break;
             }
         }
@@ -185,7 +201,6 @@ public class CombatManager : MonoBehaviour {
 
     private void DamageMob(Monsters mobAttacked, float totalDamageDone)
     {
-
         mobAttacked.monsterCurrentHealth -= totalDamageDone;
         
         Debug.Log(mobAttacked.monsterCurrentHealth);
@@ -249,6 +264,7 @@ public class CombatManager : MonoBehaviour {
         Debug.Log("Crit Chane: " + playerCritChance);
         var critRoll = Random.Range(1, 100);
         Debug.Log("Random crit roll: " + critRoll);
+
         if (critRoll <= playerCritChance)
         {
             Debug.Log("crit: true");

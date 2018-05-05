@@ -5,19 +5,29 @@ using UnityEngine;
 public class InstantiatedMob : MonoBehaviour {
 
     public string mobName;
+    public string mobKeyword;
     public string mobID;
     public float mobCurrentHealth;
+    public float mobMaxHealth;
     public float mobCurrentMana;
+    public float mobMaxMana;
     public float mobAttack;
     public float mobDefense;
 
+    public Monsters go;
+
     private void Start()
     {
-        var so = GetComponent<Monsters>();
-        mobName = so.monsterName;
-        mobCurrentHealth = so.monsterMaxHealth;
-        mobCurrentMana = so.monsterMaxMana;
-        mobAttack = so.monsterAttack;
-        mobDefense = so.monsterDefense;
+        go = GetComponent<Monsters>();
+        mobName = go.monsterName;
+        mobKeyword = go.monsterKeyword;
+        mobCurrentHealth = go.monsterMaxHealth;
+        mobMaxHealth = go.monsterMaxHealth;
+        mobCurrentMana = go.monsterMaxMana;
+        mobCurrentMana = go.monsterMaxMana;
+        mobAttack = go.monsterAttack;
+        mobDefense = go.monsterDefense;
     }
+
+    
 }
