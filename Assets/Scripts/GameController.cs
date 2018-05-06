@@ -76,7 +76,7 @@ public class GameController : MonoBehaviour
                             if (roll <= mob.spawnChance)
                             {
                                 mobsSpawnedInRoom.Add(new KeyValuePair<string, Monsters>(room.roomCode, room.mobsThatCanSpawnHere[x]));
-                                Debug.Log("Room: " + room.roomCode + " is spawning a " + room.mobsThatCanSpawnHere[x]);                                
+                                Debug.Log("Room: " + room.roomCode + " is spawning a " + room.mobsThatCanSpawnHere[x]);                           
                                 break;
                             }
                         }
@@ -88,7 +88,7 @@ public class GameController : MonoBehaviour
                     }
                 }
             }
-        }
+        }        
     }
 
     // keeps track of what has been displayed and creates the scroll of all text in the main display
@@ -104,11 +104,14 @@ public class GameController : MonoBehaviour
         // color#ffff00ff is yellow. color#c0c0c0ff is gray
         ClearCollectionsForNewRoom();
         UnpackRoom();
+
         string joinedInteractionDescriptions = string.Join("\n", interactiveDescriptionsInRoom.ToArray());
         string combinedText = "<color=#ffff00ff>" + roomNav.currentRoom.roomName + "</color> \n" +
             roomNav.currentRoom.description + "\n" + "<color=#c0c0c0ff>" + joinedInteractionDescriptions + "</color>";
+
         LogStringWithReturn(combinedText);
         CheckRoomForMobs();
+
         if (!enemyPrefabsSpawned)
         {
             SpawnMobPrefabs();
@@ -125,7 +128,8 @@ public class GameController : MonoBehaviour
             go.name = mob.monsterName;
             mob.monsterID = mob.monsterName + Random.Range(1, 999999);
             enemyPrefabsSpawned = true;
-        }    }
+        }
+    }
 
     private void CheckRoomForMobs()
     {

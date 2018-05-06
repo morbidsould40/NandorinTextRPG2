@@ -13,7 +13,6 @@ public class AttackableMobs : MonoBehaviour {
 
     public void ExamineKeyword(string[] keywordNoun)
     {
-        Debug.Log("Attempting to attack a " + keywordNoun);
         combatManager.combatState = CombatManager.CombatState.StartCombat;
         var result = GetItemKeyword(keywordNoun);
         combatManager.CombatStateMachine(result);

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class CombatManager : MonoBehaviour {
 
@@ -101,6 +102,7 @@ public class CombatManager : MonoBehaviour {
     {
         combatState = CombatState.PlayersTurn;
         Monsters mob = GetMonsterPlayerAttacked(mobAttacked);
+        Debug.Log("on player attack. Key: " + roomNav.currentRoom.roomCode + " Value: " + mob.ToString());
         weaponUsed = WeaponUsed();
         var toHit = character.Attack.Value / (character.Attack.Value + mob.monsterDefense);
         Debug.Log("percentage to hit: " + toHit);
@@ -176,19 +178,29 @@ public class CombatManager : MonoBehaviour {
 
     private void RemoveMobFromRoom(Monsters mob)
     {
-        for (int i = 0; i < controller.mobsInTheRoom.Count; i++)
+        for (int i = 0; i <= controller.mobsInTheRoom.Count; i++)
         {
             if (mob.monsterCurrentHealth <= 0)
             {
-                Debug.Log("attempting to remove dead " + mob + " from room " + roomNav.currentRoom.roomCode);
-                controller.mobsInTheRoom.Remove(mob);
-                controller.mobsSpawnedInRoom.Remove(new KeyValuePair<string, Monsters>(roomNav.currentRoom.roomCode, mob));
+                controller.mobsInTheRoom.Remove(mob);                              
+                    
                 Destroy(mob.transform.gameObject);
 
                 if (controller.mobsInTheRoom.Count <= 0)
                 {
-                   roomNav.currentRoom.mobsAlreadySpawned = false;
+                    roomNav.currentRoom.mobsAlreadySpawned = false;
                 }
+            }
+        }
+
+        for (int x = 0; x <= controller.mobsSpawnedInRoom.Count; x++)
+        {
+            var key = controller.mobsSpawnedInRoom[x].Key.ToString();
+            var value = controller.mobsSpawnedInRoom[x].Value.ToString();
+
+            if (roomNav.currentRoom.roomCode == key && mob.ToString() == value)
+            {
+                controller.mobsSpawnedInRoom.RemoveAt(x);
                 break;
             }
         }
