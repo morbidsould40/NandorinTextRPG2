@@ -77,11 +77,19 @@ public class RoomNavigation : MonoBehaviour
 
     private void ChangeRooms(string directionNoun)
     {
+        GameObject[] enemyMobObjects = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (var mob in enemyMobObjects)
+        {
+            Destroy(mob);
+        }     
+
         currentRoom = exitDictionary[directionNoun];
         controller.LogStringWithReturn("You head to the " + directionNoun);
-        controller.DisplayRoomText();
         player.CurrentRoom = currentRoom;
         player.PlayerCurrentRoom = currentRoom.roomCode;
+        controller.SpawnMobPrefabs();
+        controller.DisplayRoomText();             
     }   
 
     private bool AttemptToFleeRoom(string directionNoun)

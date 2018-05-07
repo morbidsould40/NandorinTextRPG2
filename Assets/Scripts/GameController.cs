@@ -118,7 +118,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void SpawnMobPrefabs()
+    public void SpawnMobPrefabs()
     {
         var lookup = mobsSpawnedInRoom.ToLookup(kvp => kvp.Key, kvp => kvp.Value);
 
