@@ -7,6 +7,7 @@ public class InstantiatedMob : MonoBehaviour {
     public string mobName;
     public string mobKeyword;
     public string mobID;
+    public int mobLevel;
     public float mobCurrentHealth;
     public float mobMaxHealth;
     public float mobCurrentMana;
@@ -21,6 +22,7 @@ public class InstantiatedMob : MonoBehaviour {
         go = GetComponent<Monsters>();
         mobName = go.monsterName;
         mobKeyword = go.monsterKeyword;
+        mobLevel = go.monsterLevel;
         mobCurrentHealth = go.monsterMaxHealth;
         mobMaxHealth = go.monsterMaxHealth;
         mobCurrentMana = go.monsterMaxMana;

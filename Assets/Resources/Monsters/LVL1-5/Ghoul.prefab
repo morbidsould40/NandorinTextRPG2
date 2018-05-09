@@ -53,9 +53,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterName: Ghoul
   monsterKeyword: ghoul
-  monsterID: Ghoul124926
+  monsterID: Ghoul611945
   monsterDescription: 
   monsterType: undead
+  monsterLevel: 0
   spawnChance: 20
   goldDropChance: 100
   goldDroppedMin: 2
@@ -69,5 +70,5 @@ MonoBehaviour:
   monsterCurrentMana: 0
   monsterMaxMana: 0
   monsterAttack: 10
-  monsterDefense: 12
+  monsterDefense: 8
   monsterAttacks: []

@@ -26,8 +26,8 @@ MonoBehaviour:
   - {fileID: 114990585863201176, guid: 2f566f3d8f1d32f479447e8b41f4f0ca, type: 2}
   - {fileID: 114397511698406556, guid: 0ec15db6fcedcba4c9cc7ab8ce3a9d14, type: 2}
   mobsAlreadySpawned: 1
-  minRespawnTimer: 0
-  maxRespawnTimer: 0
+  timeMobsDied: 0
+  respawnTimer: 0
   isShop: 0
   shopItems: []
   isDark: 0

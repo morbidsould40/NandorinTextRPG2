@@ -14,8 +14,8 @@ public class Room : ScriptableObject
     public bool canMobsSpawnHere;
     public Monsters[] mobsThatCanSpawnHere;
     public bool mobsAlreadySpawned;
-    public float minRespawnTimer;
-    public float maxRespawnTimer;
+    public float timeMobsDied;
+    public float respawnTimer;
     public bool isShop;
     public Items[] shopItems;
     public bool isDark; // players will need a lightsource to move through these sections

@@ -82,7 +82,7 @@ public class RoomNavigation : MonoBehaviour
         foreach (var mob in enemyMobObjects)
         {
             Destroy(mob);
-        }     
+        }
 
         currentRoom = exitDictionary[directionNoun];
         controller.LogStringWithReturn("You head to the " + directionNoun);

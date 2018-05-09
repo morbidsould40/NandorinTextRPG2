@@ -53,9 +53,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterName: Skeleton
   monsterKeyword: skeleton
-  monsterID: Skeleton206776
+  monsterID: Skeleton134194
   monsterDescription: 
   monsterType: undead
+  monsterLevel: 0
   spawnChance: 80
   goldDropChance: 80
   goldDroppedMin: 1
@@ -69,5 +70,5 @@ MonoBehaviour:
   monsterCurrentMana: 0
   monsterMaxMana: 0
   monsterAttack: 8
-  monsterDefense: 8
+  monsterDefense: 5
   monsterAttacks: []

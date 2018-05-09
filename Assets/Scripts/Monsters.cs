@@ -8,6 +8,7 @@ public class Monsters : MonoBehaviour
     [TextArea]
     public string monsterDescription;
     public string monsterType;
+    public int monsterLevel;
     public float spawnChance;
     public float goldDropChance;
     public int goldDroppedMin;

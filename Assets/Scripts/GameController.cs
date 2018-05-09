@@ -42,53 +42,63 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        SpawnAllMobs();
+        SpawnAllMobsOnStartOfGame();
         DisplayRoomText();
         DisplayLoggedText();
     }
 
-    private void SpawnAllMobs()
+    private void SpawnAllMobsOnStartOfGame()
     {        
         Room[] rooms = Resources.LoadAll<Room>("ScriptableObjects/Rooms");
         foreach (Room room in rooms)
         {
             // Resets all rooms that can spawn mobs to be able to spawn them again on player entering
             room.mobsAlreadySpawned = false;
-            if (room.canMobsSpawnHere)
+
+            SpawnMobs(room);
+
+            // set all rooms to spawned                
+            room.mobsAlreadySpawned = true;
+        }
+    }
+
+    public void SpawnMobs(Room room)
+    {
+        if (room.canMobsSpawnHere)
+        {
+            var numberToSpawn = Random.Range(0, 4);
+            if (!room.mobsAlreadySpawned)
             {
-                var numberToSpawn = Random.Range(0, 4);
-                if (!room.mobsAlreadySpawned)
+                Debug.Log("Number of mobs to spawn in " + room.roomCode + ": " + numberToSpawn);
+
+                // find the number of different mobs the room can potentially spawn
+                var numMobs = 0;
+
+                foreach (var mobs in room.mobsThatCanSpawnHere)
                 {
-                    Debug.Log("Number of mobs to spawn in " + room.roomCode + ": " + numberToSpawn);
-                    // find the number of different mobs the room can potentially spawn
-                    var numMobs = 0;
-                    foreach (var mobs in room.mobsThatCanSpawnHere)
+                    numMobs++;
+                }
+
+                // spawn x mobs randomly from the list of mobs that can spawn in the room
+                for (int i = 0; i < numberToSpawn; i++)
+                {
+                    for (int x = 0; x < numMobs; x++)
                     {
-                        numMobs++;
-                    }
-                    // spawn x mobs randomly from the list of mobs that can spawn in the room
-                    for (int i = 0; i < numberToSpawn; i++)
-                    {
-                        for (int x = 0; x < numMobs; x++)
+                        var mob = room.mobsThatCanSpawnHere[x];
+                        float roll = Random.Range(0, 100);
+
+                        if (roll <= mob.spawnChance)
                         {
-                            var mob = room.mobsThatCanSpawnHere[x];
-                            float roll = Random.Range(0, 100);
-                            if (roll <= mob.spawnChance)
-                            {
-                                mobsSpawnedInRoom.Add(new KeyValuePair<string, Monsters>(room.roomCode, room.mobsThatCanSpawnHere[x]));
-                                Debug.Log("Room: " + room.roomCode + " is spawning a " + room.mobsThatCanSpawnHere[x]);                           
-                                break;
-                            }
+                            mobsSpawnedInRoom.Add(new KeyValuePair<string, Monsters>(room.roomCode, room.mobsThatCanSpawnHere[x]));
+                            Debug.Log("Room: " + room.roomCode + " is spawning a " + room.mobsThatCanSpawnHere[x]);
+                            break;
                         }
                     }
-                    // check to make sure mobs spawned, and if they did, set it so no more spawn until these are dead
-                    if (numberToSpawn != 0)
-                    {
-                        room.mobsAlreadySpawned = true;
-                    }
                 }
+                // set room to spawned                
+                room.mobsAlreadySpawned = true;                
             }
-        }        
+        }
     }
 
     // keeps track of what has been displayed and creates the scroll of all text in the main display
@@ -155,6 +165,11 @@ public class GameController : MonoBehaviour
                 LogStringWithReturn("It is your turn to attack!");
                 mustFleeToMove = true;
             }
+        }
+        Debug.Log("Mobs in the room: " + mobsInTheRoom.Count);
+        if (mobsInTheRoom.Count <= 0)
+        {
+            roomNav.currentRoom.mobsAlreadySpawned = false;
         }
     }
 

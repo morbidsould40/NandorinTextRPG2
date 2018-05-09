@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
 
 public class CombatManager : MonoBehaviour {
 
@@ -46,7 +44,7 @@ public class CombatManager : MonoBehaviour {
         switch (combatState)
         {
             case CombatState.StartCombat:
-                // turn off auto heal
+                // TODO turn off auto heal once that function is implemented
                 Debug.Log(combatState);
                 playerInCombat = true;
                 combatState = CombatState.PlayersTurn;
@@ -57,6 +55,8 @@ public class CombatManager : MonoBehaviour {
                 PlayerAttack(mobToAttack);
                 break;
             case CombatState.MonstersTurn:
+                Debug.Log("Monsters turn to attack");
+                MonstersAttack();
                 break;
             case CombatState.PlayerDead:
                 break;
@@ -74,17 +74,13 @@ public class CombatManager : MonoBehaviour {
     {
         GameObject[] enemyMobObjects = GameObject.FindGameObjectsWithTag("Enemy");
 
-        // Debug.Log(enemyMobObjects.Length);
-
         for (int i = 0; i < enemyMobObjects.Length; i++)
         {
             var enemyMob = enemyMobObjects[i].GetComponent<Monsters>();
-            // Debug.Log(enemyMob.monsterName);
+
             if (enemyMob.monsterKeyword == mobAttacked)
             {
-                // Debug.Log(enemyMobObjects[i]);
                 return enemyMob;
-
             }
         }
 
@@ -102,13 +98,11 @@ public class CombatManager : MonoBehaviour {
     {
         combatState = CombatState.PlayersTurn;
         Monsters mob = GetMonsterPlayerAttacked(mobAttacked);
-        Debug.Log("on player attack. Key: " + roomNav.currentRoom.roomCode + " Value: " + mob.ToString());
         weaponUsed = WeaponUsed();
         var toHit = character.Attack.Value / (character.Attack.Value + mob.monsterDefense);
-        Debug.Log("percentage to hit: " + toHit);
+
         // random roll to see if hit is made
         var rollToHit = Random.Range(0f, 1f);
-        Debug.Log("Random roll: " + rollToHit);
 
         if(rollToHit < toHit)
         {
@@ -118,26 +112,46 @@ public class CombatManager : MonoBehaviour {
 
             if (WeaponUsed())
             {
-                controller.LogStringWithoutReturn("You hit " + mobAttacked + " with your " + weaponUsed.itemName
-                    + " for " + totalDamageDone + " damage.");
-                DamageMob(mob, totalDamageDone);
-                CheckMobDamageStatus(mob);
+                if (playerCrit)
+                {
+                    controller.LogStringWithoutReturn("<color=#ff0000ff>You <b>CRITICALLY HIT</b> " + mobAttacked +
+                        " with your " + weaponUsed.itemName + " for " + totalDamageDone + " damage.</color>");
+                    DamageMob(mob, totalDamageDone);
+                    CheckMobDamageStatus(mob);
+                }
+                else
+                {
+                    controller.LogStringWithoutReturn("<color=#ff0000ff>You hit " + mobAttacked + " with your " +
+                        weaponUsed.itemName + " for " + totalDamageDone + " damage.</color>");
+                    DamageMob(mob, totalDamageDone);
+                    CheckMobDamageStatus(mob);
+                }
             }
             else
             {
-                controller.LogStringWithoutReturn("You punch " + mobAttacked + " for " + totalDamageDone + " damage.");
-                DamageMob(mob, totalDamageDone);
-                CheckMobDamageStatus(mob);
+                if (playerCrit)
+                {
+                    controller.LogStringWithoutReturn("<color=#ff0000ff>You CRITICALLY punch " + mobAttacked + " for " +
+                        totalDamageDone + " damage.</color>");
+                    DamageMob(mob, totalDamageDone);
+                    CheckMobDamageStatus(mob);
+                }
+                else
+                {
+                    controller.LogStringWithoutReturn("<color=#ff0000ff>You punch " + mobAttacked + " for " + totalDamageDone +
+                        " damage.</color>");
+                    DamageMob(mob, totalDamageDone);
+                    CheckMobDamageStatus(mob);
+                }
             }
-
-            // Debug.Log("Total damage dealt: " + totalDamageDone);
         }
         else
         {
             // missed
             controller.LogStringWithoutReturn("You missed the " + mobAttacked + ".");
-            // Debug.Log("missed");
         }
+        combatState = CombatState.MonstersTurn;
+        CombatStateMachine("");
     }
 
     private void CheckMobDamageStatus(Monsters mob)
@@ -148,22 +162,22 @@ public class CombatManager : MonoBehaviour {
         if (mobCurrentHeath < mobMaxHealth && mobCurrentHeath >= mobMaxHealth * .75f)
         {
             // mob is slightly wounded
-            controller.LogStringWithoutReturn(mob.monsterName + " is slightly wounded.");
+            controller.LogStringWithoutReturn(mob.monsterName + " is <color=#00ff00ff>slightly</color> wounded.");
         }
         else if (mobCurrentHeath < mobMaxHealth * .75f && mobCurrentHeath >= mobMaxHealth * .5f)
         {
             // mob is moderately wounded
-            controller.LogStringWithoutReturn(mob.monsterName + " is moderately wounded.");
+            controller.LogStringWithoutReturn(mob.monsterName + " is <color=#ffff00ff>moderately</color> wounded.");
         }
         else if (mobCurrentHeath < mobMaxHealth * .5f && mobCurrentHeath >= mobMaxHealth * .25f)
         {
             // mob is seriously wounded
-            controller.LogStringWithoutReturn(mob.monsterName + " is seriously wounded.");
+            controller.LogStringWithoutReturn(mob.monsterName + " is <color=#ffa500ff>seriously</color> wounded.");
         }
         else if (mobCurrentHeath < mobMaxHealth * .25f && mobCurrentHeath >= 1f)
         {
             // mob is severly wounded
-            controller.LogStringWithoutReturn(mob.monsterName + " is severly wounded.");
+            controller.LogStringWithoutReturn(mob.monsterName + " is <color=#ff0000ff>severly</color> wounded.");
         }
         else
         {
@@ -172,7 +186,7 @@ public class CombatManager : MonoBehaviour {
 
             GetExperience(mob);
             GetLootDrops(mob);            
-            RemoveMobFromRoom(mob);
+            RemoveMobFromRoom(mob);            
         }
     }
 
@@ -184,12 +198,7 @@ public class CombatManager : MonoBehaviour {
             {
                 controller.mobsInTheRoom.Remove(mob);                              
                     
-                Destroy(mob.transform.gameObject);
-
-                if (controller.mobsInTheRoom.Count <= 0)
-                {
-                    roomNav.currentRoom.mobsAlreadySpawned = false;
-                }
+                Destroy(mob.transform.gameObject);                
             }
         }
 
@@ -203,7 +212,7 @@ public class CombatManager : MonoBehaviour {
                 controller.mobsSpawnedInRoom.RemoveAt(x);
                 break;
             }
-        }
+        }        
     }
 
     private void GetExperience(Monsters mob)
@@ -291,17 +300,64 @@ public class CombatManager : MonoBehaviour {
 
     public void MonstersAttack()
     {
-        combatState = CombatState.MonstersTurn;        
+        foreach (var mob in controller.mobsInTheRoom)
+        {
+            var toHit = mob.monsterAttack / (mob.monsterAttack + character.Defense.Value);
+
+            var rollToHit = Random.Range(0f, 1f);
+
+            if (rollToHit < toHit)
+            {
+                // hit successful
+                bool monsterCrit = CalculateMonstersCrit();
+                float totalDamageDone = CalculateMonstersDamage();
+
+                if (monsterCrit)
+                {
+                    controller.LogStringWithoutReturn("<color=#ff0000ff>The " + mob.monsterName +
+                        "<b>CRITICALLY HITS</b> you for " + totalDamageDone + " damage.</color>");
+                    DamagePlayer(totalDamageDone);
+                }
+                else
+                {
+                    controller.LogStringWithoutReturn("<color=#ff0000ff>The " + mob.monsterName +
+                        " hits you for " + totalDamageDone + " damage.</color>");
+                    DamagePlayer(totalDamageDone);
+                }
+            }
+            else
+            {
+                controller.LogStringWithoutReturn("The " + mob.monsterName +
+                        " misses you.");
+            }
+        }        
     }
 
-    public void CalculateMonstersDamage()
+    private void DamagePlayer(float totalDamageDone)
     {
 
     }
 
-    public void CalculateMonstersCrit()
+    public float CalculateMonstersDamage()
     {
+        return 0;
+    }
 
+    public bool CalculateMonstersCrit()
+    {
+        // For now, all enemies have a 5% chance to crit. May redo this feature at some point
+
+        var monsterCritChance = 5f;
+        var critRoll = Random.Range(1, 100);
+
+        if (critRoll <= monsterCritChance)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void GetLootDrops(Monsters mob)

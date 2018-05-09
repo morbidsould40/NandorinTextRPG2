@@ -53,9 +53,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterName: Zombie
   monsterKeyword: zombie
-  monsterID: Zombie854731
+  monsterID: Zombie867167
   monsterDescription: 
   monsterType: undead
+  monsterLevel: 0
   spawnChance: 60
   goldDropChance: 80
   goldDroppedMin: 1
@@ -69,5 +70,5 @@ MonoBehaviour:
   monsterCurrentMana: 0
   monsterMaxMana: 0
   monsterAttack: 6
-  monsterDefense: 7
+  monsterDefense: 3
   monsterAttacks: []
