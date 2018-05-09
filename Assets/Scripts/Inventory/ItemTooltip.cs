@@ -6,6 +6,7 @@ public class ItemTooltip : MonoBehaviour {
 
     [SerializeField] Text ItemNameText;
     [SerializeField] Text ItemSlotText;
+    [SerializeField] Text ItemSlotSpecialText;
     [SerializeField] Text ItemStatsText;
 
     private StringBuilder sb = new StringBuilder();
@@ -28,6 +29,31 @@ public class ItemTooltip : MonoBehaviour {
             ItemNameText.text = "<color=#ffa500ff>" + item.itemName + "</Color>";
 
         ItemSlotText.text = item.equipmentType.ToString();
+
+        ItemSlotSpecialText.text = "";
+        
+        if (item.itemType == Items.ItemType.Armor)
+        {
+            var newItem = item as Armor;
+            ItemSlotSpecialText.text = newItem.armorType.ToString();           
+        }
+
+        if (item.itemType == Items.ItemType.Weapon)
+        {
+            var newItem = item as Weapons;
+            var weaponHand = newItem.weaponHandType.ToString();
+
+            if (weaponHand == Weapons.WeaponHandType.OneHanded.ToString())            
+                weaponHand = "One-Handed";
+            
+            if (weaponHand == Weapons.WeaponHandType.TwoHanded.ToString())
+                weaponHand = "Two-Handed";
+
+            if (weaponHand == Weapons.WeaponHandType.MagicUserOnly.ToString())
+                weaponHand = "Magic User Only";
+
+            ItemSlotSpecialText.text = weaponHand + " " + newItem.damageType.ToString();
+        }
 
         sb.Length = 0;
 

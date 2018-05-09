@@ -17,6 +17,7 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 20361b72fa11c944aad7b90e03c19acd, type: 3}
   itemCost: 10
   itemWeight: 5
+  itemType: 1
   rarity: 0
   isUnique: 0
   isDroppable: 1

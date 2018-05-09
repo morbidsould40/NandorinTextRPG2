@@ -15,6 +15,12 @@ public class Items : ScriptableObject {
     public int itemCost;
     public float itemWeight;
 
+    public enum ItemType
+    {
+        Accessory, Armor, Crafting, Item, Potion, Weapon
+    }
+    public ItemType itemType;
+
     public enum Rarity
     {
         Common, Uncommon, Rare, Epic, Relic, Artifact
