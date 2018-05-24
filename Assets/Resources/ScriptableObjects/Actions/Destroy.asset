@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Name: Destroy
   m_EditorClassIdentifier: 
   keyWord: destroy
+  description: Usage - destroy <item name> - Used to destroy an item from your inventory.
+    This item is permanently lost.

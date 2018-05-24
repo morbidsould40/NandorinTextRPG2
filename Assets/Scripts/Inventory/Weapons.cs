@@ -7,7 +7,6 @@ public class Weapons : EquippableItems {
 
     public float weaponMinDamage;
     public float weaponMaxDamage;
-    public float weaponAttack;
 
     public enum WeaponType
     {
@@ -17,7 +16,7 @@ public class Weapons : EquippableItems {
 
     public enum WeaponHandType
     {
-        OneHanded, TwoHanded, MagicUserOnly
+        OneHanded, TwoHanded
     }
     public WeaponHandType weaponHandType;
 

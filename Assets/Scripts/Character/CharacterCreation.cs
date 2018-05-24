@@ -12,7 +12,6 @@ public class CharacterCreation : MonoBehaviour {
     public Player player;
     public Room startingRoom;
 
-    private BaseCharacter baseCharacter;
     private BasePlayer newPlayer;
         
     private void Start()

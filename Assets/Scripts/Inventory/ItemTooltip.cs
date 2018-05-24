@@ -49,9 +49,6 @@ public class ItemTooltip : MonoBehaviour {
             if (weaponHand == Weapons.WeaponHandType.TwoHanded.ToString())
                 weaponHand = "Two-Handed";
 
-            if (weaponHand == Weapons.WeaponHandType.MagicUserOnly.ToString())
-                weaponHand = "Magic User Only";
-
             ItemSlotSpecialText.text = weaponHand + " " + newItem.damageType.ToString();
         }
 
@@ -63,6 +60,13 @@ public class ItemTooltip : MonoBehaviour {
         AddStat(item.magicBonus, "Magic");
         AddStat(item.attackBonus, "Attack");
         AddStat(item.defenseBonus, "Defense");
+        AddStat(item.healthBonus, "Health");
+        AddStat(item.manaBonus, "Mana");
+        AddStat(item.staminaBonus, "Stamina");
+        AddStat(item.resistanceBonus, "Resistance");
+        AddStat(item.damageBonus, "Damage");
+        AddStat(item.critChanceBonus, "Crit Chance");
+        AddStat(item.multiAttackChanceBonus, "Multi-Attack Chance");
 
         AddStat(item.strengthPercentBonus, "Strength", isPercent: true);
         AddStat(item.agilityPercentBonus, "Agility", isPercent: true);
@@ -70,6 +74,13 @@ public class ItemTooltip : MonoBehaviour {
         AddStat(item.magicPercentBonus, "Magic", isPercent: true);
         AddStat(item.attackPercentBonus, "Attack", isPercent: true);
         AddStat(item.defensePercentBonus, "Defense", isPercent: true);
+        AddStat(item.healthPercentBonus, "Health", isPercent: true);
+        AddStat(item.manaPercentBonus, "Mana", isPercent: true);
+        AddStat(item.staminaPercentBonus, "Stamina", isPercent: true);
+        AddStat(item.resistancePercentBonus, "Resistance", isPercent: true);
+        AddStat(item.damagePercentBonus, "Damage", isPercent: true);
+        AddStat(item.critChancePercentBonus, "Crit Chance", isPercent: true);
+        AddStat(item.multiAttackChancePercentBonus, "Multi-Attack Chance", isPercent: true);
 
         ItemStatsText.text = sb.ToString();
 

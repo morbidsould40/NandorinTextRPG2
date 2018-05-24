@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Name: Sell
   m_EditorClassIdentifier: 
   keyWord: sell
+  description: Usage - sell <item name> - Used to sell an item while in a shop for
+    1/2 it's original gold cost.

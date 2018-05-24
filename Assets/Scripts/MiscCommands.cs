@@ -2,28 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackableMobs : MonoBehaviour {
+public class MiscCommands : MonoBehaviour {
 
-    CombatManager combatManager;
     GameController controller;
 
-    void Awake ()
+    private void Start()
     {
-        combatManager = GetComponent<CombatManager>();
         controller = GetComponent<GameController>();
-	}
+    }
 
-    public void ExamineKeyword(string[] keywordNoun)
+    public void ExamineKeyword(string[] keyword)
     {
-        if (keywordNoun.Length > 1)
+        if (keyword[0] == "quit")
         {
-            combatManager.combatState = CombatManager.CombatState.StartCombat;
-            var result = GetItemKeyword(keywordNoun);
-            combatManager.CombatStateMachine(result);
+            Application.Quit();
         }
-        else
+
+        if (keyword[0] == "commands")
         {
-            controller.LogStringWithReturn("You must include what to attack in your command.");
+            var commands = Resources.LoadAll<InputAction>("ScriptableObjects/Actions");
+            foreach (var command in commands)
+            {
+                controller.LogStringWithoutReturn("<color=#ffff00ff><b>" + command.name + "</b></color>: " + command.description);
+            }
         }
     }
 

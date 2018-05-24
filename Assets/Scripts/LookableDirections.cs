@@ -27,7 +27,7 @@ public class LookableDirections : MonoBehaviour {
         {
             controller.LogStringWithReturn("You do not see anything <b> " + directionNoun + "</b>.");
         }        
-        // TODO once mobs and other players are implemented, also show them in the room being looked into
+        // TODO once mobs are implemented, also show them in the room being looked into??
     }
 
 }

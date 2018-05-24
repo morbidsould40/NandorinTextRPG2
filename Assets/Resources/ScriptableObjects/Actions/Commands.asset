@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Name: Commands
   m_EditorClassIdentifier: 
   keyWord: commands
+  description: Usage - commands - this list.

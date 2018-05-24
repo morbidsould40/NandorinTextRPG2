@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Name: Go
   m_EditorClassIdentifier: 
   keyWord: go
+  description: Usage - go <direction> - Used to move around the gane. Each room will
+    tell you what directions you may move. Some exits may be hidden or require special
+    items to go through such as keys.

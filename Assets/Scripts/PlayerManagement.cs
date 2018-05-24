@@ -19,32 +19,41 @@ public class PlayerManagement : MonoBehaviour {
     public float maxHealth;
     public float maxMana;
     public float maxStamina;
+    public bool isPlayerInCombat = false;
 
     Player player;
-    Character character;    
+    Character character;
+    CombatManager combatManager;
 
     void Start ()
     {
         character = FindObjectOfType<Character>();
         player = FindObjectOfType<Player>();
+        combatManager = GetComponent<CombatManager>();
         playerName.text = player.PlayerName;
         playerClass.text = player.PlayerClass;
         playerLevel.text = player.PlayerLevel.ToString();
         playerExp.text = player.PlayerCurrentExperience.ToString();
-        playerGold.text = player.PlayerGold.ToString();
+        playerGold.text = player.PlayerGold.ToString();        
+        CalculateStartingStats();
+        StartCoroutine(RegenerateHealth());
     }
-	
-	void Update ()
+
+    void Update ()
+    {
+        healthBar.UpdateBar(currentHealth, maxHealth);
+        manaBar.UpdateBar(currentMana, maxMana);
+        staminaBar.UpdateBar(currentStamina, maxStamina);
+    }
+
+    private void CalculateStartingStats()
     {
         CalculateMaxHealth();
         CalculateMaxMana();
         CalculateMaxStamina();
-        currentHealth = player.PlayerCurrentHealth;
-        currentMana = player.PlayerCurrentMana;
-        currentStamina = player.PlayerCurrentStamina;
-        healthBar.UpdateBar(currentHealth, maxHealth);
-        manaBar.UpdateBar(currentMana, maxMana);
-        staminaBar.UpdateBar(currentStamina, maxStamina);
+        currentHealth = maxHealth;
+        currentMana = maxMana;
+        currentStamina = maxStamina;
     }
 
     public void CalculateMaxStamina()
@@ -95,10 +104,12 @@ public class PlayerManagement : MonoBehaviour {
         {
             player.PlayerCurrentExperience += value;
             CheckIfPlayerLeveled(player.PlayerCurrentExperience);
+            playerExp.text = player.PlayerCurrentExperience.ToString();
         }
-        else
+        else 
         {
             player.PlayerCurrentExperience = 1;
+            playerExp.text = player.PlayerCurrentExperience.ToString();
         }
     }
 
@@ -107,5 +118,26 @@ public class PlayerManagement : MonoBehaviour {
         // check if the amount of exp the player has exceeds the amount needed for next level
     }
 
-
+    IEnumerator RegenerateHealth()
+    {
+        while (true)
+        {
+            if (!isPlayerInCombat)
+            {
+                if (currentHealth < maxHealth)
+                {
+                    currentHealth += 2;
+                    yield return new WaitForSecondsRealtime(6);
+                }
+                else
+                {
+                    yield return null;
+                }
+            }
+            else
+            {
+                yield return null;
+            }
+        }
+    }
 }

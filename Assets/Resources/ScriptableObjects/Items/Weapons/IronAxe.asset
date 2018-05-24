@@ -40,10 +40,9 @@ MonoBehaviour:
   maxDamageBonus: 0
   critChanceBonus: 0
   multiAttackChanceBonus: 0
-  equipmentType: 13
+  equipmentType: 11
   weaponMinDamage: 1
   weaponMaxDamage: 4
-  weaponAttack: 5
   weaponType: 0
   weaponHandType: 0
   damageType: 1

@@ -13,11 +13,13 @@ public class RoomNavigation : MonoBehaviour
     
     GameController controller;
     Character character;
+    PlayerManagement playerManagement;
     
     private void Awake()
     {
         controller = GetComponent<GameController>();
         character = FindObjectOfType<Character>();
+        playerManagement = GetComponent<PlayerManagement>();
     }
 
     private void Start()
@@ -47,35 +49,55 @@ public class RoomNavigation : MonoBehaviour
         }
     }
 
-    public void AttemptToChangeRooms(string directionNoun)
+    public void AttemptToChangeRooms(string[] directionNoun)
     {
         // if there is an exit in the direction the player typed
-        if (exitDictionary.ContainsKey(directionNoun))
+        if (directionNoun.Length > 1)
         {
-            if (controller.mustFleeToMove)
+            if (exitDictionary.ContainsKey(directionNoun[1]))
             {
-                if (AttemptToFleeRoom(directionNoun))
+                if (controller.mustFleeToMove)
                 {
-                    ChangeRooms(directionNoun);
+                    if (AttemptToFleeRoom(directionNoun[1]))
+                    {
+                        ChangeRooms(directionNoun[1]);
+                    }
+                    else
+                    {
+                        // mobs attack first then player flees to choosen room
+                        ChangeRooms(directionNoun[1]);
+                    }
                 }
                 else
                 {
-                    // mobs attack first then player flees to choosen room
-                    ChangeRooms(directionNoun);
+                    ChangeRooms(directionNoun[1]);
                 }
             }
             else
             {
-                ChangeRooms(directionNoun);
+                controller.LogStringWithReturn("There is no exit labelled " + directionNoun);
             }
         }
         else
         {
-            controller.LogStringWithReturn("There is no exit to the " + directionNoun);
+            controller.LogStringWithReturn("You must include a direction to go in your command.");
         }
     }
 
     private void ChangeRooms(string directionNoun)
+    {
+        RemoveInstantiatedMobs();
+
+        playerManagement.isPlayerInCombat = false;
+        currentRoom = exitDictionary[directionNoun];
+        controller.LogStringWithReturn("You head to the " + directionNoun);
+        player.CurrentRoom = currentRoom;
+        player.PlayerCurrentRoom = currentRoom.roomCode;
+        controller.SpawnMobPrefabs();
+        controller.DisplayRoomText();
+    }
+
+    public void RemoveInstantiatedMobs()
     {
         GameObject[] enemyMobObjects = GameObject.FindGameObjectsWithTag("Enemy");
 
@@ -83,14 +105,7 @@ public class RoomNavigation : MonoBehaviour
         {
             Destroy(mob);
         }
-
-        currentRoom = exitDictionary[directionNoun];
-        controller.LogStringWithReturn("You head to the " + directionNoun);
-        player.CurrentRoom = currentRoom;
-        player.PlayerCurrentRoom = currentRoom.roomCode;
-        controller.SpawnMobPrefabs();
-        controller.DisplayRoomText();             
-    }   
+    }
 
     private bool AttemptToFleeRoom(string directionNoun)
     {
@@ -112,7 +127,6 @@ public class RoomNavigation : MonoBehaviour
             controller.LogStringWithReturn("You managed to flee, but not before your enemies attack!");
             return false;
         }
-
     }
 
     // clear all dictionaries to prepare for next room population

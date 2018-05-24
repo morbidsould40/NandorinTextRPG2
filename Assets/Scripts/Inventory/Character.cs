@@ -10,12 +10,15 @@ public class Character : MonoBehaviour {
     public CharacterStats Magic;
     public CharacterStats Attack;
     public CharacterStats Defense;
-
+    public CharacterStats Resistance;
+    public CharacterStats DamageBonus;
+    public CharacterStats CritChance;
+    public CharacterStats MultiAttackChance;
+    [HideInInspector] public PlayerManagement playerManagement;
+    [HideInInspector] public Player player;    
     [SerializeField] InventoryWindow inventory;
     [SerializeField] EquipmentPanel equipmentPanel;
     [SerializeField] StatPanel statPanel;
-
-    Player player;
 
     private void Awake()
     {
@@ -26,6 +29,7 @@ public class Character : MonoBehaviour {
     private void Start()
     {
         player = FindObjectOfType<Player>();
+        playerManagement = FindObjectOfType<PlayerManagement>();
 
         Strength.BaseValue = player.PlayerStrength;
         Agility.BaseValue = player.PlayerAgility;
@@ -33,6 +37,9 @@ public class Character : MonoBehaviour {
         Magic.BaseValue = player.PlayerMagic;        
         Attack.BaseValue = CalculateAttack();
         Defense.BaseValue = CalculateDefense();
+        Resistance.BaseValue = 0; // TODO Need to come up with formula for resistance
+        DamageBonus.BaseValue = ((player.PlayerStrength / 5) * player.PlayerLevel);
+        CritChance.BaseValue = ((player.PlayerAgility / 10) * player.PlayerLevel);
 
         statPanel.SetStats(Strength, Agility, Endurance, Magic, Attack, Defense);
         statPanel.UpdateStatValues();
@@ -107,5 +114,4 @@ public class Character : MonoBehaviour {
         totalDefense = Strength.Value / 5;
         return (float)Math.Round(totalDefense, 2);
     }
-
 }

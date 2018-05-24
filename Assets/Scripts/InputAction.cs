@@ -7,6 +7,8 @@ public abstract class InputAction : ScriptableObject
 {
 
     public string keyWord;
+    [TextArea]
+    public string description;
 
     public abstract void RespondToInput(GameController controller, string[] seperatedInputWords);
 }

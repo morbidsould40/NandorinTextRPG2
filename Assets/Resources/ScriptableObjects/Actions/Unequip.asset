@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Name: Unequip
   m_EditorClassIdentifier: 
   keyWord: unequip
+  description: Usage - unequip <item name> - Used to unequip an item from your equipped
+    window to your inventory.

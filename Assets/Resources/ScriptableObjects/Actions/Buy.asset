@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Name: Buy
   m_EditorClassIdentifier: 
   keyWord: buy
+  description: Usage - buy <item name> - Used to buy an item from a shop.

@@ -4,8 +4,8 @@ public class CombatManager : MonoBehaviour {
 
     public Player player;
     public GameController controller;
-    [SerializeField] float critDamageMultiplier = 1.5f;
-    public bool playerInCombat = false;
+    public float critDamageMultiplier = 1.5f;
+    public Room currentRespawnRoom;
 
     Character character;
     EquipmentPanel equipmentPanel;
@@ -43,22 +43,21 @@ public class CombatManager : MonoBehaviour {
     {
         switch (combatState)
         {
-            case CombatState.StartCombat:
-                // TODO turn off auto heal once that function is implemented
-                Debug.Log(combatState);
-                playerInCombat = true;
+            case CombatState.StartCombat:                
+                Debug.Log(combatState);                
                 combatState = CombatState.PlayersTurn;
                 CombatStateMachine(mobToAttack);
                 break;
             case CombatState.PlayersTurn:
-                Debug.Log(combatState);                
-                PlayerAttack(mobToAttack);
+                Debug.Log(combatState);
+                PlayerAttack(mobToAttack);                               
                 break;
             case CombatState.MonstersTurn:
                 Debug.Log("Monsters turn to attack");
                 MonstersAttack();
                 break;
             case CombatState.PlayerDead:
+                OnPlayerDeath();
                 break;
             case CombatState.EndCombat:
                 break;
@@ -67,6 +66,21 @@ public class CombatManager : MonoBehaviour {
             default:
                 break;
         }
+    }
+
+    private void OnPlayerDeath()
+    {
+        controller.LogStringWithReturn("\n <color=#ff0000ff>YOU HAVE DIED! You will lose 10% of your experience and " +
+                            "respawn in the nearest temple.</color>");
+        controller.DisplayLoggedText();
+        roomNav.currentRoom = currentRespawnRoom;
+        roomNav.RemoveInstantiatedMobs();
+        playerManagement.currentHealth = playerManagement.maxHealth;
+        var experienceLoss = player.PlayerCurrentExperience * .9;
+        playerManagement.UpdatePlayerExperience((int)experienceLoss);
+        playerManagement.playerExp.text = experienceLoss.ToString();
+        controller.DisplayRoomText();
+        controller.DisplayLoggedText();
     }
 
     // checks to see what the player typed in to attack and grabs the first mob in the room that matches
@@ -80,14 +94,14 @@ public class CombatManager : MonoBehaviour {
 
             if (enemyMob.monsterKeyword == mobAttacked)
             {
-                return enemyMob;
+                return enemyMob;                
             }
         }
 
         return null;
     }
 
-    ////////
+    ///////
     // Attack formula for both players and monsters is atk / (atk + def) where both atk's are attackers attack and def is defenders defense
     // This should scale pretty decent and will almost never result in a 100% chance to hit
     //
@@ -95,63 +109,65 @@ public class CombatManager : MonoBehaviour {
     ///////
 
     public void PlayerAttack(string mobAttacked)
-    {
-        combatState = CombatState.PlayersTurn;
+    {        
         Monsters mob = GetMonsterPlayerAttacked(mobAttacked);
-        weaponUsed = WeaponUsed();
-        var toHit = character.Attack.Value / (character.Attack.Value + mob.monsterDefense);
-
-        // random roll to see if hit is made
-        var rollToHit = Random.Range(0f, 1f);
-
-        if(rollToHit < toHit)
+        if (mob != null)
         {
-            // hit successful
-            bool playerCrit = CalculatePlayerCrit();
-            float totalDamageDone = CalculatePlayerDamage(playerCrit);
+            weaponUsed = WeaponUsed();
+            var toHit = character.Attack.Value / (character.Attack.Value + mob.monsterDefense);
 
-            if (WeaponUsed())
+            // random roll to see if hit is made
+            var rollToHit = Random.Range(0f, 1f);
+
+            if (rollToHit < toHit)
             {
-                if (playerCrit)
+                // hit successful
+                bool playerCrit = CalculatePlayerCrit();
+                float totalDamageDone = CalculatePlayerDamage(playerCrit);
+
+                if (WeaponUsed())
                 {
-                    controller.LogStringWithoutReturn("<color=#ff0000ff>You <b>CRITICALLY HIT</b> " + mobAttacked +
-                        " with your " + weaponUsed.itemName + " for " + totalDamageDone + " damage.</color>");
-                    DamageMob(mob, totalDamageDone);
-                    CheckMobDamageStatus(mob);
+                    if (playerCrit)
+                    {
+                        controller.LogStringWithoutReturn("<color=#ff0000ff>You <b>CRITICALLY HIT</b> " + mobAttacked +
+                            " with your " + weaponUsed.itemName + " for " + totalDamageDone + " damage.</color>");
+                        DamageMob(mob, totalDamageDone);
+                    }
+                    else
+                    {
+                        controller.LogStringWithoutReturn("<color=#ff0000ff>You hit " + mobAttacked + " with your " +
+                            weaponUsed.itemName + " for " + totalDamageDone + " damage.</color>");
+                        DamageMob(mob, totalDamageDone);
+                    }
                 }
                 else
                 {
-                    controller.LogStringWithoutReturn("<color=#ff0000ff>You hit " + mobAttacked + " with your " +
-                        weaponUsed.itemName + " for " + totalDamageDone + " damage.</color>");
-                    DamageMob(mob, totalDamageDone);
-                    CheckMobDamageStatus(mob);
+                    if (playerCrit)
+                    {
+                        controller.LogStringWithoutReturn("<color=#ff0000ff>You CRITICALLY punch " + mobAttacked + " for " +
+                            totalDamageDone + " damage.</color>");
+                        DamageMob(mob, totalDamageDone);
+                    }
+                    else
+                    {
+                        controller.LogStringWithoutReturn("<color=#ff0000ff>You punch " + mobAttacked + " for " + totalDamageDone +
+                            " damage.</color>");
+                        DamageMob(mob, totalDamageDone);
+                    }
                 }
             }
             else
             {
-                if (playerCrit)
-                {
-                    controller.LogStringWithoutReturn("<color=#ff0000ff>You CRITICALLY punch " + mobAttacked + " for " +
-                        totalDamageDone + " damage.</color>");
-                    DamageMob(mob, totalDamageDone);
-                    CheckMobDamageStatus(mob);
-                }
-                else
-                {
-                    controller.LogStringWithoutReturn("<color=#ff0000ff>You punch " + mobAttacked + " for " + totalDamageDone +
-                        " damage.</color>");
-                    DamageMob(mob, totalDamageDone);
-                    CheckMobDamageStatus(mob);
-                }
+                // missed
+                controller.LogStringWithoutReturn("You missed the " + mobAttacked + ".");
             }
+            combatState = CombatState.MonstersTurn;
+            CombatStateMachine("");
         }
         else
         {
-            // missed
-            controller.LogStringWithoutReturn("You missed the " + mobAttacked + ".");
+            controller.LogStringWithoutReturn("There isn't a <b>" + mobAttacked + "</b> here to attack.");
         }
-        combatState = CombatState.MonstersTurn;
-        CombatStateMachine("");
     }
 
     private void CheckMobDamageStatus(Monsters mob)
@@ -183,75 +199,35 @@ public class CombatManager : MonoBehaviour {
         {
             // mob is dead
             controller.LogStringWithoutReturn(mob.monsterName + " has been killed.");
-
-            GetExperience(mob);
-            GetLootDrops(mob);            
-            RemoveMobFromRoom(mob);            
         }
-    }
-
-    private void RemoveMobFromRoom(Monsters mob)
-    {
-        for (int i = 0; i <= controller.mobsInTheRoom.Count; i++)
-        {
-            if (mob.monsterCurrentHealth <= 0)
-            {
-                controller.mobsInTheRoom.Remove(mob);                              
-                    
-                Destroy(mob.transform.gameObject);                
-            }
-        }
-
-        for (int x = 0; x <= controller.mobsSpawnedInRoom.Count; x++)
-        {
-            var key = controller.mobsSpawnedInRoom[x].Key.ToString();
-            var value = controller.mobsSpawnedInRoom[x].Value.ToString();
-
-            if (roomNav.currentRoom.roomCode == key && mob.ToString() == value)
-            {
-                controller.mobsSpawnedInRoom.RemoveAt(x);
-                break;
-            }
-        }        
-    }
-
-    private void GetExperience(Monsters mob)
-    {
-        playerManagement.UpdatePlayerExperience(mob.monsterExperience);
-    }
-
-    private void DamageMob(Monsters mobAttacked, float totalDamageDone)
-    {
-        mobAttacked.monsterCurrentHealth -= totalDamageDone;
-        
-        Debug.Log(mobAttacked.monsterCurrentHealth);
     }
 
     private Weapons WeaponUsed()
     {
         for (int i = 0; i < equipmentSlots.Length; i++)
         {
-            if (equipmentSlots[i].equipmentType == EquipmentType.Weapon1)
+            if (equipmentSlots[i].equipmentType == EquipmentType.Weapon)
             {
                 var weapon = (Weapons)equipmentSlots[i].Item;
                 return weapon;
             }            
         }
+
         return null;        
     }
 
     public float CalculatePlayerDamage(bool playerCrit)
     {
         // calculate player bonus damage ((str / 5) * level)
-        float playerDamageBonus = ((player.PlayerStrength / 5) * player.PlayerLevel);
-        Debug.Log("Player Damage Bonus: " + playerDamageBonus);
+        float playerDamageBonus = character.DamageBonus.Value;
+        Debug.Log("Player damage bonus before weapon: " + playerDamageBonus);
         
         weaponUsed = WeaponUsed();        
 
         // Get the weapon the player is using to calculate weapon damage
         if (WeaponUsed())
         {
-            Debug.Log(weaponUsed.itemName);
+            Debug.Log("Weapon player is using to attack: " + weaponUsed.itemName);
             int minWeaponDamage = (int)weaponUsed.weaponMinDamage;
             int maxWeaponDamage = (int)weaponUsed.weaponMaxDamage;
             Debug.Log("MinDamage: " + minWeaponDamage + " | MaxDamage: " + maxWeaponDamage);
@@ -266,25 +242,23 @@ public class CombatManager : MonoBehaviour {
         if (playerCrit)
         {
             // Calculate damage and multiply it by critDamageModifier
-            var damageDealt = ((weaponDamage + playerDamageBonus) * critDamageMultiplier); // TODO set up damage formula
+            var damageDealt = ((weaponDamage + playerDamageBonus) * critDamageMultiplier); 
             controller.LogStringWithoutReturn("CRITICAL STRIKE!");
-            return damageDealt;
+            return (int)damageDealt;
         }
         else
         {
             // Calculate Damage normally
-            var damageDealt = weaponDamage + playerDamageBonus; // TODO set up damage formula            
-            return damageDealt;
+            var damageDealt = weaponDamage + playerDamageBonus;             
+            return (int)damageDealt;
         }
     }
 
     public bool CalculatePlayerCrit()
     {
-        // ((agility / 25) * currentLevel)
-        var playerCritChance = ((player.PlayerAgility / 10) * player.PlayerLevel);
-        Debug.Log("Crit Chane: " + playerCritChance);
+        var playerCritChance = character.CritChance.Value;
         var critRoll = Random.Range(1, 100);
-        Debug.Log("Random crit roll: " + critRoll);
+        Debug.Log("Crit Chane: " + playerCritChance + " | Random crit roll: " + critRoll);
 
         if (critRoll <= playerCritChance)
         {
@@ -298,6 +272,24 @@ public class CombatManager : MonoBehaviour {
         }
     }
 
+    private void DamageMob(Monsters mobAttacked, float totalDamageDone)
+    {
+        mobAttacked.monsterCurrentHealth -= totalDamageDone;
+
+        CheckMobDamageStatus(mobAttacked);
+
+        if (mobAttacked.monsterCurrentHealth <= 0)
+        {
+            Debug.Log("this script is firing");
+            GetExperience(mobAttacked);
+            GetLootDrops(mobAttacked);
+            RemoveMobFromRoom(mobAttacked);
+            controller.LogStringWithReturn("");
+            controller.DisplayRoomText();
+            controller.DisplayLoggedText();
+        }
+    }
+
     public void MonstersAttack()
     {
         foreach (var mob in controller.mobsInTheRoom)
@@ -305,17 +297,17 @@ public class CombatManager : MonoBehaviour {
             var toHit = mob.monsterAttack / (mob.monsterAttack + character.Defense.Value);
 
             var rollToHit = Random.Range(0f, 1f);
-
+            Debug.Log("Monster Hit Chance: " + toHit + " | Random Hit Roll: " + rollToHit);
             if (rollToHit < toHit)
             {
                 // hit successful
-                bool monsterCrit = CalculateMonstersCrit();
-                float totalDamageDone = CalculateMonstersDamage();
+                bool monsterCrit = CalculateMonstersCrit(mob);
+                float totalDamageDone = CalculateMonstersDamage(mob, monsterCrit);
 
                 if (monsterCrit)
                 {
                     controller.LogStringWithoutReturn("<color=#ff0000ff>The " + mob.monsterName +
-                        "<b>CRITICALLY HITS</b> you for " + totalDamageDone + " damage.</color>");
+                        "<b> CRITICALLY HITS</b> you for " + totalDamageDone + " damage.</color>");
                     DamagePlayer(totalDamageDone);
                 }
                 else
@@ -329,33 +321,50 @@ public class CombatManager : MonoBehaviour {
             {
                 controller.LogStringWithoutReturn("The " + mob.monsterName +
                         " misses you.");
-            }
+            }            
         }        
     }
 
     private void DamagePlayer(float totalDamageDone)
     {
-
+        playerManagement.currentHealth -= totalDamageDone;
     }
 
-    public float CalculateMonstersDamage()
+    public float CalculateMonstersDamage(Monsters mob, bool monsterCrit)
     {
-        return 0;
+        var chooseRandomAttack = Random.Range(0, mob.monsterAttacks.Length);
+        int monsterMinDamage = (int)mob.monsterAttacks[chooseRandomAttack].monsterMinDamage;
+        int monsterMaxDamage = (int)mob.monsterAttacks[chooseRandomAttack].monsterMaxDamage;
+        var monsterDamageDone = Random.Range(monsterMinDamage, monsterMaxDamage);
+
+        if (monsterCrit)
+        {
+            // Calculate damage and multiply it by critDamageModifier
+            var damageDealt = (monsterDamageDone * critDamageMultiplier);            
+            return (int)damageDealt;
+        }
+        else
+        {
+            // Calculate Damage normally
+            var damageDealt = monsterDamageDone;            
+            return (int)damageDealt;
+        }
     }
 
-    public bool CalculateMonstersCrit()
-    {
-        // For now, all enemies have a 5% chance to crit. May redo this feature at some point
-
-        var monsterCritChance = 5f;
+    public bool CalculateMonstersCrit(Monsters mob)
+    {       
+        var chooseRandomAttack = Random.Range(0, mob.monsterAttacks.Length);
+        var monsterCritChance = mob.monsterAttacks[chooseRandomAttack].monsterCritChance;
         var critRoll = Random.Range(1, 100);
 
         if (critRoll <= monsterCritChance)
         {
+            Debug.Log("Monster Crit = True");
             return true;
         }
         else
         {
+            Debug.Log("Monster Crit = False");
             return false;
         }
     }
@@ -365,16 +374,69 @@ public class CombatManager : MonoBehaviour {
 
     }
 
-    public bool IsPlayerDead()
+    private void RemoveMobFromRoom(Monsters mob)
     {
-        if (player.PlayerCurrentHealth <= 0)
+        Debug.Log("RemoveMobFromRoom: Mob Name: " + mob.monsterName + " Mob health: " + mob.monsterCurrentHealth);
+        controller.mobsInTheRoom.Remove(mob);
+        
+        //for (int i = 0; i <= controller.mobsInTheRoom.Count; i++)
+        //{
+        //    if (mob.monsterCurrentHealth <= 0) // TODO fix this as it is referencing the base creature not the
+        //                                       // instantiated creature and therefore not removing from the list
+        //    {
+        //        controller.mobsInTheRoom.Remove(mob);
+
+
+        //    }
+        //}
+
+        for (int x = 0; x <= controller.mobsSpawnedInRoom.Count; x++)
+        {
+            var key = controller.mobsSpawnedInRoom[x].Key.ToString();
+            var value = controller.mobsSpawnedInRoom[x].Value.ToString();
+
+            if (roomNav.currentRoom.roomCode == key && mob.ToString() == value)
+            {
+                controller.mobsSpawnedInRoom.RemoveAt(x);
+                break;
+            }
+        }
+
+        var mobCount = controller.mobsSpawnedInRoom.Count;
+        if (mobCount <= 0)
+        {
+            roomNav.currentRoom.mobsAlreadySpawned = false;
+        }
+
+        Destroy(mob.transform.gameObject);
+
+        DebugLists(mob);
+    }
+
+    private void DebugLists(Monsters mobs)
+    {
+        foreach (var mob in controller.mobsInTheRoom)
+        {
+            Debug.Log("name: " + mobs.monsterName + " health: " + mobs.monsterCurrentHealth);
+        }
+        foreach (var mob in controller.mobsSpawnedInRoom)
+        {
+            Debug.Log("room: " + mob.Key.ToString() + " mob: " + mob.Value.ToString());
+        }
+    }
+
+    private void GetExperience(Monsters mob)
+    {
+        playerManagement.UpdatePlayerExperience(mob.monsterExperience);
+    }
+
+    public void IsPlayerDead()
+    {
+        if (playerManagement.currentHealth <= 0)
         {
             combatState = CombatState.PlayerDead;
-            return true;
+            CombatStateMachine("");
         }
-        else
-        {
-            return false;
-        }
+
     }
 }

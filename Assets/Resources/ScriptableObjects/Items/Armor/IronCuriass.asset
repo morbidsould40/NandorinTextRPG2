@@ -28,18 +28,26 @@ MonoBehaviour:
   magicBonus: 0
   attackBonus: 0
   defenseBonus: 3
+  healthBonus: 0
+  manaBonus: 0
+  staminaBonus: 0
+  resistanceBonus: 10
+  damageBonus: 0
+  critChanceBonus: 0
+  multiAttackChanceBonus: 0
   strengthPercentBonus: 0
   agilityPercentBonus: 0
   endurancePercentBonus: 0
   magicPercentBonus: 0
   attackPercentBonus: 0
   defensePercentBonus: 0
-  healthBonus: 0
-  manaBonus: 0
-  minDamageBonus: 0
-  maxDamageBonus: 0
-  critChanceBonus: 0
-  multiAttackChanceBonus: 0
+  healthPercentBonus: 0
+  manaPercentBonus: 0
+  staminaPercentBonus: 0
+  resistancePercentBonus: 0
+  damagePercentBonus: 0
+  critChancePercentBonus: 0
+  multiAttackChancePercentBonus: 0
   equipmentType: 4
   armorDefense: 3
   armorType: 1

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 
 public class TextInput : MonoBehaviour
@@ -12,9 +13,7 @@ public class TextInput : MonoBehaviour
     private void Awake()
     {
         controller = GetComponent<GameController>();
-        //inputField.onEndEdit.AddListener(AcceptStringInput);
     }
-
 
     private void Update()
     {
@@ -33,13 +32,21 @@ public class TextInput : MonoBehaviour
         char[] delimiterCharacters = { ' ' };
         string[] seperatedInputWords = userInput.Split(delimiterCharacters);
 
+        bool wordFound = false;
         for (int i = 0; i < controller.inputActions.Length; i++)
         {
             InputAction inputAction = controller.inputActions[i];
             if (inputAction.keyWord == seperatedInputWords[0])
             {
                 inputAction.RespondToInput(controller, seperatedInputWords);
-            }
+                wordFound = true;
+            }           
+        }
+
+        if (!wordFound)
+        {
+            controller.LogStringWithReturn("You have entered an invalid command. Please type <b>commands</b> to see a list" +
+                    " of all available commands.");
         }
 
         InputComplete();

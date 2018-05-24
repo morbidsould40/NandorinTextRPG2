@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Name: Equip
   m_EditorClassIdentifier: 
   keyWord: equip
+  description: Usage - equip <item name> - used to equip an item from your inventory
+    into your equipped slot.

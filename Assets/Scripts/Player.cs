@@ -26,8 +26,6 @@ public class Player : MonoBehaviour
     [SerializeField] int playerGold;
     [SerializeField] Room currentRoom;
 
-    private RoomNavigation roomnav;
-
     public string PlayerName
     {
         get { return playerName; }

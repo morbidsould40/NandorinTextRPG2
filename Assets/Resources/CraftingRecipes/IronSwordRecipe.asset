@@ -8,8 +8,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcbd7712e0934054f9b0ed738e99ec5d, type: 3}
-  m_Name: List
+  m_Script: {fileID: 11500000, guid: e20b5c3424f9d5a48a788ce0109d8cfd, type: 3}
+  m_Name: IronSwordRecipe
   m_EditorClassIdentifier: 
-  keyWord: list
-  description: Usage - list - Used in shops to see what they have for sale.
+  Materials:
+  - Item: {fileID: 0}
+    Amount: 1
+  - Item: {fileID: 0}
+    Amount: 1
+  Results:
+  - Item: {fileID: 0}
+    Amount: 1

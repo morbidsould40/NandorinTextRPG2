@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,7 @@ public class GameController : MonoBehaviour
     [HideInInspector] public ExamaniableItems examinableItems;
     [HideInInspector] public LookableDirections lookableDirections;
     [HideInInspector] public AttackableMobs attackableMobs;
+    [HideInInspector] public MiscCommands miscCommands;
     [HideInInspector] public Inventory inventory;
     [HideInInspector] public CombatManager combatManager;
     [HideInInspector] public List<Monsters> mobsInTheRoom = new List<Monsters>();
@@ -25,9 +27,8 @@ public class GameController : MonoBehaviour
     // this will be used to determine if the player can leave a room or has to flee
     [HideInInspector] public bool mustFleeToMove = false;
 
+    PlayerManagement playerManagement;
     List<string> actionLog = new List<string>();    
-    Monsters monsters;
-    GameObject spawnedMob;
 
     private void Awake()
     { 
@@ -38,6 +39,8 @@ public class GameController : MonoBehaviour
         combatManager = GetComponent<CombatManager>();
         attackableMobs = GetComponent<AttackableMobs>();
         inventory = GetComponent<Inventory>();
+        miscCommands = GetComponent<MiscCommands>();
+        playerManagement = GetComponent<PlayerManagement>();
     }
 
     private void Start()
@@ -45,7 +48,20 @@ public class GameController : MonoBehaviour
         SpawnAllMobsOnStartOfGame();
         DisplayRoomText();
         DisplayLoggedText();
+        //StartCoroutine(MonsterRespawnTimer());
     }
+
+    //IEnumerator MonsterRespawnTimer()
+    //{
+
+
+    //    Room[] rooms = Resources.LoadAll<Room>("ScriptableObjects/Rooms");
+    //    foreach (Room room in rooms)
+    //    {
+    //        yield return new WaitForSecondsRealtime(room.respawnTimer);
+    //    }
+            
+    //}
 
     private void SpawnAllMobsOnStartOfGame()
     {        
@@ -164,6 +180,7 @@ public class GameController : MonoBehaviour
                 LogStringWithReturn(monsterText);
                 LogStringWithReturn("It is your turn to attack!");
                 mustFleeToMove = true;
+                playerManagement.isPlayerInCombat = true;
             }
         }
         Debug.Log("Mobs in the room: " + mobsInTheRoom.Count);

@@ -64,6 +64,16 @@ MonoBehaviour:
     BaseValue: 0
   Defense:
     BaseValue: 0
+  Resistance:
+    BaseValue: 0
+  DamageBonus:
+    BaseValue: 0
+  CritChance:
+    BaseValue: 0
+  MultiAttackChance:
+    BaseValue: 0
+  playerManagement: {fileID: 0}
+  player: {fileID: 0}
   inventory: {fileID: 0}
   equipmentPanel: {fileID: 0}
   statPanel: {fileID: 0}
@@ -81,7 +91,7 @@ MonoBehaviour:
   playerName: Test Player
   playerRace: 
   playerClass: Cleric
-  playerCurrentRoom: nc0028
+  playerCurrentRoom: nc0029
   playerLevel: 1
   playerStrength: 5
   playerAgility: 4
@@ -95,6 +105,6 @@ MonoBehaviour:
   playerMaxMana: 0
   playerCurrentStamina: 0
   playerMaxStamina: 0
-  playerCurrentExperience: 1
+  playerCurrentExperience: 50
   playerGold: 20
-  currentRoom: {fileID: 11400000, guid: 68fdfaaa89275544ea557b5de92d46e1, type: 2}
+  currentRoom: {fileID: 11400000, guid: efb4d6c06d94f0543a25bda839a02b0c, type: 2}

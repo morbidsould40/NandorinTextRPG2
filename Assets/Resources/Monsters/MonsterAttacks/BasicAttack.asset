@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0a01701237d4a04c9f8032582c8b199, type: 3}
+  m_Name: BasicAttack
+  m_EditorClassIdentifier: 
+  monsterAttackName: basic attack
+  monsterAttackDescription: a basic monster attack that does average damage with a
+    5% chance to crit.
+  monsterMinDamage: 1
+  monsterMaxDamage: 4
+  monsterCritChance: 5
+  monsterMultiAttackChance: 1

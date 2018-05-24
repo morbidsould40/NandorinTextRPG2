@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Name: Attack
   m_EditorClassIdentifier: 
   keyWord: attack
+  description: Usage - attack <mob name> - Used to attack a mob with your weapon or
+    fists.

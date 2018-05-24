@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterName: Skeleton
   monsterKeyword: skeleton
-  monsterID: Skeleton134194
+  monsterID: Skeleton987787
   monsterDescription: 
   monsterType: undead
   monsterLevel: 0
@@ -71,4 +71,5 @@ MonoBehaviour:
   monsterMaxMana: 0
   monsterAttack: 8
   monsterDefense: 5
-  monsterAttacks: []
+  monsterAttacks:
+  - {fileID: 11400000, guid: c90522d5ef4711a42a7935dc86f0dc22, type: 2}
